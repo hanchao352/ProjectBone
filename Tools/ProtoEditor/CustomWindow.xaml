@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfApp.CustomWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="自定义窗口" Height="300" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="MinMsgID:"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="MinMsgIDTextBox" PreviewTextInput="NumberValidationTextBox" />
+
+        <Label Grid.Row="1" Grid.Column="0" Content="MaxMsgID:"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="MaxMsgIDTextBox" PreviewTextInput="NumberValidationTextBox" />
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Content:"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="ContentTextBox" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <Button Content="确定" Width="100" Margin="0,0,10,0" Click="ConfirmButton_Click"/>
+            <Button Content="取消" Width="100" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

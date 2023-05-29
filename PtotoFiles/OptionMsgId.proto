@@ -1,0 +1,9 @@
+﻿syntax = "proto3";
+//required: 必须提供该字段的值，否则该消息将被视为“未初始化”
+//optional：可以设置也可以不设置该字段。如果未设置可选字段值，则使用默认值。
+//repeated：该字段可以重复任意次数（包括零次）。重复值的顺序将保留在 protocol buffer 中。可以将 repeated 字段视为动态大小的数组。
+import "google/protobuf/descriptor.proto";
+extend google.protobuf.MessageOptions 
+{
+  int32 msgid = 1000;
+}
