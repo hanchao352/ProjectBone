@@ -12,11 +12,13 @@ public class Main : MonoBehaviour
     // 加载脚本实例时调用 Awake
     public void Awake()
     {
+        TableManager.Instance.Initialize();
         UIManager.Instance.Initialize();
         ProtoManager.Instance.Initialize();
         ModManager.Instance.Initialize();
 
         Client.Instance.ConnectAsync(_ip, _port);
+        
         
     }
 

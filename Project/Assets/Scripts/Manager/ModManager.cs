@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Google.Protobuf;
+using UnityEngine;
 
 public  class ModManager :Singleton<ModManager>
 {
     private  Dictionary<Type, Dictionary<int, Func<IMessage, Task>>> _messageIdToCallback;
+    private Dictionary<int, Action<IMessage>> _webSocketCallbacks = new Dictionary<int, Action<IMessage>>();
     private  readonly Dictionary<Type, ModBase> _mods = new Dictionary<Type, ModBase>();
     public ModManager()
     {
@@ -90,19 +92,44 @@ public  class ModManager :Singleton<ModManager>
         }
     }
 
-    // public   void InvokeCallback(int protoId, IMessage message)
-    // {
-    //     foreach (var mod in _mods)
-    //     {
-    //         if (mod.Value.TryGetCallback(protoId, out var callback))
-    //         {
-    //             _ = callback(message);
-    //         }
-    //     }
-    //
-    // }
+    public void RegisterWebSocketCallback(int protoId, Action<IMessage> callback)
+    {
+        if (!_webSocketCallbacks.ContainsKey(protoId))
+        {
+            _webSocketCallbacks[protoId] = callback;
+        }
+        else
+        {
+            Debug.LogWarning($"WebSocket callback for protoId {protoId} is already registered. Overwriting.");
+            _webSocketCallbacks[protoId] = callback;
+        }
+    }
 
-    
+    public void UnregisterWebSocketCallback(int protoId)
+    {
+        if (_webSocketCallbacks.ContainsKey(protoId))
+        {
+            _webSocketCallbacks.Remove(protoId);
+        }
+        else
+        {
+            Debug.LogWarning($"No WebSocket callback to unregister for protoId {protoId}.");
+        }
+    }
 
- 
+    public void InvokeWebSocketCallback(int protoId, IMessage message)
+    {
+        if (_webSocketCallbacks.TryGetValue(protoId, out var callback))
+        {
+            callback(message);
+        }
+        else
+        {
+            Debug.LogWarning($"No WebSocket callback registered for protoId {protoId}.");
+        }
+    }
+
+
+
+
 }

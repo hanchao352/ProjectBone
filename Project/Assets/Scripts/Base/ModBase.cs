@@ -48,6 +48,20 @@ public abstract class ModBase
         int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
         await Client.Instance.SendMessageAsync(message, protoId);
     }
-     
-    
+    protected void RegisterWebSocketCallback<T>(Action<T> callback) where T : IMessage<T>
+    {
+        int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
+        ModManager.Instance.RegisterWebSocketCallback(protoId, callback as Action<IMessage>);
+    }
+
+    protected void UnregisterWebSocketCallback<T>() where T : IMessage<T>
+    {
+        int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
+        ModManager.Instance.UnregisterWebSocketCallback(protoId);
+    }
+    public async Task SendWebMessageAsync<T>(T message) where T : IMessage
+    {
+        int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
+        await WebSocketClient.Instance.SendMessageAsync(message, protoId);
+    }
 }

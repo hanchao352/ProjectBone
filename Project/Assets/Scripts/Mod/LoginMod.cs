@@ -18,6 +18,13 @@ public class LoginMod : SingletonMod<LoginMod>
     {
         RegisterCallback<LoginResponse>(OnLoginrResponse);
         RegisterCallback<RegisterResponse>(OnRegisterResponse);
+        RegisterWebSocketCallback<LoginResponse>(OnWebLoginrResponse);
+       
+    }
+
+    private void OnWebLoginrResponse(LoginResponse obj)
+    {
+       
     }
 
     public override void UnregisterMessageHandler()
