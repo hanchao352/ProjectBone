@@ -12,8 +12,8 @@
         private TipsView _tipsView;
         public override void Initialize()
         {
-            _uiRoot = GRoot._inst;
             GRoot.inst.SetContentScaleFactor(Screen.width, Screen.height, UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
+            _uiRoot = GRoot._inst;
             _tipsView = ShowView(ViewID.TipsView) as TipsView;
         }
 
