@@ -16,9 +16,9 @@ public class EventManager : Singleton<EventManager>
         eventTableWithoutArgs = new Dictionary<int, Delegate>();
     }
 
-    public override void Update()
+    public override void Update(float time)
     {
-        base.Update();
+        base.Update(time);
     }
 
     public override void Destroy()

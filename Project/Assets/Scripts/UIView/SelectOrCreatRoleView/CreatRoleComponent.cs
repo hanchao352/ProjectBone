@@ -30,7 +30,7 @@ public class CreatRoleComponent:GComponent
          }
          else
          {
-               CreateRoleMod.Instance.CreareRoleRquest(name,_genderGroupComponent.gener);
+              // CreateRoleMod.Instance.CreareRoleRquest(name,_genderGroupComponent.gener);
          }
      }
 

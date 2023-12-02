@@ -13,3 +13,7 @@ message NRoleInfo {
   int32 SmallServerId = 5;//小服id
   string accountid = 6;//账号id
 }
+
+
+
+

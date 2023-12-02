@@ -18,7 +18,7 @@ public class Singleton<T> where T : class, new()
         // 在派生类中重写此方法以执行初始化操作
     }
 
-    public virtual void Update()
+    public virtual void Update(float time)
     {
         // 在派生类中重写此方法以执行更新操作
     }

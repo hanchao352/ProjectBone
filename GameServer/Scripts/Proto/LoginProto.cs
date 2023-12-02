@@ -36,7 +36,7 @@ public static partial class LoginProtoReflection {
           "dWx0EgsKA21zZxgCIAEoCRIcCghyb2xlaW5mbxgDIAEoCzIKLk5Sb2xlSW5m",
           "bzoEwD6VTiJZCgxUZXN0UmVzcG9uc2USGAoGcmVzdWx0GAEgASgOMgguTlJl",
           "c3VsdBILCgNtc2cYAiABKAkSHAoIcm9sZWluZm8YAyABKAsyCi5OUm9sZUlu",
-          "Zm86BMA+lk5iBnByb3RvMw=="));
+          "Zm86BMA+l05iBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { global::OptionMsgIdReflection.Descriptor, global::NResultReflection.Descriptor, global::NRoleInfoReflection.Descriptor, },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {

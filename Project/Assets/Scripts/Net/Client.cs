@@ -33,9 +33,9 @@ public class Client :Singleton<Client>
         base.Initialize();
     }
 
-    public override void Update()
+    public override void Update(float time)
     {
-        base.Update();
+        base.Update(time);
     }
 
     public override void Destroy()

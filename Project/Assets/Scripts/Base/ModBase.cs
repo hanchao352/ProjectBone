@@ -8,9 +8,17 @@ public abstract class ModBase
 {
     private readonly Dictionary<int, Func<IMessage, Task>> _callbacks = new Dictionary<int, Func<IMessage, Task>>();
     private  Dictionary<Type, Dictionary<int, Func<IMessage, Task>>> _messageIdToCallback;
+    bool _isInitialized = false;
+
+    public bool IsInitialized => _isInitialized;
+
+    public void Use()
+    {
+    }
 
     public virtual void Initialize()
     {
+        _isInitialized = true;
         RegisterMessageHandler();
     }
 
@@ -59,9 +67,29 @@ public abstract class ModBase
         int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
         ModManager.Instance.UnregisterWebSocketCallback(protoId);
     }
+    
+    
+    protected void RegisterWebRequestCallback<T>(Action<T> callback) where T : IMessage<T>
+    {
+        int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
+        ModManager.Instance.RegisterWebSocketCallback(protoId, callback as Action<IMessage>);
+    }
+
+    protected void UnregisterWebRequestCallback<T>() where T : IMessage<T>
+    {
+        int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
+        ModManager.Instance.UnregisterWebSocketCallback(protoId);
+    }
+    
     public async Task SendWebMessageAsync<T>(T message) where T : IMessage
     {
         int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
         await WebSocketClient.Instance.SendMessageAsync(message, protoId);
     }
+    public void SendWebRequestMessageAsync<T>(T message) where T : IMessage
+    {
+        int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
+         WebRequestManager.Instance.SendMessageAsync(message);
+    }
+   
 }

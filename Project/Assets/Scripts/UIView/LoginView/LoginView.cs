@@ -28,23 +28,25 @@ public class LoginView: UIBase
             UIManager.Instance.ShowTips("服务器未连接");
             return;
         }
-        LoginMod.Instance.SendRegisterRequest(username.text, password.text);
+        //LoginMod.Instance.SendRegisterRequest(username.text, password.text);
     }
 
     private void OnLoginButtonClick(EventContext context)
     {
-        if (Client.Instance.IsConnected()==false)
-        {
-            UIManager.Instance.ShowTips("服务器未连接");
-            return;
-        }
-        LoginMod.Instance.SendLoginRequest(username.text, password.text);
+        // LoginMod.Instance.SendLoginRequest("","");
+        // if (Client.Instance.IsConnected()==false)
+        // {
+        //     UIManager.Instance.ShowTips("服务器未连接");
+        //     return;
+        // }
+        // LoginMod.Instance.SendLoginRequest(username.text, password.text);
     }
 
 
     protected override void OnShow(params object[] args)
     {
-        
+        TimerManager.Instance.SetInterval(BoneMod.Instance.Test, 1000);
+
     }
 
     protected override void OnHide()

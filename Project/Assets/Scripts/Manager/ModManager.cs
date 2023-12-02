@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Google.Protobuf;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public  class ModManager :Singleton<ModManager>
@@ -15,9 +16,9 @@ public  class ModManager :Singleton<ModManager>
     }
     public override void Initialize()
     {
-        
-        RegisterMod( LoginMod.Instance);
-        RegisterMod(CreateRoleMod.Instance);
+       //需要提前实例化的模块
+       BoneMod.Instance.Use();
+       
     }
 
 
@@ -27,15 +28,24 @@ public  class ModManager :Singleton<ModManager>
         if (_mods.ContainsKey(modType))
         {
             throw new InvalidOperationException($"Mod {modType} has already been registered.");
+            
         }
-
-        mod.Initialize();
-        _mods.Add(modType, mod);
+        else
+        {
+            Debug.Log($"Registering mod {modType}.");
+        }
+        
+        if (mod.IsInitialized == false)
+        {
+            mod.Initialize();
+            _mods.Add(modType, mod);
+        }
+       
     }
 
-    public override void Update()
+    public override void Update(float time)
     {
-        base.Update();
+        base.Update(time);
         foreach (var mod in _mods.Values)
         {
             mod.Update();

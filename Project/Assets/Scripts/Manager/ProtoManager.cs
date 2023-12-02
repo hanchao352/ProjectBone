@@ -12,12 +12,7 @@ public  class ProtoManager:Singleton<ProtoManager>
         _typeToProtoId = new Dictionary<Type, int>();
 
         // 在此处注册所有消息类型和它们对应的protoId
-        RegisterProto<LoginRequest>(ProtosMsgID.LoginRequest);
-        RegisterProto<LoginResponse>(ProtosMsgID.LoginResponse);
-        RegisterProto<RegisterRequest>(ProtosMsgID.RegisterRequest);
-        RegisterProto<RegisterResponse>(ProtosMsgID.RegisterResponse);
-        RegisterProto<CreateRoleRequest>(ProtosMsgID.CreateRoleRequest);
-        RegisterProto<CreateRoleResponse>(ProtosMsgID.CreateRoleResponse);
+        RegisterProto<CSBoneRequest>(ProtosMsgID.CSBoneRequest);
         // 注册其他消息类型...
     }
 
@@ -26,9 +21,9 @@ public  class ProtoManager:Singleton<ProtoManager>
          base.Initialize();
      }
 
-     public override void Update()
+     public override void Update(float time)
     {
-        base.Update();
+        base.Update( time);
     }
 
      public override void Destroy()

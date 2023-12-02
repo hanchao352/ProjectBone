@@ -10,7 +10,7 @@ using System.IO;
 public class WebSocketClient : Singleton<WebSocketClient>
 {
     private ClientWebSocket _webSocket = new ClientWebSocket();
-
+    
     public async Task ConnectAsync(string uri)
     {
         await _webSocket.ConnectAsync(new Uri(uri), CancellationToken.None);

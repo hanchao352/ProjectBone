@@ -22,11 +22,10 @@ public static partial class NItemReflection {
   static NItemReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "CgtOSXRlbS5wcm90bxoRT3B0aW9uTXNnSWQucHJvdG8aDU5SZXN1bHQucHJv",
-          "dG8iOwoFTkl0ZW0SEQoJaXRlbWNmZ2lkGAEgASgDEg8KB2l0ZW1udW0YAiAB",
-          "KAUSDgoGaXRlbWlkGAMgASgFYgZwcm90bzM="));
+          "CgtOSXRlbS5wcm90byI7CgVOSXRlbRIRCglpdGVtY2ZnaWQYASABKAMSDwoH",
+          "aXRlbW51bRgCIAEoBRIOCgZpdGVtaWQYAyABKAViBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-        new pbr::FileDescriptor[] { global::OptionMsgIdReflection.Descriptor, global::NResultReflection.Descriptor, },
+        new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
           new pbr::GeneratedClrTypeInfo(typeof(global::NItem), global::NItem.Parser, new[]{ "Itemcfgid", "Itemnum", "Itemid" }, null, null, null, null)
         }));

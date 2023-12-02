@@ -32,9 +32,9 @@ public class SelectOrCreatRoleView:UIBase
 
     protected override void OnShow(params object[] args)
     {
-        bool hasrole = LoginMod.Instance.rolist.Count > 0;
-         creatRoleComponent.visible = !hasrole; 
-         selectRoleComponent.visible=hasrole; 
+        // bool hasrole = LoginMod.Instance.rolist.Count > 0;
+        //  creatRoleComponent.visible = !hasrole; 
+        //  selectRoleComponent.visible=hasrole; 
     }
 
     protected override void OnHide()

@@ -1,131 +1,197 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Threading.Tasks;
+using Google.Protobuf;
+using UnityEngine;
 
-public  class TimeManager : Singleton<TimeManager>
+public class TimerManager : Singleton<TimerManager>, IDisposable
 {
-    
-    public TimeManager() { }
+    private class TimerData
+    {
+        public Action Callback;
+        public Action<object[]> CallbackWithParams;
+        public float Delay;
+        public float Interval;
+        public object[] Args;
+        public float NextTick;
+        public bool Repeat;
+    }
 
-    private Dictionary<Guid, Timer> timers = new Dictionary<Guid, Timer>();
-
+    private Dictionary<int, TimerData> timers = new Dictionary<int, TimerData>();
+    private int nextId = 1;
+    private float elapsedTime = 0f;
 
     public override void Initialize()
     {
-        base.Initialize();
+        elapsedTime = 0f;
     }
 
-    public Guid InvokeAfterDelay(Action action, int millisecondsDelay, bool shouldRepeat = false)
+    public override void Update(float deltaTime)
     {
-        return InvokeAfterDelay((Action<object[]>)((object[] args) => action()), millisecondsDelay, shouldRepeat);
-    }
+        elapsedTime += deltaTime * 1000f;
 
-    public Guid InvokeAfterDelay(Action<object[]> action, int millisecondsDelay, bool shouldRepeat = false, params object[] args)
-    {
-        if (action == null || millisecondsDelay < 0) return Guid.Empty;
+        List<int> timersToRemove = new List<int>();
 
-        var guid = Guid.NewGuid();
-        TimerCallback timerCallback = state =>
+        foreach (var entry in timers)
         {
-            try
+            int id = entry.Key;
+            TimerData data = entry.Value;
+
+            if (elapsedTime >= data.NextTick)
             {
-                action(args);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception caught in timer callback: {ex}");
-            }
-            finally
-            {
-                if (!shouldRepeat)
+                if (data.Callback != null)
                 {
-                    RemoveTimer(guid);
+                    data.Callback();
+                }
+                else if (data.CallbackWithParams != null)
+                {
+                    data.CallbackWithParams(data.Args);
+                }
+
+                if (data.Repeat)
+                {
+                    data.NextTick = elapsedTime + data.Interval;
+                }
+                else
+                {
+                    timersToRemove.Add(id);
                 }
             }
-        };
-        var timer = new Timer(timerCallback, null, millisecondsDelay, shouldRepeat ? millisecondsDelay : Timeout.Infinite);
-        timers.Add(guid, timer);
-        
-        return guid;
-    }
+        }
 
-    public Guid InvokeEvery(Action action, int millisecondsInterval)
-    {
-        return InvokeEvery((Action<object[]>)((object[] args) => action()), millisecondsInterval);
-    }
-
-    public Guid InvokeEvery(Action<object[]> action, int millisecondsInterval, params object[] args)
-    {
-        return InvokeAfterDelay(action, millisecondsInterval, true, args);
-    }
-
-
-    public Guid InvokeWithInitialDelayAndInterval(Action action, int initialDelayMilliseconds, int intervalMilliseconds)
-    {
-        return InvokeWithInitialDelayAndInterval((Action<object[]>)((object[] args) => action()), initialDelayMilliseconds, intervalMilliseconds);
-    }
-
-    public Guid InvokeWithInitialDelayAndInterval(Action<object[]> action, int initialDelayMilliseconds, int intervalMilliseconds, params object[] args)
-    {
-        if (action == null || initialDelayMilliseconds < 0 || intervalMilliseconds < 0) return Guid.Empty;
-
-        var guid = Guid.NewGuid();
-        TimerCallback timerCallback = state =>
+        foreach (int id in timersToRemove)
         {
-            try
-            {
-                action(args);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception caught in timer callback: {ex}");
-            }
-        };
-        var timer = new Timer(timerCallback, null, initialDelayMilliseconds, intervalMilliseconds);
-        timers.Add(guid, timer);
-
-        return guid;
-    }
-
-    public void RemoveTimer(Guid guid)
-    {
-        if (timers.TryGetValue(guid, out Timer timer))
-        {
-            timer.Dispose();
-            timers.Remove(guid);
+            timers.Remove(id);
+#if UNITY_EDITOR
+            Debug.Log("移除计时器id"+id); 
+#endif
         }
     }
 
-    public override void Update()
+    public int SetTimeout(Action callback, float delayInMilliseconds)
     {
-        base.Update();
+        var data = new TimerData
+        {
+            Callback = callback,
+            Delay = delayInMilliseconds,
+            NextTick = elapsedTime + delayInMilliseconds,
+            Repeat = false
+        };
+        timers[nextId] = data;
+        return nextId++;
+    }
+
+    public int SetTimeout(Action<object[]> callback, float delayInMilliseconds, params object[] args)
+    {
+        var data = new TimerData
+        {
+            CallbackWithParams = callback,
+            Args = args,
+            Delay = delayInMilliseconds,
+            NextTick = elapsedTime + delayInMilliseconds,
+            Repeat = false
+        };
+        timers[nextId] = data;
+        return nextId++;
+    }
+
+    public int SetInterval(Action callback, float intervalInMilliseconds)
+    {
+        var data = new TimerData
+        {
+            Callback = callback,
+            Interval = intervalInMilliseconds,
+            NextTick = elapsedTime + intervalInMilliseconds,
+            Repeat = true
+        };
+        timers[nextId] = data;
+        return nextId++;
+    }
+
+    public int SetIntervalAtOnce(Action callback, float intervalInMilliseconds)
+    {
+        var data = new TimerData
+        {
+            Callback = callback,
+            Interval = intervalInMilliseconds,
+            NextTick = elapsedTime + intervalInMilliseconds,
+            Repeat = true
+        };
+        callback();
+        timers[nextId] = data;
+        return nextId++;
+    }
+    public int SetInterval(Action<object[]> callback, float intervalInMilliseconds, params object[] args)
+    {
+        var data = new TimerData
+        {
+            CallbackWithParams = callback,
+            Args = args,
+            Interval = intervalInMilliseconds,
+            NextTick = elapsedTime + intervalInMilliseconds,
+            Repeat = true
+        };
+        timers[nextId] = data;
+        return nextId++;
+    }
+    public int SetIntervalAtOnce(Action<object[]> callback, float intervalInMilliseconds, params object[] args)
+    {
+        var data = new TimerData
+        {
+            CallbackWithParams = callback,
+            Args = args,
+            Interval = intervalInMilliseconds,
+            NextTick = elapsedTime + intervalInMilliseconds,
+            Repeat = true
+        };
+        callback(args);
+        timers[nextId] = data;
+        return nextId++;
+    }
+    public int SetIntervalAfterDelay(Action callback, float delayInMilliseconds, float intervalInMilliseconds)
+    {
+        var data = new TimerData
+        {
+            Callback = callback,
+            Delay = delayInMilliseconds,
+            Interval = intervalInMilliseconds,
+            NextTick = elapsedTime + delayInMilliseconds,
+            Repeat = true
+        };
+        timers[nextId] = data;
+        return nextId++;
+    }
+
+    public int SetIntervalAfterDelay(Action<object[]> callback, float delayInMilliseconds, float intervalInMilliseconds, params object[] args)
+    {
+        var data = new TimerData
+        {
+            CallbackWithParams = callback,
+            Args = args,
+            Delay = delayInMilliseconds,
+            Interval = intervalInMilliseconds,
+            NextTick = elapsedTime + delayInMilliseconds,
+            Repeat = true
+        };
+        timers[nextId] = data;
+        return nextId++;
+    }
+
+    public void RemoveTimer(int id)
+    {
+        timers.Remove(id);
     }
 
     public override void Destroy()
     {
-        base.Destroy();
-        RemoveAllTimers();
+        timers.Clear();
     }
 
-    // public void RemoveAllTimers()
-    // {
-    //     foreach (KeyValuePair<Guid, Timer> kvp in timers)
-    //     {
-    //         kvp.Value.Dispose();
-    //     }
-    //
-    //     timers.Clear();
-    // }
-    public void RemoveAllTimers()
+    public  void Dispose()
     {
-        var timerIds = new List<Guid>(timers.Keys);
-
-        for (int i = 0; i < timerIds.Count; i++)
-        {
-            Guid timerId = timerIds[i];
-            Timer timer = timers[timerId];
-            timer.Dispose();
-            timers.Remove(timerId);
-        }
+        timers.Clear();
     }
+
+
+
 }
