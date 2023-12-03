@@ -1,4 +1,4 @@
-﻿public class UITipsManager:Singleton<UITipsManager>
+﻿public class UITipsManager:SingletonManager<UITipsManager>,IGeneric
 {
         public override void Initialize()
         {

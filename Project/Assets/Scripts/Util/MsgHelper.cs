@@ -2,6 +2,12 @@
 using DG.Tweening.Plugins.Options;
 using Google.Protobuf;
 
+public class MsgInfo
+{
+    public int ProtoId;
+    public string msg;
+}
+
 public static class MsgHelper
 {
         
@@ -17,4 +23,21 @@ public static class MsgHelper
         Array.Copy(messageBuffer, 0, packagebuffer, 8, messageBuffer.Length);
         return packagebuffer;
     }
+    //将上面方法改成返回 string数组
+    public static MsgInfo  ToMsgInfo<T>(this T message) where T : IMessage
+    {
+        int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
+        var jsonFormatter = new JsonFormatter(new JsonFormatter.Settings(true));
+        string str = jsonFormatter.Format(message);
+        MsgInfo msgInfo = new MsgInfo();
+        msgInfo.ProtoId = protoId;
+        msgInfo.msg = str;
+        return msgInfo;
+    }
+    public static void  ToSend<T>(this T message) where T : IMessage
+    {
+       WebRequestManager.Instance.SendMessageAsync(message);
+    }
+    
+  
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class TableManager : Singleton<TableManager>
+public class TableManager : SingletonManager<TableManager>,IGeneric
 {
     private Tables tables ;
 
@@ -18,7 +18,7 @@ public class TableManager : Singleton<TableManager>
         base.Initialize();
         var tablesCtor = typeof(Tables).GetConstructors()[0];
         var loaderReturnType = tablesCtor.GetParameters()[0].ParameterType.GetGenericArguments()[1];
-        // 根据cfg.Tables的构造函数的Loader的返回值类型决定使用json还是ByteBuf Loader
+        // 鏍规嵁cfg.Tables鐨勬瀯閫犲嚱鏁扮殑Loader鐨勮繑鍥炲�肩被鍨嬪喅瀹氫娇鐢╦son杩樻槸ByteBuf Loader
         System.Delegate loader = loaderReturnType == typeof(ByteBuf) ?
             new System.Func<string, ByteBuf>(LoadByteBuf)
             : (System.Delegate)new System.Func<string, JSONNode>(Loader);

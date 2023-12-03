@@ -24,18 +24,24 @@ public static partial class BoneProtoReflection {
         string.Concat(
           "Cg9Cb25lUHJvdG8ucHJvdG8aEU9wdGlvbk1zZ0lkLnByb3RvIlQKCEJvbmVO",
           "b3RlEg4KBm5vdGVJZBgBIAEoBRIRCglub3RlVGl0bGUYAiABKAkSEwoLbm90",
-          "ZWNvbnRlbnQYAyABKAkSEAoIaW1hZ2V1cmwYBCADKAkiJQoNQ1NCb25lUmVx",
-          "dWVzdBIOCgZib25lSWQYASABKAU6BMA+kE4itgEKDlNDQm9uZVJlc3BvbnNl",
-          "Eg4KBnJlc3VsdBgBIAEoBRIOCgZib25lSWQYAiABKAUSDAoEdHlwZRgDIAEo",
-          "CRIQCghwb3NpdGlvbhgEIAEoCRIQCghib25lbmFtZRgFIAEoCRIQCghib25l",
-          "dGlsZRgGIAEoCRITCgtib25lY29udGVudBgHIAEoCRIcCgRub3RlGAggASgL",
-          "MgkuQm9uZU5vdGVIAIgBAToEwD6RTkIHCgVfbm90ZWIGcHJvdG8z"));
+          "ZWNvbnRlbnQYAyABKAkSEAoIaW1hZ2V1cmwYBCADKAkimgEKCEJvbmVJbmZv",
+          "Eg4KBmJvbmVJZBgBIAEoBRIMCgR0eXBlGAIgASgJEhAKCHBvc2l0aW9uGAMg",
+          "ASgJEhAKCGJvbmVuYW1lGAQgASgJEhAKCGJvbmV0aWxlGAUgASgJEhMKC2Jv",
+          "bmVjb250ZW50GAYgASgJEhwKBG5vdGUYByABKAsyCS5Cb25lTm90ZUgAiAEB",
+          "QgcKBV9ub3RlIiUKDUNTQm9uZVJlcXVlc3QSDgoGYm9uZUlkGAEgASgFOgTA",
+          "PpBOIkMKDlNDQm9uZVJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoBRIbCghib25l",
+          "aW5mbxgCIAEoCzIJLkJvbmVJbmZvOgTAPpFOIhgKEENTQWxsQm9uZVJlcXVl",
+          "c3Q6BMA+kk4iRgoRU0NBbGxCb25lUmVzcG9uc2USDgoGcmVzdWx0GAEgASgF",
+          "EhsKCGJvbmVpbmZvGAIgAygLMgkuQm9uZUluZm86BMA+k05iBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { global::OptionMsgIdReflection.Descriptor, },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
           new pbr::GeneratedClrTypeInfo(typeof(global::BoneNote), global::BoneNote.Parser, new[]{ "NoteId", "NoteTitle", "Notecontent", "Imageurl" }, null, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BoneInfo), global::BoneInfo.Parser, new[]{ "BoneId", "Type", "Position", "Bonename", "Bonetile", "Bonecontent", "Note" }, new[]{ "Note" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::CSBoneRequest), global::CSBoneRequest.Parser, new[]{ "BoneId" }, null, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::SCBoneResponse), global::SCBoneResponse.Parser, new[]{ "Result", "BoneId", "Type", "Position", "Bonename", "Bonetile", "Bonecontent", "Note" }, new[]{ "Note" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(typeof(global::SCBoneResponse), global::SCBoneResponse.Parser, new[]{ "Result", "Boneinfo" }, null, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::CSAllBoneRequest), global::CSAllBoneRequest.Parser, null, null, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::SCAllBoneResponse), global::SCAllBoneResponse.Parser, new[]{ "Result", "Boneinfo" }, null, null, null, null)
         }));
   }
   #endregion
@@ -343,6 +349,447 @@ public sealed partial class BoneNote : pb::IMessage<BoneNote>
 
 }
 
+public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
+#if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    , pb::IBufferMessage
+#endif
+{
+  private static readonly pb::MessageParser<BoneInfo> _parser = new pb::MessageParser<BoneInfo>(() => new BoneInfo());
+  private pb::UnknownFieldSet _unknownFields;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public static pb::MessageParser<BoneInfo> Parser { get { return _parser; } }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public static pbr::MessageDescriptor Descriptor {
+    get { return global::BoneProtoReflection.Descriptor.MessageTypes[1]; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  pbr::MessageDescriptor pb::IMessage.Descriptor {
+    get { return Descriptor; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public BoneInfo() {
+    OnConstruction();
+  }
+
+  partial void OnConstruction();
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public BoneInfo(BoneInfo other) : this() {
+    boneId_ = other.boneId_;
+    type_ = other.type_;
+    position_ = other.position_;
+    bonename_ = other.bonename_;
+    bonetile_ = other.bonetile_;
+    bonecontent_ = other.bonecontent_;
+    note_ = other.note_ != null ? other.note_.Clone() : null;
+    _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public BoneInfo Clone() {
+    return new BoneInfo(this);
+  }
+
+  /// <summary>Field number for the "boneId" field.</summary>
+  public const int BoneIdFieldNumber = 1;
+  private int boneId_;
+  /// <summary>
+  ///骨骼id
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public int BoneId {
+    get { return boneId_; }
+    set {
+      boneId_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "type" field.</summary>
+  public const int TypeFieldNumber = 2;
+  private string type_ = "";
+  /// <summary>
+  ///类型
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public string Type {
+    get { return type_; }
+    set {
+      type_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "position" field.</summary>
+  public const int PositionFieldNumber = 3;
+  private string position_ = "";
+  /// <summary>
+  ///所属部位
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public string Position {
+    get { return position_; }
+    set {
+      position_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "bonename" field.</summary>
+  public const int BonenameFieldNumber = 4;
+  private string bonename_ = "";
+  /// <summary>
+  ///骨骼名称
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public string Bonename {
+    get { return bonename_; }
+    set {
+      bonename_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "bonetile" field.</summary>
+  public const int BonetileFieldNumber = 5;
+  private string bonetile_ = "";
+  /// <summary>
+  ///骨骼标题
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public string Bonetile {
+    get { return bonetile_; }
+    set {
+      bonetile_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "bonecontent" field.</summary>
+  public const int BonecontentFieldNumber = 6;
+  private string bonecontent_ = "";
+  /// <summary>
+  ///骨骼内容
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public string Bonecontent {
+    get { return bonecontent_; }
+    set {
+      bonecontent_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "note" field.</summary>
+  public const int NoteFieldNumber = 7;
+  private global::BoneNote note_;
+  /// <summary>
+  ///笔记内容
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public global::BoneNote Note {
+    get { return note_; }
+    set {
+      note_ = value;
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public override bool Equals(object other) {
+    return Equals(other as BoneInfo);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public bool Equals(BoneInfo other) {
+    if (ReferenceEquals(other, null)) {
+      return false;
+    }
+    if (ReferenceEquals(other, this)) {
+      return true;
+    }
+    if (BoneId != other.BoneId) return false;
+    if (Type != other.Type) return false;
+    if (Position != other.Position) return false;
+    if (Bonename != other.Bonename) return false;
+    if (Bonetile != other.Bonetile) return false;
+    if (Bonecontent != other.Bonecontent) return false;
+    if (!object.Equals(Note, other.Note)) return false;
+    return Equals(_unknownFields, other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public override int GetHashCode() {
+    int hash = 1;
+    if (BoneId != 0) hash ^= BoneId.GetHashCode();
+    if (Type.Length != 0) hash ^= Type.GetHashCode();
+    if (Position.Length != 0) hash ^= Position.GetHashCode();
+    if (Bonename.Length != 0) hash ^= Bonename.GetHashCode();
+    if (Bonetile.Length != 0) hash ^= Bonetile.GetHashCode();
+    if (Bonecontent.Length != 0) hash ^= Bonecontent.GetHashCode();
+    if (note_ != null) hash ^= Note.GetHashCode();
+    if (_unknownFields != null) {
+      hash ^= _unknownFields.GetHashCode();
+    }
+    return hash;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public override string ToString() {
+    return pb::JsonFormatter.ToDiagnosticString(this);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public void WriteTo(pb::CodedOutputStream output) {
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    output.WriteRawMessage(this);
+  #else
+    if (BoneId != 0) {
+      output.WriteRawTag(8);
+      output.WriteInt32(BoneId);
+    }
+    if (Type.Length != 0) {
+      output.WriteRawTag(18);
+      output.WriteString(Type);
+    }
+    if (Position.Length != 0) {
+      output.WriteRawTag(26);
+      output.WriteString(Position);
+    }
+    if (Bonename.Length != 0) {
+      output.WriteRawTag(34);
+      output.WriteString(Bonename);
+    }
+    if (Bonetile.Length != 0) {
+      output.WriteRawTag(42);
+      output.WriteString(Bonetile);
+    }
+    if (Bonecontent.Length != 0) {
+      output.WriteRawTag(50);
+      output.WriteString(Bonecontent);
+    }
+    if (note_ != null) {
+      output.WriteRawTag(58);
+      output.WriteMessage(Note);
+    }
+    if (_unknownFields != null) {
+      _unknownFields.WriteTo(output);
+    }
+  #endif
+  }
+
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+    if (BoneId != 0) {
+      output.WriteRawTag(8);
+      output.WriteInt32(BoneId);
+    }
+    if (Type.Length != 0) {
+      output.WriteRawTag(18);
+      output.WriteString(Type);
+    }
+    if (Position.Length != 0) {
+      output.WriteRawTag(26);
+      output.WriteString(Position);
+    }
+    if (Bonename.Length != 0) {
+      output.WriteRawTag(34);
+      output.WriteString(Bonename);
+    }
+    if (Bonetile.Length != 0) {
+      output.WriteRawTag(42);
+      output.WriteString(Bonetile);
+    }
+    if (Bonecontent.Length != 0) {
+      output.WriteRawTag(50);
+      output.WriteString(Bonecontent);
+    }
+    if (note_ != null) {
+      output.WriteRawTag(58);
+      output.WriteMessage(Note);
+    }
+    if (_unknownFields != null) {
+      _unknownFields.WriteTo(ref output);
+    }
+  }
+  #endif
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public int CalculateSize() {
+    int size = 0;
+    if (BoneId != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeInt32Size(BoneId);
+    }
+    if (Type.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Type);
+    }
+    if (Position.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Position);
+    }
+    if (Bonename.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Bonename);
+    }
+    if (Bonetile.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Bonetile);
+    }
+    if (Bonecontent.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Bonecontent);
+    }
+    if (note_ != null) {
+      size += 1 + pb::CodedOutputStream.ComputeMessageSize(Note);
+    }
+    if (_unknownFields != null) {
+      size += _unknownFields.CalculateSize();
+    }
+    return size;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public void MergeFrom(BoneInfo other) {
+    if (other == null) {
+      return;
+    }
+    if (other.BoneId != 0) {
+      BoneId = other.BoneId;
+    }
+    if (other.Type.Length != 0) {
+      Type = other.Type;
+    }
+    if (other.Position.Length != 0) {
+      Position = other.Position;
+    }
+    if (other.Bonename.Length != 0) {
+      Bonename = other.Bonename;
+    }
+    if (other.Bonetile.Length != 0) {
+      Bonetile = other.Bonetile;
+    }
+    if (other.Bonecontent.Length != 0) {
+      Bonecontent = other.Bonecontent;
+    }
+    if (other.note_ != null) {
+      if (note_ == null) {
+        Note = new global::BoneNote();
+      }
+      Note.MergeFrom(other.Note);
+    }
+    _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public void MergeFrom(pb::CodedInputStream input) {
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    input.ReadRawMessage(this);
+  #else
+    uint tag;
+    while ((tag = input.ReadTag()) != 0) {
+      switch(tag) {
+        default:
+          _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+          break;
+        case 8: {
+          BoneId = input.ReadInt32();
+          break;
+        }
+        case 18: {
+          Type = input.ReadString();
+          break;
+        }
+        case 26: {
+          Position = input.ReadString();
+          break;
+        }
+        case 34: {
+          Bonename = input.ReadString();
+          break;
+        }
+        case 42: {
+          Bonetile = input.ReadString();
+          break;
+        }
+        case 50: {
+          Bonecontent = input.ReadString();
+          break;
+        }
+        case 58: {
+          if (note_ == null) {
+            Note = new global::BoneNote();
+          }
+          input.ReadMessage(Note);
+          break;
+        }
+      }
+    }
+  #endif
+  }
+
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+    uint tag;
+    while ((tag = input.ReadTag()) != 0) {
+      switch(tag) {
+        default:
+          _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+          break;
+        case 8: {
+          BoneId = input.ReadInt32();
+          break;
+        }
+        case 18: {
+          Type = input.ReadString();
+          break;
+        }
+        case 26: {
+          Position = input.ReadString();
+          break;
+        }
+        case 34: {
+          Bonename = input.ReadString();
+          break;
+        }
+        case 42: {
+          Bonetile = input.ReadString();
+          break;
+        }
+        case 50: {
+          Bonecontent = input.ReadString();
+          break;
+        }
+        case 58: {
+          if (note_ == null) {
+            Note = new global::BoneNote();
+          }
+          input.ReadMessage(Note);
+          break;
+        }
+      }
+    }
+  }
+  #endif
+
+}
+
 /// <summary>
 ///骨骼信息请求
 /// </summary>
@@ -360,7 +807,7 @@ public sealed partial class CSBoneRequest : pb::IMessage<CSBoneRequest>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public static pbr::MessageDescriptor Descriptor {
-    get { return global::BoneProtoReflection.Descriptor.MessageTypes[1]; }
+    get { return global::BoneProtoReflection.Descriptor.MessageTypes[2]; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -555,7 +1002,7 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public static pbr::MessageDescriptor Descriptor {
-    get { return global::BoneProtoReflection.Descriptor.MessageTypes[2]; }
+    get { return global::BoneProtoReflection.Descriptor.MessageTypes[3]; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -576,13 +1023,7 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public SCBoneResponse(SCBoneResponse other) : this() {
     result_ = other.result_;
-    boneId_ = other.boneId_;
-    type_ = other.type_;
-    position_ = other.position_;
-    bonename_ = other.bonename_;
-    bonetile_ = other.bonetile_;
-    bonecontent_ = other.bonecontent_;
-    note_ = other.note_ != null ? other.note_.Clone() : null;
+    boneinfo_ = other.boneinfo_ != null ? other.boneinfo_.Clone() : null;
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
@@ -607,108 +1048,18 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
     }
   }
 
-  /// <summary>Field number for the "boneId" field.</summary>
-  public const int BoneIdFieldNumber = 2;
-  private int boneId_;
+  /// <summary>Field number for the "boneinfo" field.</summary>
+  public const int BoneinfoFieldNumber = 2;
+  private global::BoneInfo boneinfo_;
   /// <summary>
-  ///骨骼id
+  ///骨骼信息
   /// </summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public int BoneId {
-    get { return boneId_; }
+  public global::BoneInfo Boneinfo {
+    get { return boneinfo_; }
     set {
-      boneId_ = value;
-    }
-  }
-
-  /// <summary>Field number for the "type" field.</summary>
-  public const int TypeFieldNumber = 3;
-  private string type_ = "";
-  /// <summary>
-  ///类型
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public string Type {
-    get { return type_; }
-    set {
-      type_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  /// <summary>Field number for the "position" field.</summary>
-  public const int PositionFieldNumber = 4;
-  private string position_ = "";
-  /// <summary>
-  ///所属部位
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public string Position {
-    get { return position_; }
-    set {
-      position_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  /// <summary>Field number for the "bonename" field.</summary>
-  public const int BonenameFieldNumber = 5;
-  private string bonename_ = "";
-  /// <summary>
-  ///骨骼名称
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public string Bonename {
-    get { return bonename_; }
-    set {
-      bonename_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  /// <summary>Field number for the "bonetile" field.</summary>
-  public const int BonetileFieldNumber = 6;
-  private string bonetile_ = "";
-  /// <summary>
-  ///骨骼标题
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public string Bonetile {
-    get { return bonetile_; }
-    set {
-      bonetile_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  /// <summary>Field number for the "bonecontent" field.</summary>
-  public const int BonecontentFieldNumber = 7;
-  private string bonecontent_ = "";
-  /// <summary>
-  ///骨骼内容
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public string Bonecontent {
-    get { return bonecontent_; }
-    set {
-      bonecontent_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  /// <summary>Field number for the "note" field.</summary>
-  public const int NoteFieldNumber = 8;
-  private global::BoneNote note_;
-  /// <summary>
-  ///笔记内容
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public global::BoneNote Note {
-    get { return note_; }
-    set {
-      note_ = value;
+      boneinfo_ = value;
     }
   }
 
@@ -728,13 +1079,7 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
       return true;
     }
     if (Result != other.Result) return false;
-    if (BoneId != other.BoneId) return false;
-    if (Type != other.Type) return false;
-    if (Position != other.Position) return false;
-    if (Bonename != other.Bonename) return false;
-    if (Bonetile != other.Bonetile) return false;
-    if (Bonecontent != other.Bonecontent) return false;
-    if (!object.Equals(Note, other.Note)) return false;
+    if (!object.Equals(Boneinfo, other.Boneinfo)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
@@ -743,13 +1088,7 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
   public override int GetHashCode() {
     int hash = 1;
     if (Result != 0) hash ^= Result.GetHashCode();
-    if (BoneId != 0) hash ^= BoneId.GetHashCode();
-    if (Type.Length != 0) hash ^= Type.GetHashCode();
-    if (Position.Length != 0) hash ^= Position.GetHashCode();
-    if (Bonename.Length != 0) hash ^= Bonename.GetHashCode();
-    if (Bonetile.Length != 0) hash ^= Bonetile.GetHashCode();
-    if (Bonecontent.Length != 0) hash ^= Bonecontent.GetHashCode();
-    if (note_ != null) hash ^= Note.GetHashCode();
+    if (boneinfo_ != null) hash ^= Boneinfo.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -772,33 +1111,9 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
       output.WriteRawTag(8);
       output.WriteInt32(Result);
     }
-    if (BoneId != 0) {
-      output.WriteRawTag(16);
-      output.WriteInt32(BoneId);
-    }
-    if (Type.Length != 0) {
-      output.WriteRawTag(26);
-      output.WriteString(Type);
-    }
-    if (Position.Length != 0) {
-      output.WriteRawTag(34);
-      output.WriteString(Position);
-    }
-    if (Bonename.Length != 0) {
-      output.WriteRawTag(42);
-      output.WriteString(Bonename);
-    }
-    if (Bonetile.Length != 0) {
-      output.WriteRawTag(50);
-      output.WriteString(Bonetile);
-    }
-    if (Bonecontent.Length != 0) {
-      output.WriteRawTag(58);
-      output.WriteString(Bonecontent);
-    }
-    if (note_ != null) {
-      output.WriteRawTag(66);
-      output.WriteMessage(Note);
+    if (boneinfo_ != null) {
+      output.WriteRawTag(18);
+      output.WriteMessage(Boneinfo);
     }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
@@ -814,33 +1129,9 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
       output.WriteRawTag(8);
       output.WriteInt32(Result);
     }
-    if (BoneId != 0) {
-      output.WriteRawTag(16);
-      output.WriteInt32(BoneId);
-    }
-    if (Type.Length != 0) {
-      output.WriteRawTag(26);
-      output.WriteString(Type);
-    }
-    if (Position.Length != 0) {
-      output.WriteRawTag(34);
-      output.WriteString(Position);
-    }
-    if (Bonename.Length != 0) {
-      output.WriteRawTag(42);
-      output.WriteString(Bonename);
-    }
-    if (Bonetile.Length != 0) {
-      output.WriteRawTag(50);
-      output.WriteString(Bonetile);
-    }
-    if (Bonecontent.Length != 0) {
-      output.WriteRawTag(58);
-      output.WriteString(Bonecontent);
-    }
-    if (note_ != null) {
-      output.WriteRawTag(66);
-      output.WriteMessage(Note);
+    if (boneinfo_ != null) {
+      output.WriteRawTag(18);
+      output.WriteMessage(Boneinfo);
     }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(ref output);
@@ -855,26 +1146,8 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
     if (Result != 0) {
       size += 1 + pb::CodedOutputStream.ComputeInt32Size(Result);
     }
-    if (BoneId != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeInt32Size(BoneId);
-    }
-    if (Type.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Type);
-    }
-    if (Position.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Position);
-    }
-    if (Bonename.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Bonename);
-    }
-    if (Bonetile.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Bonetile);
-    }
-    if (Bonecontent.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Bonecontent);
-    }
-    if (note_ != null) {
-      size += 1 + pb::CodedOutputStream.ComputeMessageSize(Note);
+    if (boneinfo_ != null) {
+      size += 1 + pb::CodedOutputStream.ComputeMessageSize(Boneinfo);
     }
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
@@ -891,29 +1164,11 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
     if (other.Result != 0) {
       Result = other.Result;
     }
-    if (other.BoneId != 0) {
-      BoneId = other.BoneId;
-    }
-    if (other.Type.Length != 0) {
-      Type = other.Type;
-    }
-    if (other.Position.Length != 0) {
-      Position = other.Position;
-    }
-    if (other.Bonename.Length != 0) {
-      Bonename = other.Bonename;
-    }
-    if (other.Bonetile.Length != 0) {
-      Bonetile = other.Bonetile;
-    }
-    if (other.Bonecontent.Length != 0) {
-      Bonecontent = other.Bonecontent;
-    }
-    if (other.note_ != null) {
-      if (note_ == null) {
-        Note = new global::BoneNote();
+    if (other.boneinfo_ != null) {
+      if (boneinfo_ == null) {
+        Boneinfo = new global::BoneInfo();
       }
-      Note.MergeFrom(other.Note);
+      Boneinfo.MergeFrom(other.Boneinfo);
     }
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
@@ -934,35 +1189,11 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
           Result = input.ReadInt32();
           break;
         }
-        case 16: {
-          BoneId = input.ReadInt32();
-          break;
-        }
-        case 26: {
-          Type = input.ReadString();
-          break;
-        }
-        case 34: {
-          Position = input.ReadString();
-          break;
-        }
-        case 42: {
-          Bonename = input.ReadString();
-          break;
-        }
-        case 50: {
-          Bonetile = input.ReadString();
-          break;
-        }
-        case 58: {
-          Bonecontent = input.ReadString();
-          break;
-        }
-        case 66: {
-          if (note_ == null) {
-            Note = new global::BoneNote();
+        case 18: {
+          if (boneinfo_ == null) {
+            Boneinfo = new global::BoneInfo();
           }
-          input.ReadMessage(Note);
+          input.ReadMessage(Boneinfo);
           break;
         }
       }
@@ -984,35 +1215,384 @@ public sealed partial class SCBoneResponse : pb::IMessage<SCBoneResponse>
           Result = input.ReadInt32();
           break;
         }
-        case 16: {
-          BoneId = input.ReadInt32();
-          break;
-        }
-        case 26: {
-          Type = input.ReadString();
-          break;
-        }
-        case 34: {
-          Position = input.ReadString();
-          break;
-        }
-        case 42: {
-          Bonename = input.ReadString();
-          break;
-        }
-        case 50: {
-          Bonetile = input.ReadString();
-          break;
-        }
-        case 58: {
-          Bonecontent = input.ReadString();
-          break;
-        }
-        case 66: {
-          if (note_ == null) {
-            Note = new global::BoneNote();
+        case 18: {
+          if (boneinfo_ == null) {
+            Boneinfo = new global::BoneInfo();
           }
-          input.ReadMessage(Note);
+          input.ReadMessage(Boneinfo);
+          break;
+        }
+      }
+    }
+  }
+  #endif
+
+}
+
+public sealed partial class CSAllBoneRequest : pb::IMessage<CSAllBoneRequest>
+#if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    , pb::IBufferMessage
+#endif
+{
+  private static readonly pb::MessageParser<CSAllBoneRequest> _parser = new pb::MessageParser<CSAllBoneRequest>(() => new CSAllBoneRequest());
+  private pb::UnknownFieldSet _unknownFields;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public static pb::MessageParser<CSAllBoneRequest> Parser { get { return _parser; } }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public static pbr::MessageDescriptor Descriptor {
+    get { return global::BoneProtoReflection.Descriptor.MessageTypes[4]; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  pbr::MessageDescriptor pb::IMessage.Descriptor {
+    get { return Descriptor; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public CSAllBoneRequest() {
+    OnConstruction();
+  }
+
+  partial void OnConstruction();
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public CSAllBoneRequest(CSAllBoneRequest other) : this() {
+    _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public CSAllBoneRequest Clone() {
+    return new CSAllBoneRequest(this);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public override bool Equals(object other) {
+    return Equals(other as CSAllBoneRequest);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public bool Equals(CSAllBoneRequest other) {
+    if (ReferenceEquals(other, null)) {
+      return false;
+    }
+    if (ReferenceEquals(other, this)) {
+      return true;
+    }
+    return Equals(_unknownFields, other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public override int GetHashCode() {
+    int hash = 1;
+    if (_unknownFields != null) {
+      hash ^= _unknownFields.GetHashCode();
+    }
+    return hash;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public override string ToString() {
+    return pb::JsonFormatter.ToDiagnosticString(this);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public void WriteTo(pb::CodedOutputStream output) {
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    output.WriteRawMessage(this);
+  #else
+    if (_unknownFields != null) {
+      _unknownFields.WriteTo(output);
+    }
+  #endif
+  }
+
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+    if (_unknownFields != null) {
+      _unknownFields.WriteTo(ref output);
+    }
+  }
+  #endif
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public int CalculateSize() {
+    int size = 0;
+    if (_unknownFields != null) {
+      size += _unknownFields.CalculateSize();
+    }
+    return size;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public void MergeFrom(CSAllBoneRequest other) {
+    if (other == null) {
+      return;
+    }
+    _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public void MergeFrom(pb::CodedInputStream input) {
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    input.ReadRawMessage(this);
+  #else
+    uint tag;
+    while ((tag = input.ReadTag()) != 0) {
+      switch(tag) {
+        default:
+          _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+          break;
+      }
+    }
+  #endif
+  }
+
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+    uint tag;
+    while ((tag = input.ReadTag()) != 0) {
+      switch(tag) {
+        default:
+          _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+          break;
+      }
+    }
+  }
+  #endif
+
+}
+
+public sealed partial class SCAllBoneResponse : pb::IMessage<SCAllBoneResponse>
+#if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    , pb::IBufferMessage
+#endif
+{
+  private static readonly pb::MessageParser<SCAllBoneResponse> _parser = new pb::MessageParser<SCAllBoneResponse>(() => new SCAllBoneResponse());
+  private pb::UnknownFieldSet _unknownFields;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public static pb::MessageParser<SCAllBoneResponse> Parser { get { return _parser; } }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public static pbr::MessageDescriptor Descriptor {
+    get { return global::BoneProtoReflection.Descriptor.MessageTypes[5]; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  pbr::MessageDescriptor pb::IMessage.Descriptor {
+    get { return Descriptor; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public SCAllBoneResponse() {
+    OnConstruction();
+  }
+
+  partial void OnConstruction();
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public SCAllBoneResponse(SCAllBoneResponse other) : this() {
+    result_ = other.result_;
+    boneinfo_ = other.boneinfo_.Clone();
+    _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public SCAllBoneResponse Clone() {
+    return new SCAllBoneResponse(this);
+  }
+
+  /// <summary>Field number for the "result" field.</summary>
+  public const int ResultFieldNumber = 1;
+  private int result_;
+  /// <summary>
+  ///结果 1成功 0失败  
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public int Result {
+    get { return result_; }
+    set {
+      result_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "boneinfo" field.</summary>
+  public const int BoneinfoFieldNumber = 2;
+  private static readonly pb::FieldCodec<global::BoneInfo> _repeated_boneinfo_codec
+      = pb::FieldCodec.ForMessage(18, global::BoneInfo.Parser);
+  private readonly pbc::RepeatedField<global::BoneInfo> boneinfo_ = new pbc::RepeatedField<global::BoneInfo>();
+  /// <summary>
+  ///骨骼信息
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public pbc::RepeatedField<global::BoneInfo> Boneinfo {
+    get { return boneinfo_; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public override bool Equals(object other) {
+    return Equals(other as SCAllBoneResponse);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public bool Equals(SCAllBoneResponse other) {
+    if (ReferenceEquals(other, null)) {
+      return false;
+    }
+    if (ReferenceEquals(other, this)) {
+      return true;
+    }
+    if (Result != other.Result) return false;
+    if(!boneinfo_.Equals(other.boneinfo_)) return false;
+    return Equals(_unknownFields, other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public override int GetHashCode() {
+    int hash = 1;
+    if (Result != 0) hash ^= Result.GetHashCode();
+    hash ^= boneinfo_.GetHashCode();
+    if (_unknownFields != null) {
+      hash ^= _unknownFields.GetHashCode();
+    }
+    return hash;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public override string ToString() {
+    return pb::JsonFormatter.ToDiagnosticString(this);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public void WriteTo(pb::CodedOutputStream output) {
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    output.WriteRawMessage(this);
+  #else
+    if (Result != 0) {
+      output.WriteRawTag(8);
+      output.WriteInt32(Result);
+    }
+    boneinfo_.WriteTo(output, _repeated_boneinfo_codec);
+    if (_unknownFields != null) {
+      _unknownFields.WriteTo(output);
+    }
+  #endif
+  }
+
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+    if (Result != 0) {
+      output.WriteRawTag(8);
+      output.WriteInt32(Result);
+    }
+    boneinfo_.WriteTo(ref output, _repeated_boneinfo_codec);
+    if (_unknownFields != null) {
+      _unknownFields.WriteTo(ref output);
+    }
+  }
+  #endif
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public int CalculateSize() {
+    int size = 0;
+    if (Result != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeInt32Size(Result);
+    }
+    size += boneinfo_.CalculateSize(_repeated_boneinfo_codec);
+    if (_unknownFields != null) {
+      size += _unknownFields.CalculateSize();
+    }
+    return size;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public void MergeFrom(SCAllBoneResponse other) {
+    if (other == null) {
+      return;
+    }
+    if (other.Result != 0) {
+      Result = other.Result;
+    }
+    boneinfo_.Add(other.boneinfo_);
+    _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public void MergeFrom(pb::CodedInputStream input) {
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    input.ReadRawMessage(this);
+  #else
+    uint tag;
+    while ((tag = input.ReadTag()) != 0) {
+      switch(tag) {
+        default:
+          _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+          break;
+        case 8: {
+          Result = input.ReadInt32();
+          break;
+        }
+        case 18: {
+          boneinfo_.AddEntriesFrom(input, _repeated_boneinfo_codec);
+          break;
+        }
+      }
+    }
+  #endif
+  }
+
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+    uint tag;
+    while ((tag = input.ReadTag()) != 0) {
+      switch(tag) {
+        default:
+          _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+          break;
+        case 8: {
+          Result = input.ReadInt32();
+          break;
+        }
+        case 18: {
+          boneinfo_.AddEntriesFrom(ref input, _repeated_boneinfo_codec);
           break;
         }
       }

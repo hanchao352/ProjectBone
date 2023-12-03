@@ -1,0 +1,17 @@
+ManifestFileVersion: 0
+CRC: 198353647
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 8c65c8035333483a14eea211cb896eef
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2612ac43db082a73502ee80f2eceb73f
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Res/UI/SelectOrCreateRole_atlas0.png
+Dependencies: []

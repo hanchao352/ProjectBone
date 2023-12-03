@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 389774281
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 080a3145fcd3d06a495784913ea29d8e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b30fce1a9ad74efb72be6c308c56e365
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/AssetBundleSample/SampleAssets/MyMaterial.mat
+Dependencies: []

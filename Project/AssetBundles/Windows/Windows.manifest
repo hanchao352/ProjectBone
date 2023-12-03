@@ -1,0 +1,83 @@
+ManifestFileVersion: 0
+CRC: 575139981
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: fairygui-examples/i3.ab
+      Dependencies: {}
+    Info_1:
+      Name: fairygui-examples/i8.ab
+      Dependencies: {}
+    Info_2:
+      Name: fairygui-examples/i1.ab
+      Dependencies: {}
+    Info_3:
+      Name: fairygui-examples/i6.ab
+      Dependencies: {}
+    Info_4:
+      Name: fairygui-examples/bundleusage.ab
+      Dependencies: {}
+    Info_5:
+      Name: fairygui-examples/i4.ab
+      Dependencies: {}
+    Info_6:
+      Name: fairygui-examples/i9.ab
+      Dependencies: {}
+    Info_7:
+      Name: fairygui-examples/i2.ab
+      Dependencies: {}
+    Info_8:
+      Name: fairygui-examples/i7.ab
+      Dependencies: {}
+    Info_9:
+      Name: fairygui-examples/i0.ab
+      Dependencies: {}
+    Info_10:
+      Name: fairygui-examples/i5.ab
+      Dependencies: {}
+    Info_11:
+      Name: jirou_nan
+      Dependencies: {}
+    Info_12:
+      Name: variants/variant-scene
+      Dependencies:
+        Dependency_0: variants/myassets.hd
+    Info_13:
+      Name: scene-bundle
+      Dependencies:
+        Dependency_0: material-bundle
+    Info_14:
+      Name: banner.english
+      Dependencies: {}
+    Info_15:
+      Name: tanks-albedo.normal-sd
+      Dependencies: {}
+    Info_16:
+      Name: banner.danish
+      Dependencies: {}
+    Info_17:
+      Name: variants/myassets.sd
+      Dependencies: {}
+    Info_18:
+      Name: tanks-albedo.normal-hd
+      Dependencies: {}
+    Info_19:
+      Name: material-bundle
+      Dependencies: {}
+    Info_20:
+      Name: tanks-scene-bundle
+      Dependencies:
+        Dependency_0: tanks-albedo.normal-hd
+    Info_21:
+      Name: cube-bundle
+      Dependencies:
+        Dependency_0: material-bundle
+    Info_22:
+      Name: tanks-albedo.desert-sd
+      Dependencies: {}
+    Info_23:
+      Name: variants/myassets.hd
+      Dependencies: {}
+    Info_24:
+      Name: tanks-albedo.desert-hd
+      Dependencies: {}

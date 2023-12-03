@@ -1,0 +1,17 @@
+ManifestFileVersion: 0
+CRC: 3441606364
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2469cc74af014b95ec1c38a472caad56
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2612ac43db082a73502ee80f2eceb73f
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Res/UI/UILoginWindow_atlas0!a.png
+Dependencies: []

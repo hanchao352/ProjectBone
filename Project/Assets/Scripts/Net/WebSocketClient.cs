@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.IO;
 
-public class WebSocketClient : Singleton<WebSocketClient>
+public class WebSocketClient : SingletonManager<WebSocketClient>,IGeneric
 {
     private ClientWebSocket _webSocket = new ClientWebSocket();
     

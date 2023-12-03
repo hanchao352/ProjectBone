@@ -1,7 +1,9 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -10,17 +12,63 @@ public class Main : MonoBehaviour
   
 
    
-    // 加载脚本实例时调用 Awake
+    private IGeneric[] managers;
+    private IMod[] mods;
     public void Awake()
     {
-        ProtoManager.Instance.Initialize();
-        TimerManager.Instance.Initialize();
-        // TableManager.Instance.Initialize();
-         UIManager.Instance.Initialize();
-         ModManager.Instance.Initialize();
-         WebRequestManager.Instance.Initialize();
-         InputManager.Instance.Initialize();
-         
+        DontDestroyOnLoad(this);
+        var managerTypes = Assembly.GetExecutingAssembly().GetTypes()
+            .Where(t => typeof(IGeneric).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+
+        List<IGeneric> managersList = new List<IGeneric>();
+
+        foreach (var type in managerTypes)
+        {
+            // 获取静态属性 "Instance"
+            var instanceProperty = type.GetProperty("Instance", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+            if (instanceProperty != null)
+            {
+                // 通过 "Instance" 属性获取单例实例
+                var managerInstance = instanceProperty.GetValue(null, null) as IGeneric;
+                if (managerInstance != null)
+                {
+                    managersList.Add(managerInstance);
+                }
+            }
+        }
+        managers = managersList.ToArray();
+
+        // 调用每个 manager 的 Initialize 方法
+        foreach (var manager in managers)
+        {
+            manager.Initialize();
+        }
+        
+        var modTypes = Assembly.GetExecutingAssembly().GetTypes()
+            .Where(t => typeof(IMod).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+
+        List<IMod> modList = new List<IMod>();
+
+        foreach (var mod in modTypes)
+        {
+            // 获取静态属性 "Instance"
+            var instanceProperty = mod.GetProperty("Instance", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+            if (instanceProperty != null)
+            {
+                // 通过 "Instance" 属性获取单例实例
+                var managerInstance = instanceProperty.GetValue(null, null) as IMod;
+                if (managerInstance != null)
+                {
+                    modList.Add(managerInstance);
+                }
+            }
+        }
+        mods = modList.ToArray();
+        //调用每个 manager 的 Initialize 方法
+        foreach (var mod in modList)
+        {
+            mod.Initialize();
+        }
     }
 
 
@@ -34,30 +82,21 @@ public class Main : MonoBehaviour
     public void Start()
     {
        // UIManager.Instance.ShowView(ViewID.LoginView);
-        TimerManager.Instance.SetInterval(Test1, 1000);
-        TimerManager.Instance.SetTimeout(Test2, 5000);
+       LoadBody();
+       BoneMod.Instance.Test();
     }
 
-    private void Test2()
-    {
-        Debug.Log("延时计时器");
-    }
-
-    private void Test1()
-    {
-        Debug.Log("循环计时器");
-    }
+   
 
     // 如果 MonoBehaviour 已启用，则在每一帧都调用 Update
     public void Update()
     {
         
-        TimerManager.Instance.Update(Time.deltaTime);
-        InputManager.Instance.Update(Time.deltaTime);
-        // UIManager.Instance.Update();
-        // ProtoManager.Instance.Update();
-        // ModManager.Instance.Update();
-        // WebSocketClient.Instance.Update();
+        float time = Time.deltaTime;
+        foreach (var manager in managers)
+        {
+            manager.Update(time);
+        }
     }
 
     // 当行为被禁用或处于非活动状态时调用此函数 
@@ -69,15 +108,52 @@ public class Main : MonoBehaviour
     // 当 MonoBehaviour 将被销毁时调用此函数
     public void OnDestroy()
     {
-       ProtoManager.Instance.Destroy();
-       ModManager.Instance.Destroy();
-       Client.Instance.Destroy();
+        foreach (var manager in managers)
+        {
+            manager.Dispose();
+        }
        
     }
 
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        foreach (var manager in managers)
+        {
+            manager.OnApplicationFocus(hasFocus);
+        }
+    }
 
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        foreach (var manager in managers)
+        {
+            manager.OnApplicationPause(pauseStatus);
+        }
+    }
 
+    private void OnApplicationQuit()
+    {
+        foreach (var manager in managers)
+        {
+            manager.OnApplicationQuit();
+        }
+    }
 
+    void LoadBody()
+    {
+        GameObject obj = ResManager.Instance.LoadRes("jirou_nan");
+        obj.transform.position = new Vector3(0, 0, 0);
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            obj.transform.GetChild(i).gameObject.layer = UnityLayer.Layer_Body;
+            if ( obj.transform.GetChild(i).gameObject.GetComponent<MeshCollider>() == null)
+            {
+                obj.transform.GetChild(i).gameObject.AddComponent<MeshCollider>();
+            }
+            
+        }
+        GameObjectManager.Instance.Body = obj;
+    }
 
 
 

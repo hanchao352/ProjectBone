@@ -1,0 +1,17 @@
+ManifestFileVersion: 0
+CRC: 105959753
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: df3fa059a78c224e204f3365035e92a6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Res/UI/SelectOrCreateRole_fui.bytes
+Dependencies: []

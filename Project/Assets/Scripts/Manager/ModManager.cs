@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Google.Protobuf;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public  class ModManager :Singleton<ModManager>
+public  class ModManager :SingletonManager<ModManager>, IGeneric
 {
     private  Dictionary<Type, Dictionary<int, Func<IMessage, Task>>> _messageIdToCallback;
     private Dictionary<int, Action<IMessage>> _webSocketCallbacks = new Dictionary<int, Action<IMessage>>();
@@ -17,7 +16,7 @@ public  class ModManager :Singleton<ModManager>
     public override void Initialize()
     {
        //需要提前实例化的模块
-       BoneMod.Instance.Use();
+       
        
     }
 
@@ -52,8 +51,9 @@ public  class ModManager :Singleton<ModManager>
         }
     }
 
-    public override void Destroy()
+    public override void Dispose ()
     {
+        base.Dispose();
         foreach (var mod in _mods.Values)
         {
             mod.Dispose();

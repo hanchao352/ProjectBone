@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class EventManager : Singleton<EventManager>
+public class EventManager : SingletonManager<EventManager>, IGeneric
 {
     private Dictionary<int, Delegate> eventTableWithArgs;
     private Dictionary<int, Delegate> eventTableWithoutArgs;
@@ -21,9 +21,9 @@ public class EventManager : Singleton<EventManager>
         base.Update(time);
     }
 
-    public override void Destroy()
+    public override void Dispose ()
     {
-        base.Destroy();
+        base.Dispose();
         eventTableWithArgs.Clear();
         eventTableWithoutArgs.Clear();
     }

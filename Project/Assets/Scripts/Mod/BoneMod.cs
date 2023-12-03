@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoneMod : SingletonMod<BoneMod>
+public class BoneMod : SingletonMod<BoneMod>,IMod
 {
     private LayerMask interactableLayer;
     public override void Initialize()
     {
         base.Initialize();
-        interactableLayer = UnityLayer.Layer_Body;
+        interactableLayer = 1<<UnityLayer.Layer_Body;
         InputManager.Instance.OnTap += OnTap;
-        Debug.Log("BoneMod Initialize");
     }
 
     private void OnTap(Vector2 vec2)
@@ -26,25 +25,51 @@ public class BoneMod : SingletonMod<BoneMod>
 
     public override void RegisterMessageHandler()
     {
-        
+        RegisterWebRequestCallback<CSBoneRequest>(OnCSBoneRequest);
         RegisterWebRequestCallback<SCBoneResponse>(OnWebSCBoneResponse);
+        RegisterWebRequestCallback<CSAllBoneRequest>(OnCSAllBoneRequest);
+        RegisterWebRequestCallback<SCAllBoneResponse>(OnSCAllBoneResponse);
     }
 
-   
+    private void OnCSAllBoneRequest(CSAllBoneRequest obj)
+    {
+        Debug.Log("OnCSAllBoneRequest");
+    }
+
+    private void OnCSBoneRequest(CSBoneRequest obj)
+    {
+        Debug.Log("OnCSBoneRequest");
+    }
+
+    private void OnSCAllBoneResponse(SCAllBoneResponse obj)
+    {
+        Debug.Log("OnSCAllBoneResponse");
+    }
+
 
     public override void UnregisterMessageHandler()
     {
         UnregisterWebRequestCallback<SCBoneResponse>();
+        UnregisterWebRequestCallback<CSBoneRequest>();
+        UnregisterWebRequestCallback<CSAllBoneRequest>();
+        UnregisterWebRequestCallback<SCAllBoneResponse>();
     }
     private void OnWebSCBoneResponse(SCBoneResponse obj)
     {
         Debug.Log("OnWebSCBoneResponse");
     }
-    int id = 0;
+    int id = 55;
     public void Test()
     {
-       CSBoneRequest cSBoneRequest = new CSBoneRequest();
-         cSBoneRequest.BoneId = id++;
-         SendWebRequestMessageAsync(cSBoneRequest);
+       // CSBoneRequest cSBoneRequest = new CSBoneRequest();
+       //   cSBoneRequest.BoneId = id++;
+       //   cSBoneRequest.ToSend();
+       //
+       //   CSAllBoneRequest cSAllBoneRequest = new CSAllBoneRequest();
+       //   cSAllBoneRequest.ToSend();
+       SCBoneResponse sCBoneResponse = new SCBoneResponse();
+         sCBoneResponse.Result = 1;
+            sCBoneResponse.Boneinfo = null;
+            sCBoneResponse.ToSend();
     }
 }

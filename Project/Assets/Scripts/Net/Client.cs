@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Client :Singleton<Client>
+public class Client :SingletonManager<Client>,IGeneric
 {
     private Socket _socket;
     private NetworkStream _networkStream;
@@ -38,9 +38,9 @@ public class Client :Singleton<Client>
         base.Update(time);
     }
 
-    public override void Destroy()
+    public override void Dispose()
     {
-        base.Destroy();
+        base.Dispose();
         Disconnect();
     }
   

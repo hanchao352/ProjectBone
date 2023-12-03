@@ -1,0 +1,74 @@
+ManifestFileVersion: 0
+CRC: 1414712734
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: fairygui-examples/i3.ab
+      Dependencies: {}
+    Info_1:
+      Name: fairygui-examples/i8.ab
+      Dependencies: {}
+    Info_2:
+      Name: fairygui-examples/i1.ab
+      Dependencies: {}
+    Info_3:
+      Name: fairygui-examples/i6.ab
+      Dependencies: {}
+    Info_4:
+      Name: fairygui-examples/bundleusage.ab
+      Dependencies: {}
+    Info_5:
+      Name: fairygui-examples/i4.ab
+      Dependencies: {}
+    Info_6:
+      Name: fairygui-examples/i9.ab
+      Dependencies: {}
+    Info_7:
+      Name: fairygui-examples/i2.ab
+      Dependencies: {}
+    Info_8:
+      Name: fairygui-examples/i7.ab
+      Dependencies: {}
+    Info_9:
+      Name: fairygui-examples/i0.ab
+      Dependencies: {}
+    Info_10:
+      Name: fairygui-examples/i5.ab
+      Dependencies: {}
+    Info_11:
+      Name: jirou_nan
+      Dependencies: {}
+    Info_12:
+      Name: load
+      Dependencies: {}
+    Info_13:
+      Name: main
+      Dependencies:
+        Dependency_0: jirou_nan
+    Info_14:
+      Name: selectorcreaterole_atlas0!a
+      Dependencies: {}
+    Info_15:
+      Name: selectorcreaterole_atlas0
+      Dependencies: {}
+    Info_16:
+      Name: selectorcreaterole_atlas0_1!a
+      Dependencies: {}
+    Info_17:
+      Name: selectorcreaterole_atlas0_1
+      Dependencies: {}
+    Info_18:
+      Name: selectorcreaterole_fui
+      Dependencies: {}
+    Info_19:
+      Name: uiloginwindow_atlas0!a
+      Dependencies: {}
+    Info_20:
+      Name: uiloginwindow_atlas0
+      Dependencies: {}
+    Info_21:
+      Name: uiloginwindow_fui
+      Dependencies: {}
+    Info_22:
+      Name: uitipswindow_fui
+      Dependencies: {}

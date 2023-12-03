@@ -1,0 +1,42 @@
+ManifestFileVersion: 0
+CRC: 91751896
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b9621bcd1ed7c6ecca5a6f98f2586b05
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6d503e4aec4cf872e809cfe3ad26531e
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 196
+  Script: {instanceID: 0}
+- Class: 850595691
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/AssetBundleSample/SampleAssets/TestScene.unity
+Dependencies:
+- F:/ProjectBone/Project/AssetBundles/Windows/material-bundle

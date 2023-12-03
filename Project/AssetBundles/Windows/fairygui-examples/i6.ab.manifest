@@ -1,0 +1,17 @@
+ManifestFileVersion: 0
+CRC: 2875264799
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 03ea482c942b38d5336d85e3cbdf48a4
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2612ac43db082a73502ee80f2eceb73f
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/FairyGUI/Examples/Resources/Icons/i6.png
+Dependencies: []

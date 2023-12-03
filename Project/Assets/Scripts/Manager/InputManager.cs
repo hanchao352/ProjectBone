@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class InputManager:Singleton<InputManager>,IDisposable
+public class InputManager:SingletonManager<InputManager>, IGeneric
 {
     
     public event Action<Vector2> OnTap;
@@ -11,8 +11,8 @@ public class InputManager:Singleton<InputManager>,IDisposable
 
     private Vector2 initialTouchPosition;
     private Vector2 lastTouchPosition;
-    private bool isDragging = false;
-    private float dragThreshold = 5f; // 拖拽阈值
+    public bool isDragging = false;
+    public float dragThreshold = 2f; // 拖拽阈值
         public override void Initialize()
         {
                 base.Initialize();
@@ -46,6 +46,14 @@ public class InputManager:Singleton<InputManager>,IDisposable
                         isDragging = true;
                     }
                     OnDrag?.Invoke(lastTouchPosition, (Vector2)Input.mousePosition);
+                    //根据鼠标移动的差值，计算旋转角度
+                    Vector2 diff =   (Vector2)Input.mousePosition - lastTouchPosition;
+                    float difx = diff.x;
+                    //根据difx，计算旋转角度
+                    float angle = difx * 0.1f;
+                    
+                    OnRotate?.Invoke(angle);
+                    
                 }
                 lastTouchPosition = Input.mousePosition;
             }
@@ -57,6 +65,12 @@ public class InputManager:Singleton<InputManager>,IDisposable
                 }
                 isDragging = false;
             }
+            
+            //鼠标滚轮
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            scroll *= 10;
+            OnZoom?.Invoke(scroll);
+            
         }
 
     private void HandleTouchInput()
@@ -122,13 +136,10 @@ public class InputManager:Singleton<InputManager>,IDisposable
         return Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
     }
         
-        public override void Destroy()
+        public override void Dispose()
         {
-                base.Destroy();
+                base.Dispose();
         }
         
-        void IDisposable.Dispose()
-        {
-                
-        }
+
 }

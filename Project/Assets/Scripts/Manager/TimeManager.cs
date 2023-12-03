@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using UnityEngine;
 
-public class TimerManager : Singleton<TimerManager>, IDisposable
+public class TimerManager : SingletonManager<TimerManager>, IGeneric
 {
     private class TimerData
     {
@@ -182,16 +182,13 @@ public class TimerManager : Singleton<TimerManager>, IDisposable
         timers.Remove(id);
     }
 
-    public override void Destroy()
+    public override void Dispose()
     {
+        base.Dispose();
         timers.Clear();
     }
 
-    public  void Dispose()
-    {
-        timers.Clear();
-    }
-
+   
 
 
 }

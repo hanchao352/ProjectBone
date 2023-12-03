@@ -3,7 +3,7 @@
     using FairyGUI;
     using UnityEngine;
 
-    public class UIManager:Singleton<UIManager>
+    public class UIManager:SingletonManager<UIManager>,IGeneric
     {
         
 
