@@ -67,9 +67,22 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
        //
        //   CSAllBoneRequest cSAllBoneRequest = new CSAllBoneRequest();
        //   cSAllBoneRequest.ToSend();
-       SCBoneResponse sCBoneResponse = new SCBoneResponse();
+         SCBoneResponse sCBoneResponse = new SCBoneResponse();
          sCBoneResponse.Result = 1;
-            sCBoneResponse.Boneinfo = null;
-            sCBoneResponse.ToSend();
+         BoneInfo boneInfo = new BoneInfo();
+         boneInfo.BoneId = 1;
+         boneInfo.Bonename = "BoneName";
+         boneInfo.Bonecontent = "BoneContent";
+         sCBoneResponse.Boneinfo = boneInfo;
+         sCBoneResponse.ToSend();
+         
+         ////////////
+         SCBoneResponse sCBoneResponse1 = new SCBoneResponse();
+         sCBoneResponse1.Result = 1;
+        
+         sCBoneResponse.Boneinfo.BoneId = 2;
+            sCBoneResponse.Boneinfo.Bonename = "BoneName2";
+            sCBoneResponse.Boneinfo.Bonecontent = "BoneContent2";
+         sCBoneResponse.ToSend();
     }
 }

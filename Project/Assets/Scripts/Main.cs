@@ -17,6 +17,7 @@ public class Main : MonoBehaviour
     public void Awake()
     {
         DontDestroyOnLoad(this);
+        WebRequestManager.Instance.Initialize();
         var managerTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => typeof(IGeneric).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 

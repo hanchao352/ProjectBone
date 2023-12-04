@@ -12,7 +12,7 @@ public class InputManager:SingletonManager<InputManager>, IGeneric
     private Vector2 initialTouchPosition;
     private Vector2 lastTouchPosition;
     public bool isDragging = false;
-    public float dragThreshold = 2f; // 拖拽阈值
+    public float dragThreshold = 1f; // 拖拽阈值
         public override void Initialize()
         {
                 base.Initialize();
