@@ -62,8 +62,7 @@ public class WebRequestManager : MonoSingleton<WebRequestManager>, IDisposable
            }
            else
            {
-               byte[] bs = new byte[] { 30, 0, 0, 0 };
-               byte[] bs1 = new byte[] { 30,0,0,0,16,39,0,0,8,1,18,26,8,10,26,10,232,130,140,232,130,137,49,50,51,52,34,10,231,187,147,230,158,132,49,49,52,52};
+              
                string responseData = webRequest.downloadHandler.text;
                int[] intArray = JsonConvert.DeserializeObject<int[]>(responseData);
                
@@ -73,7 +72,7 @@ public class WebRequestManager : MonoSingleton<WebRequestManager>, IDisposable
                {
                    byteArray[i] = (byte)intArray[i];
                }
-               List<byte> catchbufferlist =byteArray.ToList();
+              
               
                 //Debug.Log("Received:" + webRequest.downloadHandler.text);
                // Debug.Log("Cookie:"+webRequest.GetRequestHeader("Cookie"));
