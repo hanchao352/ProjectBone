@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Google.Protobuf;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class WebRequestManager : MonoSingleton<WebRequestManager>, IDisposable
 {
-    private string url = "https://certt.froglesson.com/muscle/index";
+    private string url = "http://ecmo.froglesson.com/protobuf/index";
     public override void Initialize()
     {
         base.Initialize();
@@ -45,11 +46,7 @@ public class WebRequestManager : MonoSingleton<WebRequestManager>, IDisposable
        //form.AddBinaryData("msgdata",bs);
        Debug.Log("str:"+msgInfo.msg);
        
-       Type messageType = ProtoManager.Instance.GetTypeByProtoId(msgInfo.ProtoId);
-       IMessage message1 = (IMessage)Activator.CreateInstance(messageType);
-                
-       JsonParser jsonParser = new JsonParser(JsonParser.Settings.Default);
-       message1 = jsonParser.Parse(msgInfo.msg, message.Descriptor);
+      
        
        StartCoroutine(PostRequest(url, form));
    }
@@ -65,29 +62,34 @@ public class WebRequestManager : MonoSingleton<WebRequestManager>, IDisposable
            }
            else
            {
+               byte[] bs = new byte[] { 30, 0, 0, 0 };
+               byte[] bs1 = new byte[] { 30,0,0,0,16,39,0,0,8,1,18,26,8,10,26,10,232,130,140,232,130,137,49,50,51,52,34,10,231,187,147,230,158,132,49,49,52,52};
                string responseData = webRequest.downloadHandler.text;
+               int[] intArray = JsonConvert.DeserializeObject<int[]>(responseData);
                
-                Debug.Log("Received:" + webRequest.downloadHandler.text);
+               // 转换为字节数组
+               byte[] byteArray = new byte[intArray.Length];
+               for (int i = 0; i < intArray.Length; i++)
+               {
+                   byteArray[i] = (byte)intArray[i];
+               }
+               List<byte> catchbufferlist =byteArray.ToList();
+              
+                //Debug.Log("Received:" + webRequest.downloadHandler.text);
                // Debug.Log("Cookie:"+webRequest.GetRequestHeader("Cookie"));
-               // ReceiveMessages(webRequest.downloadHandler.data);
-               string[] parts = responseData.Split(new string[] { "<br>" }, StringSplitOptions.None);
-
-                // 处理 POST 数据
-               string postPart = parts[0];
-               Dictionary<string, string> postValues = ParseResponse(responseData);
-               int protoId = int.Parse(postValues["msgid"]);
-                string msgstr = postValues["msgstr"];
+               byte[] lengthBytes = new byte[4];
+               Array.Copy(byteArray, 0, lengthBytes, 0, 4);
+               byte[] idBytes = new byte[4];
+                Array.Copy(byteArray, 4, idBytes, 0, 4);
+               int packagelength = BitConverter.ToInt32(lengthBytes);
+               int protoId = BitConverter.ToInt32(idBytes);
+               byte[] messageBytes = new byte[packagelength];
+                Array.Copy(byteArray, 8, messageBytes, 0, packagelength);
                 Type messageType = ProtoManager.Instance.GetTypeByProtoId(protoId);
                 IMessage message = (IMessage)ObjectCreator.CreateInstance(messageType);
-                
-                JsonParser jsonParser = new JsonParser(JsonParser.Settings.Default);
-                 message = jsonParser.Parse(responseData, message.Descriptor);
-                 ModManager.Instance.InvokeWebSocketCallback(protoId, message);
-                // 处理 GET 数据
-               string getPart = parts[1];
-              // Dictionary<string, string> getValues = ParseKeyValuePairs(getPart);
-
-               Debug.Log("99");
+                message.MergeFrom(messageBytes);
+                ModManager.Instance.InvokeWebSocketCallback(protoId, message);
+               
                
            }
        }

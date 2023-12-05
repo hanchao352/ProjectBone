@@ -56,11 +56,11 @@ public abstract class ModBase
         int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
         await Client.Instance.SendMessageAsync(message, protoId);
     }
-    protected void RegisterWebSocketCallback<T>(Action<T> callback) where T : IMessage<T>
-    {
-        int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
-        ModManager.Instance.RegisterWebSocketCallback(protoId, callback as Action<IMessage>);
-    }
+    // protected void RegisterWebSocketCallback<T>(Action<T> callback) where T : IMessage<T>
+    // {
+    //     int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
+    //     ModManager.Instance.RegisterWebSocketCallback(protoId, callback as Action<IMessage>);
+    // }
 
     protected void UnregisterWebSocketCallback<T>() where T : IMessage<T>
     {
@@ -69,11 +69,11 @@ public abstract class ModBase
     }
     
     
-    protected void RegisterWebRequestCallback<T>(Action<T> callback) where T : IMessage<T>
-    {
-        int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
-        ModManager.Instance.RegisterWebSocketCallback(protoId, callback as Action<IMessage>);
-    }
+    // protected void RegisterWebRequestCallback<T>(Action<T> callback) where T : IMessage<T>
+    // {
+    //     int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
+    //     ModManager.Instance.RegisterWebSocketCallback(protoId, callback as Action<IMessage>);
+    // }
 
     protected void UnregisterWebRequestCallback<T>() where T : IMessage<T>
     {

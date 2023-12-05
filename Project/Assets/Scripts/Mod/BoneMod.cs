@@ -61,28 +61,28 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
     int id = 55;
     public void Test()
     {
-       // CSBoneRequest cSBoneRequest = new CSBoneRequest();
-       //   cSBoneRequest.BoneId = id++;
-       //   cSBoneRequest.ToSend();
+       CSBoneRequest cSBoneRequest = new CSBoneRequest();
+         cSBoneRequest.BoneId = 10;
+         cSBoneRequest.ToSend();
        //
        //   CSAllBoneRequest cSAllBoneRequest = new CSAllBoneRequest();
        //   cSAllBoneRequest.ToSend();
-         SCBoneResponse sCBoneResponse = new SCBoneResponse();
-         sCBoneResponse.Result = 1;
-         BoneInfo boneInfo = new BoneInfo();
-         boneInfo.BoneId = 1;
-         boneInfo.Bonename = "BoneName";
-         boneInfo.Bonecontent = "BoneContent";
-         sCBoneResponse.Boneinfo = boneInfo;
-         sCBoneResponse.ToSend();
-         
-         ////////////
-         SCBoneResponse sCBoneResponse1 = new SCBoneResponse();
-         sCBoneResponse1.Result = 1;
-        
-         sCBoneResponse.Boneinfo.BoneId = 2;
-            sCBoneResponse.Boneinfo.Bonename = "BoneName2";
-            sCBoneResponse.Boneinfo.Bonecontent = "BoneContent2";
-         sCBoneResponse.ToSend();
+         // SCBoneResponse sCBoneResponse = new SCBoneResponse();
+         // sCBoneResponse.Result = 1;
+         // BoneInfo boneInfo = new BoneInfo();
+         // boneInfo.BoneId = 1;
+         // boneInfo.Bonename = "BoneName";
+         // boneInfo.Bonecontent = "BoneContent";
+         // sCBoneResponse.Boneinfo = boneInfo;
+         // sCBoneResponse.ToSend();
+         //
+         // ////////////
+         // SCBoneResponse sCBoneResponse1 = new SCBoneResponse();
+         // sCBoneResponse1.Result = 1;
+         //
+         // sCBoneResponse.Boneinfo.BoneId = 2;
+         //    sCBoneResponse.Boneinfo.Bonename = "BoneName2";
+         //    sCBoneResponse.Boneinfo.Bonecontent = "BoneContent2";
+         // sCBoneResponse.ToSend();
     }
 }

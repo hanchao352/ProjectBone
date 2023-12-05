@@ -15,10 +15,9 @@ message BoneInfo
 {
   int32 boneId = 1;//骨骼id
   string type =2;//类型
-  string position = 3;//所属部位
-  string bonename = 4;//骨骼名称
-  string  bonecontent = 5;//骨骼内容
-  optional BoneNote  note = 6;//笔记内容
+  string bonename = 3;//骨骼名称
+  string  bonecontent = 4;//骨骼内容
+  optional BoneNote  note = 5;//笔记内容
 }
 
 //骨骼信息请求

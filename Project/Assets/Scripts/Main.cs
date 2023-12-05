@@ -84,7 +84,11 @@ public class Main : MonoBehaviour
     {
        // UIManager.Instance.ShowView(ViewID.LoginView);
        LoadBody();
-       BoneMod.Instance.Test();
+       for (int i = 0; i < 10; i++)
+       {
+           BoneMod.Instance.Test();
+       }
+      
     }
 
    

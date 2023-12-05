@@ -8,7 +8,7 @@ public  class ModManager :SingletonManager<ModManager>, IGeneric
 {
     private  Dictionary<Type, Dictionary<int, Func<IMessage, Task>>> _messageIdToCallback;
     private Dictionary<int, Action<IMessage>> _webSocketCallbacks = new Dictionary<int, Action<IMessage>>();
-    private  readonly Dictionary<Type, ModBase> _mods = new Dictionary<Type, ModBase>();
+     private  readonly Dictionary<Type, IMod> _mods = new Dictionary<Type, IMod>();
     public ModManager()
     {
         _messageIdToCallback = new Dictionary<Type, Dictionary<int, Func<IMessage, Task>>>();
@@ -21,24 +21,21 @@ public  class ModManager :SingletonManager<ModManager>, IGeneric
     }
 
 
-    public  void RegisterMod(ModBase mod)
+    public  void RegisterMod(IMod mod)
     {
         var modType = mod.GetType();
         if (_mods.ContainsKey(modType))
         {
             throw new InvalidOperationException($"Mod {modType} has already been registered.");
-            
+            return;
         }
         else
         {
             Debug.Log($"Registering mod {modType}.");
         }
         
-        if (mod.IsInitialized == false)
-        {
-            mod.Initialize();
-            _mods.Add(modType, mod);
-        }
+        _mods.Add(modType, mod);
+        
        
     }
 
@@ -47,7 +44,7 @@ public  class ModManager :SingletonManager<ModManager>, IGeneric
         base.Update(time);
         foreach (var mod in _mods.Values)
         {
-            mod.Update();
+            mod.Update(time);
         }
     }
 
@@ -58,7 +55,7 @@ public  class ModManager :SingletonManager<ModManager>, IGeneric
         {
             mod.Dispose();
         }
-
+    
         _mods.Clear();
     }
     public  void RegisterCallback<T>(int protoId, Func<T, Task> callback) where T : IMessage<T>
@@ -92,26 +89,34 @@ public  class ModManager :SingletonManager<ModManager>, IGeneric
         }
         return false;
     }
-    public  void UnregisterMod<T>() where T : ModBase
-    {
-        var modType = typeof(T);
-        if (_mods.TryGetValue(modType, out var mod))
-        {
-            mod.Dispose();
-            _mods.Remove(modType);
-        }
-    }
+    // public  void UnregisterMod<T>() where T : ModBase
+    // {
+    //     var modType = typeof(T);
+    //     if (_mods.TryGetValue(modType, out var mod))
+    //     {
+    //         mod.Dispose();
+    //         _mods.Remove(modType);
+    //     }
+    // }
 
-    public void RegisterWebSocketCallback(int protoId, Action<IMessage> callback)
+    public void RegisterWebSocketCallback<T>(int protoId, Action<T> callback) where T : IMessage<T>
     {
+        Action<IMessage> generalCallback = (message) =>
+        {
+            if (message is T tMessage)
+            {
+                callback(tMessage);
+            }
+        };
+
         if (!_webSocketCallbacks.ContainsKey(protoId))
         {
-            _webSocketCallbacks[protoId] = callback;
+            _webSocketCallbacks[protoId] = generalCallback;
         }
         else
         {
             Debug.LogWarning($"WebSocket callback for protoId {protoId} is already registered. Overwriting.");
-            _webSocketCallbacks[protoId] = callback;
+            _webSocketCallbacks[protoId] = generalCallback;
         }
     }
 

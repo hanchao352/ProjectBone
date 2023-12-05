@@ -4,11 +4,11 @@ public static class ProtosMsgID
     public const int SCBoneResponse = 10001;
     public const int CSAllBoneRequest = 10002;
     public const int SCAllBoneResponse = 10003;
-    public const int RegisterRequest = 10000;
-    public const int RegisterResponse = 10001;
-    public const int LoginRequest = 10002;
-    public const int LoginResponse = 10003;
-    public const int CreateRoleRequest = 10004;
-    public const int CreateRoleResponse = 10005;
-    public const int TestResponse = 10007;
+    // public const int RegisterRequest = 10000;
+    // public const int RegisterResponse = 10001;
+    // public const int LoginRequest = 10002;
+    // public const int LoginResponse = 10003;
+    // public const int CreateRoleRequest = 10004;
+    // public const int CreateRoleResponse = 10005;
+    // public const int TestResponse = 10007;
 }

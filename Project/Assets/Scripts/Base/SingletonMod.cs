@@ -53,7 +53,7 @@ public abstract class SingletonMod<T>  where T : class, IMod, new()
         protected void RegisterWebRequestCallback<T>(Action<T> callback) where T : IMessage<T>
         {
             int protoId = ProtoManager.Instance.GetProtoIdByType(typeof(T));
-            ModManager.Instance.RegisterWebSocketCallback(protoId, callback as Action<IMessage>);
+            ModManager.Instance.RegisterWebSocketCallback(protoId, callback );
         }
 
         protected void UnregisterWebRequestCallback<T>() where T : IMessage<T>
@@ -81,7 +81,7 @@ public abstract class SingletonMod<T>  where T : class, IMod, new()
         public virtual void Initialize()
         {
             // Default implementation, can be overridden in derived classes
-            //ModManager.Instance.RegisterMod(Instance);
+            ModManager.Instance.RegisterMod(Instance);
             RegisterMessageHandler();
             initialized = true;
             Debug.Log(Instance.ToString()+" Initialize");
@@ -115,5 +115,6 @@ public abstract class SingletonMod<T>  where T : class, IMod, new()
         {
             // Default implementation, can be overridden in derived classes
             Debug.Log(Instance.ToString()+" Destroy");
+            UnregisterMessageHandler();
         }
     }
