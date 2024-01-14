@@ -1,93 +1,129 @@
 ﻿using System;
 using System.Collections.Generic;
-using FairyGUI;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public abstract class UIBase
+using Object = UnityEngine.Object;
+
+public abstract class UIBase:IViewGeneric
 {
-    public string packageName;
-    public string resName;
-    public bool useAsyncLoad=false;
-   // private List<ComponentBase> child = new List<ComponentBase>();
-    public GComponent MainComponent { get; private set; }
+    public object[] Args;
+    public GameObject Root { get; set; }
+    public RectTransform rectTransform { get; set; }
+    public List<ComponentBase> childComponents { get; set; }
+    public ViewInfo ViewInfo { get; set; }
+    public bool Isvisible
+    {
+        get => isvisible;
+    }
+
+    private bool isvisible = false;
+    public void CreateRoot()
+    {
+        Root = ResManager.Instance.LoadRes<GameObject>("UI/prefab/"+ViewInfo.ResName);
+        var parent = (ViewInfo.ViewID == ViewID.BotMenuView)?UIManager.Instance.BotWindowRoot:UIManager.Instance.WindowRoot;
+        Root.transform.SetParent(parent,false); 
+        rectTransform = Root.GetComponent<RectTransform>();
+        Root.transform.localPosition = Vector3.zero;
+        Root.transform.localScale= Vector3.one;
+        Root.transform.rotation= Quaternion.identity;
+
+        Initialize();
+        OnShow(Args);
+    }
+
+    private void OnLoadDone(GameObject uiroot)
+    {
+        Root=   GameObject.Instantiate(uiroot,UIManager.Instance.UIRoot.transform);
+        Initialize();
+        OnShow(Args);
+    }
+
+
+    public virtual void Initialize()
+    {
+        childComponents = new List<ComponentBase>();
+    }
+
+    public virtual void OnShow(params object[] args)
+    {
+        isvisible = true;
+        Root.SetActive(true);
+    }
+
+    public virtual void UpdateView(params object[] args)
+    {
+        for (int i = 0; i < childComponents.Count; i++)
+        {
+            childComponents[i].UpdateView(); 
+        }
+    }
+
+    public virtual void Update(float time)
+    {
+        for (int i = 0; i < childComponents.Count; i++)
+        {
+            childComponents[i].Update(time);
+        }
+    }
+
+    public virtual void OnApplicationFocus(bool hasFocus)
+    {
+        
+    }
+
+    public virtual void OnApplicationPause(bool pauseStatus)
+    {
+       
+    }
+
+    public virtual void OnApplicationQuit()
+    {
+        
+    }
+
+    public virtual void OnHide()
+    {
+        isvisible = false;
+        Root.SetActive(false);
+        for (int i = 0; i < childComponents.Count; i++)
+        {
+            childComponents[i].Visible = false;
+        }
+    }
+
+    public virtual void OnEnterMutex()
+    {
+        for (int i = 0; i < childComponents.Count; i++)
+        {
+            childComponents[i].OnEnterMutex();
+        }
+    }
+
+    public virtual void OnExitMutex()
+    {
+        for (int i = 0; i < childComponents.Count; i++)
+        {
+            childComponents[i].OnExitMutex();
+        }
+    }
+
+    public virtual void Dispose()
+    {
+        for (int i = 0; i < childComponents.Count; i++)
+        {
+            childComponents[i].Dispose();
+        }
+        Object.Destroy(Root);
+    }
     
-    public  void InitRes(params object[] args)
+    public virtual T MakeComponent<T>(GameObject comroot) where T:ComponentBase
     {
-        SetPackageItemExtension();
-        UIPackage.AddPackage("Assets/Res/UI/" + packageName);
-        if (useAsyncLoad)
+        T com = comroot.MakeComponent<T>();
+        if (childComponents.Contains(com)==false)
         {
-            
-            UIPackage.CreateObjectAsync(packageName,resName,OnCreatDone);
+            childComponents.Add(com);
         }
-        else
-        {
-            MainComponent=  UIPackage.CreateObject(packageName,resName).asCom;
-            GRoot.inst.AddChild(MainComponent);
-            Init(args);
-            OnShow(args);
-        }
+        return com;
     }
-
-    protected virtual void SetPackageItemExtension()
-    {
-       
-    }
-
-    protected abstract void OnInit(params object[] args);
-    protected abstract void OnShow(params object[] args);
-
-    protected virtual void OnUpdate()
-    {
-        
-    }
-    protected abstract void OnHide() ;
-    protected abstract void OnDestroy() ;
-
-    public void Init(params object[] args)
-    {
-        OnInit(args);
-    }
-
-    public void Show(params object[] args)
-    {
-        OnShow(args);
-    }
-
-    public void Hide()
-    {
-        OnHide();
-    }
-
-    public void Dispose()
-    {
-        OnDestroy();
-        // MainComponent.Dispose();
-        // for (int i = 0; i < child.Count; i++)
-        // {
-        //     child[i].Dispose();
-        // }
-        
-    }
-
-
-    protected void OnCreatDone(GObject result,params object[] args)
-    {
-        MainComponent = result.asCom;
-        GRoot.inst.AddChild(MainComponent);
-        Init(args);
-        OnShow(args);
-       
-    }
-
-    // public T MakeComponent<T>(GComponent component) where T : ComponentBase, new() 
-    // {
-    //     T t = new T();
-    //     t.MainComponent = component;
-    //     t.Init();
-    //     t.SetVisible(false); 
-    //     child.Add(t);
-    //     return t;
-    // }
-
 }

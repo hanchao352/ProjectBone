@@ -1,75 +1,128 @@
-﻿// using System;
-// using System.Collections.Generic;
-// using FairyGUI;
-//
-// public abstract class ComponentBase : IDisposable
-// {
-//     public GComponent MainComponent { get;   set; }
-//
-//    
-//    
-//
-//     #region 虚方法
-//
-//    
-//
-//     #endregion
-//     
-//     #region 抽象方法,声明周期
-//
-//     public abstract void Init(params object[] args);
-//
-//     protected abstract void OnShow(params object[] args);
-//     protected abstract void OnUpdate() ;
-//     protected abstract void OnHide() ;
-//     protected abstract void OnDestroy() ;
-//
-//     #endregion
-//     
-//
-//     #region Component 通用属性
-//     
-//     public bool Enabled
-//     {
-//         get {  return MainComponent.enabled; }
-//         set { MainComponent.enabled = value; }
-//     }
-//     
-//     public bool Grayed
-//     {
-//         get {  return MainComponent.grayed; }
-//         set { MainComponent.grayed = value; }
-//     }
-//     
-//     public bool Touchable
-//     {
-//         get {  return MainComponent.touchable; }
-//         set { MainComponent.touchable = value; }
-//     }
-//
-//     #endregion
-//     
-//     public void Dispose()
-//     {
-//         OnDestroy();
-//     }
-//
-//     #region 外部调用方法
-//
-//     public void SetVisible(bool vis,params object[] args)
-//     {
-//         MainComponent.visible = vis;
-//         if (vis)
-//         {
-//             OnShow(args);
-//         }
-//         else
-//         {
-//             OnHide();
-//         }
-//         
-//        
-//     }
-//
-//     #endregion
-// }
+﻿
+    using System.Collections.Generic;
+    using UnityEngine;
+
+    public class ComponentBase:IViewGeneric
+    {
+        public GameObject Root { get; set; }
+        public List<ComponentBase> childComponents { get; set; }
+        
+        public bool Visible
+        {
+            get { return visible; }
+            set
+            {
+                if (visible == true)
+                {
+                    if (value == true)
+                    {
+                        UpdateView();
+                    }
+                    else
+                    {
+                        OnHide();
+                    }
+                }
+                else
+                {
+                    if (value == true)
+                    {
+                        OnShow();
+                    }
+                    else
+                    {
+                        OnHide();
+                    }
+                }
+                visible = value;
+                Root.SetActive(visible);
+            }
+        }
+
+        private bool visible = false;
+      
+
+        public virtual void Initialize()
+        {
+            childComponents = new List<ComponentBase>();
+            Visible = false;
+        }
+
+        public virtual void OnShow(params object[] args)
+        {
+            
+        }
+
+        public virtual void UpdateView(params object[] args)
+        {
+            for (int i = 0; i < childComponents.Count; i++)
+            {
+                childComponents[i].UpdateView();
+            }
+        }
+
+        public virtual void Update(float time)
+        {
+            for (int i = 0; i < childComponents.Count; i++)
+            {
+                childComponents[i].Update(time);
+            }
+        }
+
+        public virtual void OnApplicationFocus(bool hasFocus)
+        {
+          
+        }
+
+        public virtual void OnApplicationPause(bool pauseStatus)
+        {
+            
+        }
+
+        public virtual void OnApplicationQuit()
+        {
+            
+        }
+
+        public virtual void OnHide()
+        {
+            for (int i = 0; i < childComponents.Count; i++)
+            {
+                childComponents[i].OnHide();
+            }
+        }
+
+        public virtual void OnEnterMutex()
+        {
+            for (int i = 0; i < childComponents.Count; i++)
+            {
+                childComponents[i].OnEnterMutex();
+            }
+        }
+
+        public virtual void OnExitMutex()
+        {
+            for (int i = 0; i < childComponents.Count; i++)
+            {
+                childComponents[i].OnExitMutex();
+            }
+        }
+
+        public virtual void Dispose()
+        {
+            for (int i = 0; i < childComponents.Count; i++)
+            {
+                childComponents[i].Dispose();
+            }
+        }
+        
+        public virtual  T MakeComponent<T>(GameObject comroot) where T:ComponentBase
+        {
+            T com = comroot.MakeComponent<T>();
+            if (childComponents.Contains(com)==false)
+            {
+                childComponents.Add(com);
+            }
+            return com;
+        }
+    }

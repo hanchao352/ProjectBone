@@ -1,74 +1,243 @@
 ManifestFileVersion: 0
-CRC: 1414712734
+CRC: 2232692738
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: fairygui-examples/i3.ab
-      Dependencies: {}
-    Info_1:
-      Name: fairygui-examples/i8.ab
-      Dependencies: {}
-    Info_2:
-      Name: fairygui-examples/i1.ab
-      Dependencies: {}
-    Info_3:
-      Name: fairygui-examples/i6.ab
-      Dependencies: {}
-    Info_4:
-      Name: fairygui-examples/bundleusage.ab
-      Dependencies: {}
-    Info_5:
-      Name: fairygui-examples/i4.ab
-      Dependencies: {}
-    Info_6:
-      Name: fairygui-examples/i9.ab
-      Dependencies: {}
-    Info_7:
-      Name: fairygui-examples/i2.ab
-      Dependencies: {}
-    Info_8:
-      Name: fairygui-examples/i7.ab
-      Dependencies: {}
-    Info_9:
-      Name: fairygui-examples/i0.ab
-      Dependencies: {}
-    Info_10:
-      Name: fairygui-examples/i5.ab
-      Dependencies: {}
-    Info_11:
-      Name: jirou_nan
-      Dependencies: {}
-    Info_12:
-      Name: load
-      Dependencies: {}
-    Info_13:
-      Name: main
-      Dependencies:
-        Dependency_0: jirou_nan
-    Info_14:
-      Name: selectorcreaterole_atlas0!a
-      Dependencies: {}
-    Info_15:
-      Name: selectorcreaterole_atlas0
-      Dependencies: {}
-    Info_16:
       Name: selectorcreaterole_atlas0_1!a
       Dependencies: {}
-    Info_17:
-      Name: selectorcreaterole_atlas0_1
-      Dependencies: {}
-    Info_18:
-      Name: selectorcreaterole_fui
-      Dependencies: {}
-    Info_19:
+    Info_1:
       Name: uiloginwindow_atlas0!a
       Dependencies: {}
-    Info_20:
-      Name: uiloginwindow_atlas0
+    Info_2:
+      Name: jirou_nan
       Dependencies: {}
-    Info_21:
-      Name: uiloginwindow_fui
+    Info_3:
+      Name: selectorcreaterole_atlas0!a
       Dependencies: {}
-    Info_22:
+    Info_4:
       Name: uitipswindow_fui
       Dependencies: {}
+    Info_5:
+      Name: main
+      Dependencies: {}
+    Info_6:
+      Name: selectorcreaterole_atlas0_1
+      Dependencies: {}
+    Info_7:
+      Name: uiloginwindow_atlas0
+      Dependencies: {}
+    Info_8:
+      Name: selectorcreaterole_atlas0
+      Dependencies: {}
+    Info_9:
+      Name: selectorcreaterole_fui
+      Dependencies: {}
+    Info_10:
+      Name: uiloginwindow_fui
+      Dependencies: {}
+    Info_11:
+      Name: load
+      Dependencies: {}
+    Info_12:
+      Name: main_window
+      Dependencies:
+        Dependency_0: fill 17@2x
+        Dependency_1: "\u5973\u6027@2x"
+        Dependency_2: "\u7537\u6027@2x"
+        Dependency_3: "\u7F16\u7EC4 3@2x"
+        Dependency_4: "\u7F16\u7EC4 4@2x"
+        Dependency_5: "\u80A9\u9888@2x"
+    Info_13:
+      Name: "\u6A21\u578B\u9996\u9875"
+      Dependencies: {}
+    Info_14:
+      Name: "\u808C\u8089-\u653E\u5927\u4E0D\u53EF\u70B9\u51FB"
+      Dependencies: {}
+    Info_15:
+      Name: "\u9AA8\u9ABC-\u5C55\u5F00"
+      Dependencies: {}
+    Info_16:
+      Name: "\u9AA8\u9ABC-\u5DE6\u4FA7\u9009\u62E9\u5668"
+      Dependencies: {}
+    Info_17:
+      Name: "\u9AA8\u9ABC-\u808C\u8089"
+      Dependencies: {}
+    Info_18:
+      Name: "\u9AA8\u9ABC-\u9009\u4E2D"
+      Dependencies: {}
+    Info_19:
+      Name: bg_menubar
+      Dependencies: {}
+    Info_20:
+      Name: bg_menubar@2x
+      Dependencies: {}
+    Info_21:
+      Name: bg_menubar@3x
+      Dependencies: {}
+    Info_22:
+      Name: fill 17
+      Dependencies: {}
+    Info_23:
+      Name: fill 17@2x
+      Dependencies: {}
+    Info_24:
+      Name: fill 17@3x
+      Dependencies: {}
+    Info_25:
+      Name: minus-circle-fill 1
+      Dependencies: {}
+    Info_26:
+      Name: minus-circle-fill
+      Dependencies: {}
+    Info_27:
+      Name: minus-circle-fill@2x 1
+      Dependencies: {}
+    Info_28:
+      Name: minus-circle-fill@2x
+      Dependencies: {}
+    Info_29:
+      Name: minus-circle-fill@3x 1
+      Dependencies: {}
+    Info_30:
+      Name: minus-circle-fill@3x
+      Dependencies: {}
+    Info_31:
+      Name: plus-circle-fill
+      Dependencies: {}
+    Info_32:
+      Name: plus-circle-fill@2x
+      Dependencies: {}
+    Info_33:
+      Name: plus-circle-fill@3x
+      Dependencies: {}
+    Info_34:
+      Name: up-circle
+      Dependencies: {}
+    Info_35:
+      Name: up-circle@2x
+      Dependencies: {}
+    Info_36:
+      Name: up-circle@3x
+      Dependencies: {}
+    Info_37:
+      Name: "\u5973\u6027"
+      Dependencies: {}
+    Info_38:
+      Name: "\u5973\u6027@2x"
+      Dependencies: {}
+    Info_39:
+      Name: "\u5973\u6027@3x"
+      Dependencies: {}
+    Info_40:
+      Name: "\u7537\u6027"
+      Dependencies: {}
+    Info_41:
+      Name: "\u7537\u6027@2x"
+      Dependencies: {}
+    Info_42:
+      Name: "\u7537\u6027@3x"
+      Dependencies: {}
+    Info_43:
+      Name: "\u7F16\u7EC4 13"
+      Dependencies: {}
+    Info_44:
+      Name: "\u7F16\u7EC4 13@2x"
+      Dependencies: {}
+    Info_45:
+      Name: "\u7F16\u7EC4 13@3x"
+      Dependencies: {}
+    Info_46:
+      Name: "\u7F16\u7EC4 3"
+      Dependencies: {}
+    Info_47:
+      Name: "\u7F16\u7EC4 3@2x"
+      Dependencies: {}
+    Info_48:
+      Name: "\u7F16\u7EC4 3@3x"
+      Dependencies: {}
+    Info_49:
+      Name: "\u7F16\u7EC4 4"
+      Dependencies: {}
+    Info_50:
+      Name: "\u7F16\u7EC4 4@2x 1"
+      Dependencies: {}
+    Info_51:
+      Name: "\u7F16\u7EC4 4@2x"
+      Dependencies: {}
+    Info_52:
+      Name: "\u7F16\u7EC4 4@3x 1"
+      Dependencies: {}
+    Info_53:
+      Name: "\u7F16\u7EC4 4@3x"
+      Dependencies: {}
+    Info_54:
+      Name: "\u7F16\u7EC4 5"
+      Dependencies: {}
+    Info_55:
+      Name: "\u7F16\u7EC4 5@2x"
+      Dependencies: {}
+    Info_56:
+      Name: "\u7F16\u7EC4 5@3x"
+      Dependencies: {}
+    Info_57:
+      Name: "\u7F16\u7EC4 6"
+      Dependencies: {}
+    Info_58:
+      Name: "\u7F16\u7EC4 6@2x"
+      Dependencies: {}
+    Info_59:
+      Name: "\u7F16\u7EC4 6@3x"
+      Dependencies: {}
+    Info_60:
+      Name: "\u7F16\u7EC4 7"
+      Dependencies: {}
+    Info_61:
+      Name: "\u7F16\u7EC4 9"
+      Dependencies: {}
+    Info_62:
+      Name: "\u7F16\u7EC4 9@2x"
+      Dependencies: {}
+    Info_63:
+      Name: "\u7F16\u7EC4 9@3x"
+      Dependencies: {}
+    Info_64:
+      Name: "\u7F16\u7EC4\u5907\u4EFD"
+      Dependencies: {}
+    Info_65:
+      Name: "\u7F16\u7EC4\u5907\u4EFD@2x"
+      Dependencies: {}
+    Info_66:
+      Name: "\u7F16\u7EC4\u5907\u4EFD@3x"
+      Dependencies: {}
+    Info_67:
+      Name: "\u80A9\u9888"
+      Dependencies: {}
+    Info_68:
+      Name: "\u80A9\u9888@2x"
+      Dependencies: {}
+    Info_69:
+      Name: "\u80A9\u9888@3x"
+      Dependencies: {}
+    Info_70:
+      Name: "\u8DEF\u5F84"
+      Dependencies: {}
+    Info_71:
+      Name: "\u8DEF\u5F84@2x"
+      Dependencies: {}
+    Info_72:
+      Name: "\u8DEF\u5F84@3x"
+      Dependencies: {}
+    Info_73:
+      Name: bot_menu_window
+      Dependencies:
+        Dependency_0: bg_menubar
+    Info_74:
+      Name: show_window
+      Dependencies:
+        Dependency_0: bg_menubar@2x
+        Dependency_1: "\u7F16\u7EC4 13@2x"
+        Dependency_2: "\u7F16\u7EC4 4@3x 1"
+        Dependency_3: "\u7F16\u7EC4 6@2x"
+        Dependency_4: "\u7F16\u7EC4 9@2x"
+        Dependency_5: "\u7F16\u7EC4\u5907\u4EFD@2x"
+        Dependency_6: "\u8DEF\u5F84@2x"

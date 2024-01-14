@@ -3,9 +3,8 @@ using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Config.character;
-using FairyGUI;
 using Google.Protobuf;
-
+using UnityEngine;
 public static class UtilHelper
 {
        
@@ -32,4 +31,15 @@ public static class ObjectCreator
 
         return creator();
     }
+}
+public static class UIUtilHleper
+{
+    public static T MakeComponent<T>(this GameObject gameObject) where T:ComponentBase
+    {
+        T component = (T)ObjectCreator.CreateInstance(typeof(T));
+        component.Root = gameObject;
+        component.Initialize();
+        return component;
+    }
+    
 }

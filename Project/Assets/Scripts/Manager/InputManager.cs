@@ -1,145 +1,111 @@
 ﻿using System;
+using DigitalRubyShared;
 using UnityEngine;
 
 public class InputManager:SingletonManager<InputManager>, IGeneric
 {
+    private PanGestureRecognizer panGesture;
+    private ScaleGestureRecognizer scaleGesture;
+    private OneTouchRotateGestureRecognizer rotateGesture;
+    public override void Initialize()
+    {
+        base.Initialize();
+        CreatePanGesture();
+        CreateScaleGesture();
+        CreateRotateGesture();
+         panGesture.AllowSimultaneousExecution(scaleGesture);
+        scaleGesture.AllowSimultaneousExecution(panGesture);
+      
+    }
+    //创建缩放手势
+    private void CreateScaleGesture()
+    {
+        scaleGesture = new ScaleGestureRecognizer();
+        scaleGesture.StateUpdated += ScaleGestureCallback;
+        FingersScript.Instance.AddGesture(scaleGesture);
+    }
     
-    public event Action<Vector2> OnTap;
-    public event Action<Vector2, Vector2> OnDrag;
-    public event Action<float> OnRotate;
-    public event Action<float> OnZoom;
-
-    private Vector2 initialTouchPosition;
-    private Vector2 lastTouchPosition;
-    public bool isDragging = false;
-    public float dragThreshold = 1f; // 拖拽阈值
-        public override void Initialize()
-        {
-                base.Initialize();
-        }
-
-        public override void Update(float time)
-        {
-            base.Update(time);
-#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-            HandleMouseInput();
-#else
-            HandleTouchInput();
-#endif
-        }
-
-        
-        private void HandleMouseInput()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                initialTouchPosition = Input.mousePosition;
-                lastTouchPosition = Input.mousePosition;
-                isDragging = false;
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                if (((Vector2)Input.mousePosition - lastTouchPosition).magnitude > dragThreshold)
-                {
-                    if (!isDragging)
-                    {
-                        isDragging = true;
-                    }
-                    OnDrag?.Invoke(lastTouchPosition, (Vector2)Input.mousePosition);
-                    //根据鼠标移动的差值，计算旋转角度
-                    Vector2 diff =   (Vector2)Input.mousePosition - lastTouchPosition;
-                    float difx = diff.x;
-                    //根据difx，计算旋转角度
-                    float angle = difx * 0.1f;
-                    
-                    OnRotate?.Invoke(angle);
-                    
-                }
-                lastTouchPosition = Input.mousePosition;
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                if (!isDragging)
-                {
-                    OnTap?.Invoke(Input.mousePosition);
-                }
-                isDragging = false;
-            }
-            
-            //鼠标滚轮
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
-            scroll *= 10;
-            OnZoom?.Invoke(scroll);
-            
-        }
-
-    private void HandleTouchInput()
+    private void ScaleGestureCallback(DigitalRubyShared.GestureRecognizer gesture)
     {
-        if (Input.touchCount > 0)
+        if (gesture.State == GestureRecognizerState.Executing)
         {
-            Touch touch = Input.GetTouch(0);
-
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
-                    initialTouchPosition = touch.position;
-                    lastTouchPosition = touch.position;
-                    break;
-
-                case TouchPhase.Moved:
-                    if (isDragging)
-                    {
-                        OnDrag?.Invoke(lastTouchPosition, touch.position);
-                    }
-                    else
-                    {
-                        isDragging = true;
-                    }
-                    lastTouchPosition = touch.position;
-                    break;
-
-                case TouchPhase.Ended:
-                    if (!isDragging)
-                    {
-                        OnTap?.Invoke(touch.position);
-                    }
-                    isDragging = false;
-                    break;
-            }
-        }
-
-        if (Input.touchCount == 2)
-        {
-            Touch touch0 = Input.GetTouch(0);
-            Touch touch1 = Input.GetTouch(1);
-
-            Vector2 touch0PrevPos = touch0.position - touch0.deltaPosition;
-            Vector2 touch1PrevPos = touch1.position - touch1.deltaPosition;
-
-            float prevMagnitude = (touch0PrevPos - touch1PrevPos).magnitude;
-            float currentMagnitude = (touch0.position - touch1.position).magnitude;
-
-            float difference = currentMagnitude - prevMagnitude;
-
-            OnZoom?.Invoke(difference);
-
-            float angle = GetAngleBetweenTouches(touch0, touch1);
-            OnRotate?.Invoke(angle);
+           
+            GameObjectManager.Instance.Body.transform.localScale *= scaleGesture.ScaleMultiplier;
+         
         }
     }
-
-
-
-    private float GetAngleBetweenTouches(Touch touch0, Touch touch1)
+    
+    //创建旋转手势
+    private void CreateRotateGesture()
     {
-        Vector2 diff = touch1.position - touch0.position;
-        return Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        
+        
+        rotateGesture = new OneTouchRotateGestureRecognizer();
+        rotateGesture.StateUpdated += RotateGestureCallback;
+        FingersScript.Instance.AddGesture(rotateGesture);
     }
-        
-        public override void Dispose()
+    private void RotateGestureCallback(DigitalRubyShared.GestureRecognizer gesture)
+    {
+        if (gesture.State == GestureRecognizerState.Executing )
         {
-                base.Dispose();
-        }
         
+         float rotationSpeed = 0.1f; // 根据需要调整这个值
+         GameObjectManager.Instance.Body.transform.Rotate(Vector3.up, -panGesture.DeltaX * rotationSpeed, Space.World);
+          GameObjectManager.Instance.Body.transform.Rotate(Vector3.right, panGesture.DeltaY * rotationSpeed, Space.World);
+        }
+       
+    }
+    //创建拖拽手势
+    private void CreatePanGesture()
+    {
+        panGesture = new PanGestureRecognizer();
+        panGesture.MinimumNumberOfTouchesToTrack = 2;
+        panGesture.StateUpdated += PanGestureCallback;
+        FingersScript.Instance.AddGesture(panGesture);
+    }
+    
+    private void PanGestureCallback(DigitalRubyShared.GestureRecognizer gesture)
+    {
+        if (gesture.State == GestureRecognizerState.Executing)
+        {
+       
+           
+            float deltaX = panGesture.DeltaX / 1000.0f;
+            float deltaY = panGesture.DeltaY / 1000.0f;
+            
+            Vector3 pos = GameObjectManager.Instance.Body.transform.position;
+            pos.x += deltaX;
+            pos.y += deltaY;
+            GameObjectManager.Instance.Body.transform.position = pos;
+        }
+    }
+  
+  
 
+
+
+    public override void Update(float time)
+    {
+        base.Update(time);
+    }
+
+    public override void OnApplicationFocus(bool hasFocus)
+    {
+        base.OnApplicationFocus(hasFocus);
+    }
+
+    public override void OnApplicationPause(bool pauseStatus)
+    {
+        base.OnApplicationPause(pauseStatus);
+    }
+
+    public override void OnApplicationQuit()
+    {
+        base.OnApplicationQuit();
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+    }
 }

@@ -82,13 +82,14 @@ public class Main : MonoBehaviour
     // 仅在首次调用 Update 方法之前调用 Start
     public void Start()
     {
-       // UIManager.Instance.ShowView(ViewID.LoginView);
+        UIManager.Instance.ShowView(ViewID.MainView);
+        UIManager.Instance.ShowView(ViewID.BotMenuView);
        LoadBody();
-       for (int i = 0; i < 10; i++)
+       for (int i = 0; i < 1; i++)
        {
            BoneMod.Instance.Test();
        }
-      
+    
     }
 
    
@@ -146,10 +147,25 @@ public class Main : MonoBehaviour
 
     void LoadBody()
     {
-        GameObject obj = ResManager.Instance.LoadRes("jirou_nan");
+        GameObject obj = ResManager.Instance.LoadRes<GameObject>("Model/jirou_nan");
         obj.transform.position = new Vector3(0, 0, 0);
         for (int i = 0; i < obj.transform.childCount; i++)
         {
+            string name = obj.transform.GetChild(i).name;
+            if (int.TryParse(name,out int id))
+            {
+                Bone  bone = new Bone();
+                bone.Id = id;
+                if (BoneMod.Instance.boneDic.ContainsKey(id))
+                {
+                    BoneMod.Instance.boneDic[id] = bone;
+                }
+                else
+                {
+                    BoneMod.Instance.boneDic.Add(id,bone);
+                }
+                
+            }
             obj.transform.GetChild(i).gameObject.layer = UnityLayer.Layer_Body;
             if ( obj.transform.GetChild(i).gameObject.GetComponent<MeshCollider>() == null)
             {
@@ -157,6 +173,7 @@ public class Main : MonoBehaviour
             }
             
         }
+        obj.transform.position = new Vector3(0, 0, 0.5f);
         GameObjectManager.Instance.Body = obj;
     }
 

@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Google.Protobuf;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class BoneMod : SingletonMod<BoneMod>,IMod
 {
     private LayerMask interactableLayer;
+    public Dictionary<int, Bone> boneDic;
     public override void Initialize()
     {
         base.Initialize();
         interactableLayer = 1<<UnityLayer.Layer_Body;
-        InputManager.Instance.OnTap += OnTap;
+      //  InputManager.Instance.OnTap += OnTap;
+        boneDic = new Dictionary<int, Bone>();
     }
 
     private void OnTap(Vector2 vec2)
@@ -40,10 +44,37 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
     {
         Debug.Log("OnCSBoneRequest");
     }
+ 
 
     private void OnSCAllBoneResponse(SCAllBoneResponse obj)
     {
-        Debug.Log("OnSCAllBoneResponse");
+        //Debug.Log("OnSCAllBoneResponse");
+        for (int i = 0; i < obj.Boneinfo.Count; i++)
+        {
+            BoneInfo boneInfo = obj.Boneinfo[i];
+            if (boneDic.ContainsKey(boneInfo.BoneId))
+            {
+                boneDic[boneInfo.BoneId].UpdateBoneInfo(boneInfo);
+            }
+            else
+            {
+                Bone bone = new Bone();
+                bone.UpdateBoneInfo(boneInfo);
+                boneDic[boneInfo.BoneId] = bone;
+            }
+            // Debug.Log("BoneId:"+boneInfo.BoneId + " BoneName:"+boneInfo.Bonename + " BoneContent:"+boneInfo.Bonecontent+" BoneType:"+boneInfo.Type);
+            // if (boneInfo.Note != null)
+            // {
+            //     Debug.Log("NoteID:"+boneInfo.Note.NoteId  + " NoteTitle:"+boneInfo.Note.NoteTitle + " NoteContent:"+boneInfo.Note.Notecontent);
+            //     for (int j = 0; j < boneInfo.Note.Imageurl.Count; j++)
+            //     {
+            //         Debug.Log("URL:"+boneInfo.Note.Imageurl[j]);
+            //     }
+            // }
+           
+        }
+    
+       
     }
 
 
@@ -61,9 +92,9 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
     int id = 55;
     public void Test()
     {
-       CSBoneRequest cSBoneRequest = new CSBoneRequest();
-         cSBoneRequest.BoneId = 10;
-         cSBoneRequest.ToSend();
+       // CSBoneRequest cSBoneRequest = new CSBoneRequest();
+       //   cSBoneRequest.BoneId = 10;
+       //   cSBoneRequest.ToSend();
        //
        //   CSAllBoneRequest cSAllBoneRequest = new CSAllBoneRequest();
        //   cSAllBoneRequest.ToSend();
@@ -84,5 +115,7 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
          //    sCBoneResponse.Boneinfo.Bonename = "BoneName2";
          //    sCBoneResponse.Boneinfo.Bonecontent = "BoneContent2";
          // sCBoneResponse.ToSend();
+         CSAllBoneRequest cSAllBoneRequest = new CSAllBoneRequest();
+         cSAllBoneRequest.ToSend();
     }
 }

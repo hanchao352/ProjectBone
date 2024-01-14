@@ -24,20 +24,21 @@ public static partial class BoneProtoReflection {
         string.Concat(
           "Cg9Cb25lUHJvdG8ucHJvdG8aEU9wdGlvbk1zZ0lkLnByb3RvIlQKCEJvbmVO",
           "b3RlEg4KBm5vdGVJZBgBIAEoBRIRCglub3RlVGl0bGUYAiABKAkSEwoLbm90",
-          "ZWNvbnRlbnQYAyABKAkSEAoIaW1hZ2V1cmwYBCADKAkidgoIQm9uZUluZm8S",
-          "DgoGYm9uZUlkGAEgASgFEgwKBHR5cGUYAiABKAkSEAoIYm9uZW5hbWUYAyAB",
-          "KAkSEwoLYm9uZWNvbnRlbnQYBCABKAkSHAoEbm90ZRgFIAEoCzIJLkJvbmVO",
-          "b3RlSACIAQFCBwoFX25vdGUiJQoNQ1NCb25lUmVxdWVzdBIOCgZib25lSWQY",
-          "ASABKAU6BMA+kE4iQwoOU0NCb25lUmVzcG9uc2USDgoGcmVzdWx0GAEgASgF",
-          "EhsKCGJvbmVpbmZvGAIgASgLMgkuQm9uZUluZm86BMA+kU4iGAoQQ1NBbGxC",
-          "b25lUmVxdWVzdDoEwD6STiJGChFTQ0FsbEJvbmVSZXNwb25zZRIOCgZyZXN1",
-          "bHQYASABKAUSGwoIYm9uZWluZm8YAiADKAsyCS5Cb25lSW5mbzoEwD6TTmIG",
-          "cHJvdG8z"));
+          "ZWNvbnRlbnQYAyABKAkSEAoIaW1hZ2V1cmwYBCADKAkivgEKCEJvbmVJbmZv",
+          "Eg4KBmJvbmVJZBgBIAEoBRIMCgR0eXBlGAIgASgJEhAKCGJvbmVuYW1lGAMg",
+          "ASgJEhMKC2JvbmVjb250ZW50GAQgASgJEhwKBG5vdGUYBSABKAsyCS5Cb25l",
+          "Tm90ZUgAiAEBEhEKCWRpcmVjdGlvbhgGIAEoCRIQCghwb3NpdGlvbhgHIAEo",
+          "CRIQCghlbnVtdHlwZRgIIAEoBRIPCgdlbnVtcG9zGAkgAygFQgcKBV9ub3Rl",
+          "IiUKDUNTQm9uZVJlcXVlc3QSDgoGYm9uZUlkGAEgASgFOgTAPpBOIkMKDlND",
+          "Qm9uZVJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoBRIbCghib25laW5mbxgCIAEo",
+          "CzIJLkJvbmVJbmZvOgTAPpFOIhgKEENTQWxsQm9uZVJlcXVlc3Q6BMA+kk4i",
+          "RgoRU0NBbGxCb25lUmVzcG9uc2USDgoGcmVzdWx0GAEgASgFEhsKCGJvbmVp",
+          "bmZvGAIgAygLMgkuQm9uZUluZm86BMA+k05iBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { global::OptionMsgIdReflection.Descriptor, },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
           new pbr::GeneratedClrTypeInfo(typeof(global::BoneNote), global::BoneNote.Parser, new[]{ "NoteId", "NoteTitle", "Notecontent", "Imageurl" }, null, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::BoneInfo), global::BoneInfo.Parser, new[]{ "BoneId", "Type", "Bonename", "Bonecontent", "Note" }, new[]{ "Note" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BoneInfo), global::BoneInfo.Parser, new[]{ "BoneId", "Type", "Bonename", "Bonecontent", "Note", "Direction", "Position", "Enumtype", "Enumpos" }, new[]{ "Note" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::CSBoneRequest), global::CSBoneRequest.Parser, new[]{ "BoneId" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::SCBoneResponse), global::SCBoneResponse.Parser, new[]{ "Result", "Boneinfo" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::CSAllBoneRequest), global::CSAllBoneRequest.Parser, null, null, null, null, null),
@@ -388,6 +389,10 @@ public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
     bonename_ = other.bonename_;
     bonecontent_ = other.bonecontent_;
     note_ = other.note_ != null ? other.note_.Clone() : null;
+    direction_ = other.direction_;
+    position_ = other.position_;
+    enumtype_ = other.enumtype_;
+    enumpos_ = other.enumpos_.Clone();
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
@@ -472,6 +477,65 @@ public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
     }
   }
 
+  /// <summary>Field number for the "direction" field.</summary>
+  public const int DirectionFieldNumber = 6;
+  private string direction_ = "";
+  /// <summary>
+  ///方向
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public string Direction {
+    get { return direction_; }
+    set {
+      direction_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "position" field.</summary>
+  public const int PositionFieldNumber = 7;
+  private string position_ = "";
+  /// <summary>
+  ///位置
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public string Position {
+    get { return position_; }
+    set {
+      position_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "enumtype" field.</summary>
+  public const int EnumtypeFieldNumber = 8;
+  private int enumtype_;
+  /// <summary>
+  ///枚举类型
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public int Enumtype {
+    get { return enumtype_; }
+    set {
+      enumtype_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "enumpos" field.</summary>
+  public const int EnumposFieldNumber = 9;
+  private static readonly pb::FieldCodec<int> _repeated_enumpos_codec
+      = pb::FieldCodec.ForInt32(74);
+  private readonly pbc::RepeatedField<int> enumpos_ = new pbc::RepeatedField<int>();
+  /// <summary>
+  ///枚举位置
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public pbc::RepeatedField<int> Enumpos {
+    get { return enumpos_; }
+  }
+
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public override bool Equals(object other) {
@@ -492,6 +556,10 @@ public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
     if (Bonename != other.Bonename) return false;
     if (Bonecontent != other.Bonecontent) return false;
     if (!object.Equals(Note, other.Note)) return false;
+    if (Direction != other.Direction) return false;
+    if (Position != other.Position) return false;
+    if (Enumtype != other.Enumtype) return false;
+    if(!enumpos_.Equals(other.enumpos_)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
@@ -504,6 +572,10 @@ public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
     if (Bonename.Length != 0) hash ^= Bonename.GetHashCode();
     if (Bonecontent.Length != 0) hash ^= Bonecontent.GetHashCode();
     if (note_ != null) hash ^= Note.GetHashCode();
+    if (Direction.Length != 0) hash ^= Direction.GetHashCode();
+    if (Position.Length != 0) hash ^= Position.GetHashCode();
+    if (Enumtype != 0) hash ^= Enumtype.GetHashCode();
+    hash ^= enumpos_.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -542,6 +614,19 @@ public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
       output.WriteRawTag(42);
       output.WriteMessage(Note);
     }
+    if (Direction.Length != 0) {
+      output.WriteRawTag(50);
+      output.WriteString(Direction);
+    }
+    if (Position.Length != 0) {
+      output.WriteRawTag(58);
+      output.WriteString(Position);
+    }
+    if (Enumtype != 0) {
+      output.WriteRawTag(64);
+      output.WriteInt32(Enumtype);
+    }
+    enumpos_.WriteTo(output, _repeated_enumpos_codec);
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
     }
@@ -572,6 +657,19 @@ public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
       output.WriteRawTag(42);
       output.WriteMessage(Note);
     }
+    if (Direction.Length != 0) {
+      output.WriteRawTag(50);
+      output.WriteString(Direction);
+    }
+    if (Position.Length != 0) {
+      output.WriteRawTag(58);
+      output.WriteString(Position);
+    }
+    if (Enumtype != 0) {
+      output.WriteRawTag(64);
+      output.WriteInt32(Enumtype);
+    }
+    enumpos_.WriteTo(ref output, _repeated_enumpos_codec);
     if (_unknownFields != null) {
       _unknownFields.WriteTo(ref output);
     }
@@ -597,6 +695,16 @@ public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
     if (note_ != null) {
       size += 1 + pb::CodedOutputStream.ComputeMessageSize(Note);
     }
+    if (Direction.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Direction);
+    }
+    if (Position.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Position);
+    }
+    if (Enumtype != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeInt32Size(Enumtype);
+    }
+    size += enumpos_.CalculateSize(_repeated_enumpos_codec);
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
     }
@@ -627,6 +735,16 @@ public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
       }
       Note.MergeFrom(other.Note);
     }
+    if (other.Direction.Length != 0) {
+      Direction = other.Direction;
+    }
+    if (other.Position.Length != 0) {
+      Position = other.Position;
+    }
+    if (other.Enumtype != 0) {
+      Enumtype = other.Enumtype;
+    }
+    enumpos_.Add(other.enumpos_);
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
 
@@ -665,6 +783,23 @@ public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
           input.ReadMessage(Note);
           break;
         }
+        case 50: {
+          Direction = input.ReadString();
+          break;
+        }
+        case 58: {
+          Position = input.ReadString();
+          break;
+        }
+        case 64: {
+          Enumtype = input.ReadInt32();
+          break;
+        }
+        case 74:
+        case 72: {
+          enumpos_.AddEntriesFrom(input, _repeated_enumpos_codec);
+          break;
+        }
       }
     }
   #endif
@@ -701,6 +836,23 @@ public sealed partial class BoneInfo : pb::IMessage<BoneInfo>
             Note = new global::BoneNote();
           }
           input.ReadMessage(Note);
+          break;
+        }
+        case 50: {
+          Direction = input.ReadString();
+          break;
+        }
+        case 58: {
+          Position = input.ReadString();
+          break;
+        }
+        case 64: {
+          Enumtype = input.ReadInt32();
+          break;
+        }
+        case 74:
+        case 72: {
+          enumpos_.AddEntriesFrom(ref input, _repeated_enumpos_codec);
           break;
         }
       }

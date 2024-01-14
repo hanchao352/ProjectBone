@@ -8,9 +8,9 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
         public override void Initialize()
         {
                 base.Initialize();
-                InputManager.Instance.OnRotate+=OnRotate;
-                InputManager.Instance.OnZoom+=OnZoom;
-                InputManager.Instance.OnDrag+=OnDrag;
+                // InputManager.Instance.OnRotate+=OnRotate;
+                // InputManager.Instance.OnZoom+=OnZoom;
+                // InputManager.Instance.OnDrag+=OnDrag;
         }
 
         private void OnDrag(Vector2 lastpos, Vector2 curpos)

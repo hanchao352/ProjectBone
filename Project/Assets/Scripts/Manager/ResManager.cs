@@ -17,30 +17,17 @@ public class ResManager:SingletonManager<ResManager>,IGeneric
         
         public override void Dispose()
         {
-                base.Dispose();
+              
         }
         
 
-        public GameObject LoadRes(string resname)
+        public T LoadRes<T>(string resname) where T : UnityEngine.Object
         {
+               
 
-                AssetBundle ab = null;
-                GameObject obj = null;
-                if (_assetBundles.ContainsKey(resname))
-                {
-                         ab = _assetBundles[resname];
-                }
-                else
-                {
-                         ab = AssetBundle.LoadFromFile(Application.dataPath + "/AssetBundles/" + resname);
-                        _assetBundles.Add(resname,ab);
-                }
+              T  go = Resources.Load<T>(resname);
+             T obj =   GameObject.Instantiate<T>(go);
                 
-                GameObject go = ab.LoadAsset<GameObject>(resname);
-                obj = GameObject.Instantiate(go);
-                
-
                 return obj;
-
         }
 }

@@ -18,6 +18,10 @@ message BoneInfo
   string bonename = 3;//骨骼名称
   string  bonecontent = 4;//骨骼内容
   optional BoneNote  note = 5;//笔记内容
+  string direction = 6;//方向
+  string  position = 7;//位置
+  int32  enumtype = 8;//枚举类型
+  repeated int32 enumpos = 9;//枚举位置
 }
 
 //骨骼信息请求

@@ -5,7 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Res/Scene/Main.unity
+  - enabled: 0
+    path: Assets/Resources/Scene/Main.unity
     guid: 9403e0468efc5ce4db295e15d1aeb8c6
+  - enabled: 1
+    path: Assets/Vuplex/WebView/Demos/Scenes/2_CanvasWebViewDemo.unity
+    guid: d5ac12fb2aa3e4f07ba9f38c0ea0bfcf
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
