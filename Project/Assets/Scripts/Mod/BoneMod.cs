@@ -8,12 +8,17 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
 {
     private LayerMask interactableLayer;
     public Dictionary<int, Bone> boneDic;
+    public bool boneLoaded = false;
+    public int currentBoneId;
     public override void Initialize()
     {
         base.Initialize();
+        boneLoaded = false;
         interactableLayer = 1<<UnityLayer.Layer_Body;
       //  InputManager.Instance.OnTap += OnTap;
         boneDic = new Dictionary<int, Bone>();
+        currentBoneId = 0;
+      
     }
 
     private void OnTap(Vector2 vec2)
@@ -73,7 +78,9 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
             // }
            
         }
-    
+
+        boneLoaded = true;
+        Debug.Log("------------");
        
     }
 

@@ -1,18 +1,61 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEditor.Timeline;
+using UnityEngine;
 
 public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
 {
         public GameObject Body;
         public bool dragenable = false;
         public bool rotateenable = false;
+        public List<SkeletonInfo> skeletonInfos;
         public override void Initialize()
         {
                 base.Initialize();
-                // InputManager.Instance.OnRotate+=OnRotate;
-                // InputManager.Instance.OnZoom+=OnZoom;
-                // InputManager.Instance.OnDrag+=OnDrag;
+                skeletonInfos = new List<SkeletonInfo>();
+            
         }
-
+        
+        public override void AllManagerInitialize()
+        {
+                base.AllManagerInitialize();
+                LoadBody();
+        }
+        void LoadBody()
+        {
+                GameObject obj = ResManager.Instance.LoadRes<GameObject>("Model/jirou_nan");
+                obj.transform.position = new Vector3(0, 0, 0);
+                for (int i = 0; i < obj.transform.childCount; i++)
+                {
+                        GameObject boneobj = obj.transform.GetChild(i).gameObject;
+                        string name = boneobj.name;
+                        if (int.TryParse(name,out int id))
+                        {
+                                SkeletonInfo skeletonInfo = new SkeletonInfo();
+                                Bone  bone = new Bone();
+                                bone.Id = id;
+                                skeletonInfo.boneId = id;
+                                skeletonInfo.bone = bone;
+                                skeletonInfo.boneGameObject = boneobj;
+                                if (BoneMod.Instance.boneDic.ContainsKey(id))
+                                {
+                                        BoneMod.Instance.boneDic[id] = bone;
+                                }
+                                else
+                                {
+                                        BoneMod.Instance.boneDic.Add(id,bone);
+                                }
+                                skeletonInfos.Add(skeletonInfo);
+                        }
+                        obj.transform.GetChild(i).gameObject.layer = UnityLayer.Layer_Body;
+                        if ( obj.transform.GetChild(i).gameObject.GetComponent<MeshCollider>() == null)
+                        {
+                                obj.transform.GetChild(i).gameObject.AddComponent<MeshCollider>();
+                        }
+                      
+                }
+                obj.transform.position = new Vector3(0, 0, 0.5f);
+                Body = obj;
+        }
         private void OnDrag(Vector2 lastpos, Vector2 curpos)
         {
                //拖拽模型位置
@@ -53,9 +96,63 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
         {
                 base.Update(time);
         }
-        
+
+        public override void OnApplicationQuit()
+        {
+                base.OnApplicationQuit();
+        }
+
         public override void Dispose()
         {
                 base.Dispose();
         }
+
+        public override void OnApplicationFocus(bool hasFocus)
+        {
+                base.OnApplicationFocus(hasFocus);
+        }
+
+        public override void OnApplicationPause(bool pauseStatus)
+        {
+                base.OnApplicationPause(pauseStatus);
+        }
+        
+        public void HideBone(int boneid = -1 )
+        {
+                if (boneid == -1)
+                {
+                        boneid = BoneMod.Instance.currentBoneId;
+                }
+                for (int i = 0; i < skeletonInfos.Count; i++)
+                {
+                        SkeletonInfo skeletonInfo = skeletonInfos[i];
+                        if (skeletonInfo.boneId == boneid)
+                        {
+                                skeletonInfo.boneGameObject.SetActive(false);
+                        }
+                        else
+                        {
+                                skeletonInfo.boneGameObject.SetActive(true);
+                        }
+                }
+        }       
+      public void HideOtherBone(int boneid = -1)
+      {
+              if (boneid == -1)
+              {
+                      boneid = BoneMod.Instance.currentBoneId;
+              }
+              for (int i = 0; i < skeletonInfos.Count; i++)
+              {
+                      SkeletonInfo skeletonInfo = skeletonInfos[i];
+                      if (skeletonInfo.boneId != boneid)
+                      {
+                              skeletonInfo.boneGameObject.SetActive(false);
+                      }
+                      else
+                      {
+                              skeletonInfo.boneGameObject.SetActive(true);
+                      }
+              }
+      }
 }

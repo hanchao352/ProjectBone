@@ -14,6 +14,7 @@ public class Main : MonoBehaviour
    
     private IGeneric[] managers;
     private IMod[] mods;
+
     public void Awake()
     {
         DontDestroyOnLoad(this);
@@ -44,7 +45,8 @@ public class Main : MonoBehaviour
         {
             manager.Initialize();
         }
-        
+
+       
         var modTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => typeof(IMod).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 
@@ -70,6 +72,10 @@ public class Main : MonoBehaviour
         {
             mod.Initialize();
         }
+        foreach (var manager in managers)
+        {
+            manager.AllManagerInitialize();
+        }
     }
 
 
@@ -84,15 +90,24 @@ public class Main : MonoBehaviour
     {
         UIManager.Instance.ShowView(ViewID.MainView);
         UIManager.Instance.ShowView(ViewID.BotMenuView);
-       LoadBody();
+      // LoadBody();
        for (int i = 0; i < 1; i++)
        {
            BoneMod.Instance.Test();
        }
-    
+
     }
 
-   
+    private void OnEvent2(object[] args)
+    {
+        Debug.Log("OnEvent2");
+    }
+
+    private void OnEvent1()
+    {
+        Debug.Log("OnEvent1");
+    }
+
 
     // 如果 MonoBehaviour 已启用，则在每一帧都调用 Update
     public void Update()
@@ -145,37 +160,7 @@ public class Main : MonoBehaviour
         }
     }
 
-    void LoadBody()
-    {
-        GameObject obj = ResManager.Instance.LoadRes<GameObject>("Model/jirou_nan");
-        obj.transform.position = new Vector3(0, 0, 0);
-        for (int i = 0; i < obj.transform.childCount; i++)
-        {
-            string name = obj.transform.GetChild(i).name;
-            if (int.TryParse(name,out int id))
-            {
-                Bone  bone = new Bone();
-                bone.Id = id;
-                if (BoneMod.Instance.boneDic.ContainsKey(id))
-                {
-                    BoneMod.Instance.boneDic[id] = bone;
-                }
-                else
-                {
-                    BoneMod.Instance.boneDic.Add(id,bone);
-                }
-                
-            }
-            obj.transform.GetChild(i).gameObject.layer = UnityLayer.Layer_Body;
-            if ( obj.transform.GetChild(i).gameObject.GetComponent<MeshCollider>() == null)
-            {
-                obj.transform.GetChild(i).gameObject.AddComponent<MeshCollider>();
-            }
-            
-        }
-        obj.transform.position = new Vector3(0, 0, 0.5f);
-        GameObjectManager.Instance.Body = obj;
-    }
+  
 
 
 

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
  using UnityEngine.EventSystems;
@@ -14,13 +15,20 @@ using UnityEngine;
         private Dictionary<int, UIBase> _showViews = new Dictionary<int, UIBase>();
         //隐藏中的界面
         private Dictionary<int, UIBase> _hideViews = new Dictionary<int, UIBase>();
+        //显示中的界面
+        private List<UIBase> _showViewsList = new List<UIBase>();
+        //隐藏中的界面
+        private List<UIBase> _hideViewsList = new List<UIBase>();
         public Transform UIRoot { get; set; }
         public Camera UICamera { get; set; }
         public Transform WindowRoot { get; set; }
         public Transform BotWindowRoot { get; set; }
+        public Camera ModelCamera { get; set; }
         
         public override void Initialize()
         {
+            Debug.Log("UIManager Initialize");
+            GameObject eventSystem = GameObject.Find("EventSystem");
             UIRoot = GameObject.Find("ui_root").transform;
             WindowRoot = UIRoot.Find("canvas/window");
             BotWindowRoot = UIRoot.Find("canvas/bot_window");
@@ -31,18 +39,20 @@ using UnityEngine;
             UICamera.GetUniversalAdditionalCameraData().renderType = CameraRenderType.Overlay;
             Canvas canvas = UIRoot.Find("canvas").GetComponent<Canvas>();
             canvas.worldCamera = UICamera;
-             UIRoot.gameObject.AddComponent<EventSystem>();
-             UIRoot.gameObject.AddComponent<StandaloneInputModule>();
+             // UIRoot.gameObject.AddComponent<EventSystem>();
+             // UIRoot.gameObject.AddComponent<StandaloneInputModule>();
              //UIRoot.gameObject.AddComponent<Canvas>();
             GameObject.DontDestroyOnLoad(UIRoot);
+            GameObject.DontDestroyOnLoad(eventSystem);
             //创建一个model相机
-            Camera modelCamera = new GameObject("modelCamera").AddComponent<Camera>();
+            ModelCamera = new GameObject("modelCamera").AddComponent<Camera>();
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(UICamera);
-            modelCamera.cullingMask = 1 << LayerMask.NameToLayer("Body");
-            modelCamera.clearFlags = CameraClearFlags.Depth;
-            modelCamera.depth = 2;
-            modelCamera.GetUniversalAdditionalCameraData().renderType = CameraRenderType.Overlay;
-            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(modelCamera);
+            ModelCamera.cullingMask = 1 << LayerMask.NameToLayer("Body");
+            ModelCamera.clearFlags = CameraClearFlags.Depth;
+            ModelCamera.depth = 2;
+            ModelCamera.GetUniversalAdditionalCameraData().renderType = CameraRenderType.Overlay;
+            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(ModelCamera);
+            
         }
 
         public UIBase GetView(int viewid)
@@ -71,6 +81,7 @@ using UnityEngine;
                 view.Args = args;
                 view.CreateRoot();
                 _showViews[viewid] = view;
+                _showViewsList = _showViews.Values.ToList();
             }
             else
             {
@@ -88,8 +99,11 @@ using UnityEngine;
                 {
                     _hideViews.Remove(viewid);
                 }
+                _showViewsList = _showViews.Values.ToList();
+                _hideViewsList = _hideViews.Values.ToList();
+               
             }
-           return null;
+           return view;
         }
 
         public void HideView(int viewid)
@@ -101,6 +115,9 @@ using UnityEngine;
                 _showViews.Remove(viewid);
                 _hideViews[viewid] = view;
             }
+            _showViewsList = _showViews.Values.ToList();
+            _hideViewsList = _hideViews.Values.ToList();
+           
         }
 
       
@@ -114,41 +131,42 @@ using UnityEngine;
 
         public override void Update(float time)
         {
-            foreach (var view in _showViews)
+            
+            for (int i = 0; i < _showViewsList.Count; i++)
             {
-               view.Value.Update(time);
+                _showViewsList[i].Update(time);
             }
         }
         
         override public void Dispose()
         {
-            foreach (var view in _showViews)
+            for (int i = 0; i < _showViewsList.Count; i++)
             {
-               
+                _showViewsList[i].Dispose();
             }
            
         }
         
         override public void OnApplicationQuit()
         {
-            foreach (var view in _showViews)
+            for (int i = 0; i < _showViewsList.Count; i++)
             {
-              
+                _showViewsList[i].OnApplicationQuit();
             }
         }
       public  override  void OnApplicationFocus(bool focus)
         {
-            foreach (var view in _showViews)
+            for (int i = 0; i < _showViewsList.Count; i++)
             {
-              
+                _showViewsList[i].OnApplicationFocus(focus);
             }
         }
         
         override public void OnApplicationPause(bool pause)
         {
-            foreach (var view in _showViews)
+            for (int i = 0; i < _showViewsList.Count; i++)
             {
-              
+                _showViewsList[i].OnApplicationPause(pause);
             }
         }
         

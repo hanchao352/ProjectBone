@@ -47,10 +47,22 @@ public abstract class UIBase:IViewGeneric
 
     public virtual void OnShow(params object[] args)
     {
+        RegisterEvent();
         isvisible = true;
         Root.SetActive(true);
+       
     }
 
+    public virtual void RegisterEvent()
+    {
+        
+    }
+    
+    public virtual void UnRegisterEvent()
+    {
+        
+    }
+    
     public virtual void UpdateView(params object[] args)
     {
         for (int i = 0; i < childComponents.Count; i++)
@@ -84,6 +96,7 @@ public abstract class UIBase:IViewGeneric
 
     public virtual void OnHide()
     {
+        UnRegisterEvent();
         isvisible = false;
         Root.SetActive(false);
         for (int i = 0; i < childComponents.Count; i++)

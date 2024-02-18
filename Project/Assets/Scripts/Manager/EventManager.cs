@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
+public delegate void EventCallback(params object[] args);
+public delegate void EventCallbackWithoutArgs();
 public class EventManager : SingletonManager<EventManager>, IGeneric
 {
     private Dictionary<int, Delegate> eventTableWithArgs;
     private Dictionary<int, Delegate> eventTableWithoutArgs;
 
-    public delegate void EventCallback(params object[] args);
-    public delegate void EventCallbackWithoutArgs();
+
 
     public override void Initialize()
     {

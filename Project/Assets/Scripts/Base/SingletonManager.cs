@@ -33,7 +33,7 @@ public class SingletonManager<T>  where T : class, IGeneric, new()
     public virtual void Initialize()
     {
         // Default implementation, can be overridden in derived classes
-        Debug.Log(Instance.ToString()+" Initialize");
+       // Debug.Log(Instance.ToString()+" Initialize");
     }
 
     public virtual void Update(float time)
@@ -45,26 +45,31 @@ public class SingletonManager<T>  where T : class, IGeneric, new()
     public virtual void OnApplicationFocus(bool hasFocus)
     {
         // Default implementation, can be overridden in derived classes
-        Debug.Log(Instance.ToString()+" OnApplicationFocus"+hasFocus);
+        //Debug.Log(Instance.ToString()+" OnApplicationFocus"+hasFocus);
     }
 
     public virtual void OnApplicationPause(bool pauseStatus)
     {
         // Default implementation, can be overridden in derived classes
-        Debug.Log(Instance.ToString()+"OnApplicationPause"+pauseStatus);
+        //Debug.Log(Instance.ToString()+"OnApplicationPause"+pauseStatus);
     }
 
     public virtual void OnApplicationQuit()
     {
         // Default implementation, can be overridden in derived classes
-        Debug.Log(Instance.ToString()+" OnApplicationQuit");
+        //Debug.Log(Instance.ToString()+" OnApplicationQuit");
     }
 
     public virtual void Dispose()
     {
         // Default implementation, can be overridden in derived classes
-        Debug.Log(Instance.ToString()+" Destroy");
+        //Debug.Log(Instance.ToString()+" Destroy");
     }
 
+    public virtual void AllManagerInitialize()
+    {
+        // Default implementation, can be overridden in derived classes
+        Debug.Log(Instance.ToString()+" AllManagerInitialize");
+    }
 
 }

@@ -7,6 +7,7 @@
     void OnApplicationPause(bool pauseStatus);
     void OnApplicationQuit();
     void Dispose();
+    void AllManagerInitialize();
    
 
 }

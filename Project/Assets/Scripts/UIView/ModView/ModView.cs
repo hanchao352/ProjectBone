@@ -9,9 +9,16 @@ public class ModView : UIBase
     public Button switchbutton;
     public Button searchbutton;
     public Button infoButton;
-    public Button bone_btn;
     public Button last_btn;
-
+    public Button bone_btn;
+    public Button bone_muscle_btn;
+    public Button allshow_btn;
+    private TextMeshProUGUI boneText;
+    private TextMeshProUGUI bone_muscle_text;
+    
+    private GameObject switchRoot;
+    private GameObject muscleRoot;
+    
     private GameObject botGo;
     private GameObject infoSvGo;
     private TextMeshProUGUI titleText;
@@ -25,6 +32,7 @@ public class ModView : UIBase
     private Button showBtn;
     private Button otherBtn;
     private bool showInfoSv;
+    private bool isBoneRoot;
     
     public override void Initialize()
     {
@@ -36,6 +44,13 @@ public class ModView : UIBase
         infoButton = Root.transform.Find("left/Image/info_btn").GetComponent<Button>();
         last_btn = Root.transform.Find("left/Image/backup_btn").GetComponent<Button>();
         bone_btn = Root.transform.Find("left/Image/bone_btn").GetComponent<Button>();
+        bone_muscle_btn =  Root.transform.Find("left/Image/bone_btn/switch_root/bone_muscle_btn").GetComponent<Button>();
+        allshow_btn =  Root.transform.Find("left/Image/bone_btn/switch_root/allshow_btn").GetComponent<Button>();
+        boneText =  Root.transform.Find("left/Image/bone_btn/bone_text").GetComponent<TextMeshProUGUI>();
+        bone_muscle_text = Root.transform.Find("left/Image/bone_btn/switch_root/bone_muscle_btn/bone_muscle_text").GetComponent<TextMeshProUGUI>();
+        switchRoot = Root.transform.Find("left/Image/bone_btn/switch_root").gameObject;
+        muscleRoot = Root.transform.Find("left/Image/bone_btn/muscle_root").gameObject;
+        
         searchbutton.onClick.AddListener(OnSearchButtonClick);
         backbutton.onClick.AddListener(OnBackButtonClick);
         refreshbutton.onClick.AddListener(OnRefreshButtonClick);
@@ -43,6 +58,8 @@ public class ModView : UIBase
         infoButton.onClick.AddListener(OnInfoButtonClick);
         last_btn.onClick.AddListener(OnLastButtonClick);
         bone_btn.onClick.AddListener(OnBoneButtonClick);
+        bone_muscle_btn.onClick.AddListener(OnBoneMuscleButtonClick);
+        allshow_btn.onClick.AddListener(OnAllShowButtonClick);
         
         botGo = Root.transform.Find("bot").gameObject;
         infoSvGo = Root.transform.Find("bot/bg/infoSv").gameObject;
@@ -63,10 +80,59 @@ public class ModView : UIBase
         lucencyOtherBtn.onClick.AddListener(OnLucencyOtherButtonClick);
         showBtn.onClick.AddListener(OnShowButtonClick);
         otherBtn.onClick.AddListener(OnOtherButtonClick);
-        showInfoSv = false;
-        infoSvGo.SetActive(showInfoSv);
+        Init();
     }
 
+    
+    // 界面初始化状态
+    private void Init()
+    {
+        showInfoSv = false;
+        isBoneRoot = true;
+        switchRoot.SetActive(false);
+        muscleRoot.SetActive(false);
+        infoSvGo.SetActive(showInfoSv); 
+        boneText.text = "Bone";
+        bone_muscle_text.text = "Muscle";
+        // 点击复位按钮时 恢复到原始状态  相机模型需要复位
+    }
+
+    public override void RegisterEvent()
+    {
+        base.RegisterEvent();
+        EventManager.Instance.RegisterEvent(EventDefine.BoneClickEvent,OnBoneClick);
+    }
+
+    private void OnBoneClick(object[] args)
+    {
+       int boneid = (int) args[0];
+       OnReceiveClickEvent(boneid);
+       Debug.Log("骨骼点击事件" + boneid);
+    }
+
+    public override void UnRegisterEvent()
+    {
+        base.UnRegisterEvent();
+        EventManager.Instance.UnregisterEvent(EventDefine.BoneClickEvent,OnBoneClick);
+    }
+
+    private void OnBoneMuscleButtonClick()
+    {
+        isBoneRoot = !isBoneRoot;
+        switchRoot.SetActive(false);
+        muscleRoot.SetActive(!isBoneRoot);
+        boneText.text = isBoneRoot ? "Bone" : "Muscle";
+        bone_muscle_text.text = isBoneRoot ? "Muscle" : "Bone"; 
+        
+        //todo 显示骨骼或者肌肉
+    }
+    
+    private void OnAllShowButtonClick()
+    {
+        //todo 显示所有骨骼肌肉
+        Init();
+    }
+    
     private void OnSelectBone()
     {
         //todo 当点击骨骼时，显示骨骼信息
@@ -84,17 +150,17 @@ public class ModView : UIBase
     //隐藏按钮
     private void OnHideButtonClick()
     {
-        
+        GameObjectManager.Instance.HideBone();
     }
     //透明按钮
     private void OnLucencyButtonClick()
     {
-        
+        GameObjectManager.Instance.HideBone();
     }
     //透明其他按钮
     private void OnLucencyOtherButtonClick()
     {
-        
+        GameObjectManager.Instance.HideOtherBone();
     }
     //显示按钮
     private void OnShowButtonClick()
@@ -109,7 +175,8 @@ public class ModView : UIBase
 
     private void OnSearchButtonClick()
     {
-        
+        // todo 打开搜索界面 
+        // UIManager.Instance.ShowView(ViewID.WebView);
     }
     
     private void OnBackButtonClick()
@@ -131,30 +198,51 @@ public class ModView : UIBase
     
     private void OnRefreshButtonClick()
     {
-        
+        //todo 恢复到原始状态
     }
     
     private void OnSwitchButtonClick()
     {
-        
+        //切换男女模型
+        Debug.Log("功能暂未开放");
     }
     
     private void OnInfoButtonClick()
     {
+        // todo 打开笔记界面
         UIManager.Instance.ShowView(ViewID.WebView);
     }
     
     private void OnLastButtonClick()
     {
-        
+        // 复位？ 还是备份 暂时不太懂 不开放
     }
     
     private void OnBoneButtonClick()
     {
-        
+        switchRoot.SetActive(true);
+        muscleRoot.SetActive(false);
     }
     
     
+    // 收到骨骼或肌肉点击事件
+    private void OnReceiveClickEvent(int keyId)
+    {
+        if (BoneMod.Instance.boneLoaded == false)
+        {
+            Debug.Log("骨骼数据未加载");
+            return;
+        }
+        if ( BoneMod.Instance.boneDic.ContainsKey(keyId))
+        {
+            var info = BoneMod.Instance.boneDic[keyId];
+            // 隐藏底部菜单 显示骨骼信息
+            ShowInfo(true);
+            titleText.text = info.Name;
+            msgText.text = info.Content;
+        }
+          
+    }
     
     public override void OnShow(params object[] args)
     {
@@ -166,9 +254,16 @@ public class ModView : UIBase
         base.UpdateView(args);
     }
 
+    private int key = 1001;
     public override void Update(float time)
     {
         base.Update(time);
+        // 测试 按键显示骨骼信息
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            OnReceiveClickEvent(key);
+            key++;
+        }
     }
 
     public override void OnApplicationFocus(bool hasFocus)

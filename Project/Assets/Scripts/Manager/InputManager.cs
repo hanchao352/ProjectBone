@@ -7,9 +7,12 @@ public class InputManager:SingletonManager<InputManager>, IGeneric
     private PanGestureRecognizer panGesture;
     private ScaleGestureRecognizer scaleGesture;
     private OneTouchRotateGestureRecognizer rotateGesture;
+    public LayerMask targetLayer;
     public override void Initialize()
     {
         base.Initialize();
+       
+        targetLayer = 1 << UnityLayer.Layer_Body;
         CreatePanGesture();
         CreateScaleGesture();
         CreateRotateGesture();
@@ -87,8 +90,53 @@ public class InputManager:SingletonManager<InputManager>, IGeneric
     public override void Update(float time)
     {
         base.Update(time);
+        CheckBoneClick();
     }
 
+    public void CheckBoneClick()
+    {
+        // 对于PC，使用鼠标输入
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastFromInput(Input.mousePosition);
+        }
+
+        // 对于移动设备，使用触摸输入
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == UnityEngine.TouchPhase.Began)
+        {
+            RaycastFromInput(Input.GetTouch(0).position);
+        }
+    }
+    
+    void RaycastFromInput(Vector2 inputPosition)
+    {
+       
+        // 将输入位置（鼠标位置或触摸位置）转换为从相机到屏幕的射线
+        Ray ray = UIManager.Instance.ModelCamera.ScreenPointToRay(inputPosition);
+        RaycastHit hit;
+
+        // 发射射线，最大距离设置为Mathf.Infinity表示射线长度无限
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetLayer))
+        {
+            // 如果射线与指定层上的对象相交，输出该对象的名称
+            string boneName = hit.collider.gameObject.name;
+            int boneId;
+           // 使用 int.TryParse() 判断是不是能够转换成id
+           if (int.TryParse(boneName, out  boneId))
+           {
+               BoneMod.Instance.currentBoneId = boneId;
+               EventManager.Instance.TriggerEvent(EventDefine.BoneClickEvent ,boneId);
+           }
+           else
+           {
+               
+           }
+
+            
+          
+        }
+    }
+    
     public override void OnApplicationFocus(bool hasFocus)
     {
         base.OnApplicationFocus(hasFocus);
