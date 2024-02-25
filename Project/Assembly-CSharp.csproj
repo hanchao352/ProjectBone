@@ -338,6 +338,7 @@
     <None Include="Assets\Vuplex\WebView\iOS\LICENSE_iOS.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Vuplex\新建 文本文档.txt" />
+    <None Include="Assets\TextMesh Pro\Fonts\7000常用字优化版.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Resources\BillingMode.json" />
