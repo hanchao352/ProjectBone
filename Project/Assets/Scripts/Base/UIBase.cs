@@ -21,7 +21,15 @@ public abstract class UIBase:IViewGeneric
     public void CreateRoot()
     {
         Root = ResManager.Instance.LoadRes<GameObject>("UI/prefab/"+ViewInfo.ResName);
-        var parent = (ViewInfo.ViewID == ViewID.BotMenuView)?UIManager.Instance.BotWindowRoot:UIManager.Instance.WindowRoot;
+        var parent = UIManager.Instance.WindowRoot;
+        if (ViewInfo.ViewID == ViewID.BotMenuView)
+        {
+            parent = UIManager.Instance.BotWindowRoot;
+        }
+        else if (ViewInfo.ViewID == ViewID.WebView)
+        {
+            parent = UIManager.Instance.WebWindowRoot;
+        }
         Root.transform.SetParent(parent,false); 
         rectTransform = Root.GetComponent<RectTransform>();
         Root.transform.localPosition = Vector3.zero;

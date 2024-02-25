@@ -9,15 +9,14 @@ public  class ModManager :SingletonManager<ModManager>, IGeneric
     private  Dictionary<Type, Dictionary<int, Func<IMessage, Task>>> _messageIdToCallback;
     private Dictionary<int, Action<IMessage>> _webSocketCallbacks = new Dictionary<int, Action<IMessage>>();
      private  readonly Dictionary<Type, IMod> _mods = new Dictionary<Type, IMod>();
+     private List<IMod> _modList = new List<IMod>();
     public ModManager()
     {
         _messageIdToCallback = new Dictionary<Type, Dictionary<int, Func<IMessage, Task>>>();
     }
     public override void Initialize()
     {
-       //需要提前实例化的模块
-       
-       
+        
     }
 
 
@@ -35,6 +34,7 @@ public  class ModManager :SingletonManager<ModManager>, IGeneric
         }
         
         _mods.Add(modType, mod);
+        _modList= new List<IMod>(_mods.Values);
         
        
     }
@@ -42,21 +42,31 @@ public  class ModManager :SingletonManager<ModManager>, IGeneric
     public override void Update(float time)
     {
         base.Update(time);
-        foreach (var mod in _mods.Values)
+        // foreach (var mod in _mods.Values)
+        // {
+        //     mod.Update(time);
+        // }
+
+        for (int i = 0; i < _modList.Count; i++)
         {
-            mod.Update(time);
+            _modList[i].Update(time);
         }
     }
 
     public override void Dispose ()
     {
         base.Dispose();
-        foreach (var mod in _mods.Values)
+        // foreach (var mod in _mods.Values)
+        // {
+        //     mod.Dispose();
+        // }
+        for (int i = 0; i < _modList.Count; i++)
         {
-            mod.Dispose();
+            _modList[i].Dispose();
         }
     
         _mods.Clear();
+        _modList.Clear();
     }
     public  void RegisterCallback<T>(int protoId, Func<T, Task> callback) where T : IMessage<T>
     {

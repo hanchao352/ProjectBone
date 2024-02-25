@@ -210,7 +210,7 @@ public class ModView : UIBase
     private void OnInfoButtonClick()
     {
         // todo 打开笔记界面
-        UIManager.Instance.ShowView(ViewID.WebView);
+        UIManager.Instance.ShowView(ViewID.WebView,WebState.Note);
     }
     
     private void OnLastButtonClick()

@@ -10,8 +10,12 @@ public class BoneWebView : UIBase
     public Button BackButton;
     public Button ForwardButton;
     public Button CloseButton;
+    
+    private int webState;
+    
     public async override void Initialize()
     {
+        Debug.Log("WebView initialized111");
         base.Initialize();
         canvasWebViewPrefab = Root.GetComponent<CanvasWebViewPrefab>();
         BackButton = Root.transform.Find("back").GetComponent<Button>();
@@ -28,6 +32,7 @@ public class BoneWebView : UIBase
         // https://developer.vuplex.com/webview/IWebView
         canvasWebViewPrefab.WebView.UrlChanged += OnUrlChanged; 
         canvasWebViewPrefab.WebView.LoadProgressChanged += OnLoadProgress;
+        
     }
 
     private void OnMessageEmitted(object sender, EventArgs<string> e)
@@ -37,9 +42,27 @@ public class BoneWebView : UIBase
 
     private void OnInitialized(object sender, EventArgs e)
     {
-        canvasWebViewPrefab.WebView.LoadUrl("https://certt.froglesson.com/anatomy/getUserMuscleNote?uid=1");
+        string url = "";
+        switch (webState)
+        {
+            case WebState.Note:
+                url = WebUrl.Note;
+                break;
+            case WebState.Collect:
+                url = WebUrl.Collect;
+                break;
+            case WebState.Login:
+                url = WebUrl.Login;
+                break;
+            default:
+                url = WebUrl.Default;
+                break;
+        }
+        canvasWebViewPrefab.WebView.LoadUrl(url);
+        Debug.Log("WebView initialized");
     }
 
+    
     private void OnCloseButtonClick()
     {
         UIManager.Instance.HideView(ViewID.WebView);
@@ -104,7 +127,8 @@ public class BoneWebView : UIBase
     public override void OnShow(params object[] args)
     {
         base.OnShow(args);
-        
+        Debug.Log("WebView OnShow");
+        webState = (int)args[1];
     }
 
     public override void UpdateView(params object[] args)
@@ -139,7 +163,7 @@ public class BoneWebView : UIBase
     public override void OnHide()
     {
         base.OnHide();
-        canvasWebViewPrefab.Visible = false;
+       // canvasWebViewPrefab.Visible = false;
     }
 
     public override void OnEnterMutex()
