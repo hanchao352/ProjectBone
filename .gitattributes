@@ -1,2 +1,1 @@
-Project/Assets/Vuplex/* filter=lfs diff=lfs merge=lfs -text
-Project/Assets/Vuplex/ filter=lfs diff=lfs merge=lfs -text
+Project/Assets/Vuplex/** filter=lfs diff=lfs merge=lfs -text
