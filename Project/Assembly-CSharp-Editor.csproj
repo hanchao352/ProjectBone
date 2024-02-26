@@ -51,9 +51,9 @@
     <Compile Include="Assets\Editor\SvnMerge\SVNLog.cs" />
     <Compile Include="Assets\Editor\SvnMerge\SVNManager.cs" />
     <Compile Include="Assets\Vuplex\WebView\Core\Editor\Scripts\CanvasWebViewPrefabInspector.cs" />
+    <Compile Include="Assets\Fingers\Prefab\Editor\MinMaxSlider.cs" />
     <Compile Include="Assets\Vuplex\WebView\Standalone\Editor\StandaloneEditorScript.cs" />
     <Compile Include="Assets\Vuplex\WebView\Core\Editor\Scripts\DefaultPointerInputDetectorInspector.cs" />
-    <Compile Include="Assets\Fingers\Prefab\Editor\MinMaxSlider.cs" />
     <Compile Include="Assets\Vuplex\WebView\Core\Editor\Scripts\ConditionalCompilationUtility.cs" />
     <Compile Include="Assets\Vuplex\WebView\Core\Editor\Scripts\OptionalDependencyAttribute.cs" />
     <Compile Include="Assets\Editor\SvnMerge\SVNTools.cs" />

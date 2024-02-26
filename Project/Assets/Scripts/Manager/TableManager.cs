@@ -16,24 +16,24 @@ public class TableManager : SingletonManager<TableManager>,IGeneric
     public override void Initialize()
     {
         base.Initialize();
-        var tablesCtor = typeof(Tables).GetConstructors()[0];
-        var loaderReturnType = tablesCtor.GetParameters()[0].ParameterType.GetGenericArguments()[1];
-        // 根据cfg.Tables的构造函数的Loader的返回值类型决定使用json还是ByteBuf Loader
-        System.Delegate loader = loaderReturnType == typeof(ByteBuf) ?
-            new System.Func<string, ByteBuf>(LoadByteBuf)
-            : (System.Delegate)new System.Func<string, JSONNode>(Loader);
-         Tables = (Tables)tablesCtor.Invoke(new object[] { loader });
+        // var tablesCtor = typeof(Tables).GetConstructors()[0];
+        // var loaderReturnType = tablesCtor.GetParameters()[0].ParameterType.GetGenericArguments()[1];
+        // // 根据cfg.Tables的构造函数的Loader的返回值类型决定使用json还是ByteBuf Loader
+        // System.Delegate loader = loaderReturnType == typeof(ByteBuf) ?
+        //     new System.Func<string, ByteBuf>(LoadByteBuf)
+        //     : (System.Delegate)new System.Func<string, JSONNode>(Loader);
+        //  Tables = (Tables)tablesCtor.Invoke(new object[] { loader });
     }
 
-    private ByteBuf LoadByteBuf(string arg)
-    {
-       return new ByteBuf(File.ReadAllBytes($"{Application.dataPath}/GenJsonBin/{arg}.bytes"));
-    }
-
-    private JSONNode Loader(string arg)
-    {
-        return JSON.Parse(File.ReadAllText(Application.dataPath + "/GenJsonData/" + arg + ".json"));
-    }
+    // private ByteBuf LoadByteBuf(string arg)
+    // {
+    //    return new ByteBuf(File.ReadAllBytes($"{Application.dataPath}/GenJsonBin/{arg}.bytes"));
+    // }
+    //
+    // private JSONNode Loader(string arg)
+    // {
+    //     return JSON.Parse(File.ReadAllText(Application.dataPath + "/GenJsonData/" + arg + ".json"));
+    // }
 
 
 }
