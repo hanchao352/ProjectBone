@@ -128,7 +128,7 @@ public class BoneWebView : UIBase
     {
         base.OnShow(args);
         Debug.Log("WebView OnShow");
-        webState = (int)args[1];
+        webState = (int)args[0];
     }
 
     public override void UpdateView(params object[] args)

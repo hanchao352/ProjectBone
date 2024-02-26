@@ -18,6 +18,7 @@ public class Main : MonoBehaviour
     public void Awake()
     {
         DontDestroyOnLoad(this);
+        SetScreen();
         WebRequestManager.Instance.Initialize();
         var managerTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => typeof(IGeneric).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
@@ -78,6 +79,15 @@ public class Main : MonoBehaviour
         }
     }
 
+    //设置为竖屏.不自动旋转
+    private void SetScreen()
+    {
+        Screen.orientation = ScreenOrientation.Portrait;
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
+        Screen.autorotateToLandscapeLeft = false;
+        Screen.autorotateToLandscapeRight = false;
+    }
 
     // 当对象已启用并处于活动状态时调用此函数
     public void OnEnable()
