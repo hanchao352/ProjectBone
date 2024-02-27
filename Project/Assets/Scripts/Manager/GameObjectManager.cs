@@ -7,6 +7,30 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
         public bool dragenable = false;
         public bool rotateenable = false;
         public List<SkeletonInfo> skeletonInfos;
+        private bool bodyVisible = false;
+
+        public bool BodyVisible
+        {
+                get
+                {
+                        return bodyVisible
+                                ;
+                }
+                set
+                {
+                       
+                        if (Body!= null)
+                        { 
+                                bodyVisible = value;
+                                Body.SetActive(value);
+                        }
+                        {
+                                bodyVisible = false;
+                        }
+                }
+             
+        }
+
         public override void Initialize()
         {
                 base.Initialize();
@@ -18,6 +42,7 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
         {
                 base.AllManagerInitialize();
                 LoadBody();
+                BodyVisible = false;
         }
         void LoadBody()
         {
@@ -154,4 +179,6 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                       }
               }
       }
+
+      
 }

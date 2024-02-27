@@ -37,6 +37,7 @@ public class UIMainView : UIBase
     {
         UIManager.Instance.HideView(ViewID.MainView);
         UIManager.Instance.ShowView(ViewID.ModelView);
+        GameObjectManager.Instance.BodyVisible = true;
     }
     
     private void OnArmButtonClick()

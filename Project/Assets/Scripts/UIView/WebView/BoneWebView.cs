@@ -11,7 +11,7 @@ public class BoneWebView : UIBase
     public Button CloseButton;
     
     private int webState;
-    
+    private string weburl = "";
     public async override void Initialize()
     {
         Debug.Log("WebView initialized111");
@@ -57,6 +57,7 @@ public class BoneWebView : UIBase
                 url = WebUrl.Default;
                 break;
         }
+        weburl = url;
         canvasWebViewPrefab.WebView.LoadUrl(url);
         Debug.Log("WebView initialized");
     }
@@ -128,6 +129,26 @@ public class BoneWebView : UIBase
         base.OnShow(args);
         Debug.Log("WebView OnShow");
         webState = (int)args[0];
+        switch (webState)
+        {
+            case WebState.Note:
+                weburl = WebUrl.Note;
+                break;
+            case WebState.Collect:
+                weburl = WebUrl.Collect;
+                break;
+            case WebState.Login:
+                weburl = WebUrl.Login;
+                break;
+            default:
+                weburl = WebUrl.Default;
+                break;
+        }
+
+        if (canvasWebViewPrefab.WebView?.IsInitialized == true)
+        {
+            canvasWebViewPrefab.WebView.LoadUrl(weburl);
+        }
     }
 
     public override void UpdateView(params object[] args)

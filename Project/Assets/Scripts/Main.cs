@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -98,6 +99,10 @@ public class Main : MonoBehaviour
     // 仅在首次调用 Update 方法之前调用 Start
     public void Start()
     {
+
+#if WEBTest
+        UIManager.Instance.ShowView(ViewID.TestView);
+#else
         UIManager.Instance.ShowView(ViewID.MainView);
         UIManager.Instance.ShowView(ViewID.BotMenuView);
       // LoadBody();
@@ -105,6 +110,13 @@ public class Main : MonoBehaviour
        {
            BoneMod.Instance.Test();
        }
+#endif
+        
+
+
+
+
+      
 
     }
 
