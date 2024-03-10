@@ -65,10 +65,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: model
+  m_text: "\u6A21\u578B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 595d6c0e55cb07c4b914edcdabecbe71, type: 2}
-  m_sharedMaterial: {fileID: -5541837862534583745, guid: 595d6c0e55cb07c4b914edcdabecbe71, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0f123c2502f627c499407de3dbffa883, type: 2}
+  m_sharedMaterial: {fileID: -1244554116259466511, guid: 0f123c2502f627c499407de3dbffa883, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -441,10 +441,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: questionbank
+  m_text: "\u9898\u5E93"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 595d6c0e55cb07c4b914edcdabecbe71, type: 2}
-  m_sharedMaterial: {fileID: -5541837862534583745, guid: 595d6c0e55cb07c4b914edcdabecbe71, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0f123c2502f627c499407de3dbffa883, type: 2}
+  m_sharedMaterial: {fileID: -1244554116259466511, guid: 0f123c2502f627c499407de3dbffa883, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -696,10 +696,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: mine
+  m_text: "\u6211\u7684"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 595d6c0e55cb07c4b914edcdabecbe71, type: 2}
-  m_sharedMaterial: {fileID: -5541837862534583745, guid: 595d6c0e55cb07c4b914edcdabecbe71, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0f123c2502f627c499407de3dbffa883, type: 2}
+  m_sharedMaterial: {fileID: -1244554116259466511, guid: 0f123c2502f627c499407de3dbffa883, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

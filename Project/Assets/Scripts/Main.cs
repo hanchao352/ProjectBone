@@ -5,13 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using UnityEngine;
+using Vuplex.WebView;
 
 
 public class Main : MonoBehaviour
 {
-  
-
-   
     private IGeneric[] managers;
     private IMod[] mods;
 
@@ -19,6 +17,8 @@ public class Main : MonoBehaviour
     {
         DontDestroyOnLoad(this);
         SetScreen();
+        // StandaloneWebView.SetCommandLineArguments("--disable-web-security");
+        Web.ClearAllData();
         WebRequestManager.Instance.Initialize();
         var managerTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => typeof(IGeneric).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
@@ -67,6 +67,7 @@ public class Main : MonoBehaviour
                 }
             }
         }
+      
         mods = modList.ToArray();
         //调用每个 manager 的 Initialize 方法
         foreach (var mod in modList)
@@ -76,6 +77,10 @@ public class Main : MonoBehaviour
         foreach (var manager in managers)
         {
             manager.AllManagerInitialize();
+        }
+        foreach (var mod in mods)
+        {
+            mod.AllModInitialize();
         }
     }
 
@@ -154,7 +159,6 @@ public class Main : MonoBehaviour
         {
             manager.Dispose();
         }
-       
     }
 
     private void OnApplicationFocus(bool hasFocus)

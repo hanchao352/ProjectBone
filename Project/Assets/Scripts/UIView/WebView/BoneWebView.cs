@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 using Vuplex.WebView;
@@ -15,6 +16,7 @@ public class BoneWebView : UIBase
     public async override void Initialize()
     {
         Debug.Log("WebView initialized111");
+        Web.ClearAllData();
         base.Initialize();
         canvasWebViewPrefab = Root.GetComponent<CanvasWebViewPrefab>();
         BackButton = Root.transform.Find("back").GetComponent<Button>();
@@ -25,39 +27,64 @@ public class BoneWebView : UIBase
         CloseButton.onClick.AddListener(OnCloseButtonClick);
         canvasWebViewPrefab.InitialUrl = "";
         canvasWebViewPrefab.Initialized += OnInitialized;
+        canvasWebViewPrefab.LogConsoleMessages = true;
+        
         await canvasWebViewPrefab.WaitUntilInitialized();
+        canvasWebViewPrefab.WebView.ConsoleMessageLogged += OnConsoleMessageLogged;
         canvasWebViewPrefab.WebView.MessageEmitted += OnMessageEmitted;
         // After the prefab has initialized, you can use the IWebView APIs via its WebView property.
         // https://developer.vuplex.com/webview/IWebView
         canvasWebViewPrefab.WebView.UrlChanged += OnUrlChanged; 
         canvasWebViewPrefab.WebView.LoadProgressChanged += OnLoadProgress;
-        
+        await canvasWebViewPrefab.WebView.WaitForNextPageLoadToFinish();
+       
+    }
+    
+    private void OnConsoleMessageLogged(object sender, ConsoleMessageEventArgs e)
+    {
+        Debug.Log($"Console message logged: [{e.Level}] {e.Message}");
     }
 
-    private void OnMessageEmitted(object sender, EventArgs<string> e)
+    public void PostMessage(EventState eventState)
+    {
+        if (canvasWebViewPrefab.WebView?.IsInitialized == true)
+        {
+            string json = JsonConvert.SerializeObject(eventState);
+            canvasWebViewPrefab.WebView.PostMessage(json);
+        }
+        else
+        {
+            Debug.Log("WebView not initialized");
+        }
+    }
+   
+    
+    private  void OnMessageEmitted(object sender, EventArgs<string> e)
     {
         Debug.Log("JSON received: " + e.Value);
+        var data = JsonConvert.DeserializeObject<EventState>(e.Value);
+        EventManager.Instance.TriggerEvent(data.type,data.message);
     }
 
-    private void OnInitialized(object sender, EventArgs e)
+    private void H5CallBack(string obj)
+    {
+      Debug.Log("H5CallBack:"+obj);
+    }
+
+    private  void OnInitialized(object sender, EventArgs e)
     {
         string url = "";
-        switch (webState)
+        if (webState == 0)
         {
-            case WebState.Note:
-                url = WebUrl.Note;
-                break;
-            case WebState.Collect:
-                url = WebUrl.Collect;
-                break;
-            case WebState.Login:
-                url = WebUrl.Login;
-                break;
-            default:
-                url = WebUrl.Default;
-                break;
+            url = WebInfo.webDic[WebState.Default];
         }
+        else
+        {
+            url = WebInfo.webDic[webState];
+        }
+        url = WebInfo.webDic[webState];
         weburl = url;
+    
         canvasWebViewPrefab.WebView.LoadUrl(url);
         Debug.Log("WebView initialized");
     }
@@ -65,6 +92,7 @@ public class BoneWebView : UIBase
     
     private void OnCloseButtonClick()
     {
+        EventManager.Instance.TriggerEvent(EventDefine.HideModel,1);
         UIManager.Instance.HideView(ViewID.WebView);
     }
 
@@ -94,16 +122,16 @@ public class BoneWebView : UIBase
         }
     }
 
-    private void OnUrlChanged(object sender, UrlChangedEventArgs e)
+    private async void OnUrlChanged(object sender, UrlChangedEventArgs e)
     {
         
             Debug.Log("[CanvasWebViewDemo] URL changed: " + e.Url);
-        
     }
 
-    private void OnLoadProgress(object sender, ProgressChangedEventArgs e)
+    private async void OnLoadProgress(object sender, ProgressChangedEventArgs e)
     {
         Debug.Log("[CanvasWebViewDemo] Load progress: " + e.Progress);
+        
         if (e.Type == ProgressChangeType.Started)
         {
             
@@ -114,7 +142,10 @@ public class BoneWebView : UIBase
         }
         else if (e.Type == ProgressChangeType.Finished)
         {
-            
+            // WindowsWebView webView = sender as WindowsWebView;
+            // var cookies = await canvasWebViewPrefab.WebView.ExecuteJavaScript("document.cookie");
+            // canvasWebViewPrefab.
+            // Debug.Log($"---{cookies}-------------");
         }
         else if (e.Type == ProgressChangeType.Failed)
         {
@@ -127,30 +158,15 @@ public class BoneWebView : UIBase
     public override void OnShow(params object[] args)
     {
         base.OnShow(args);
+        EventManager.Instance.TriggerEvent(EventDefine.HideModel,0);
         Debug.Log("WebView OnShow");
         webState = (int)args[0];
-        switch (webState)
-        {
-            case WebState.Note:
-                weburl = WebUrl.Note;
-                break;
-            case WebState.Collect:
-                weburl = WebUrl.Collect;
-                break;
-            case WebState.Login:
-                weburl = WebUrl.Login;
-                break;
-            default:
-                weburl = WebUrl.Default;
-                break;
-        }
-
+        weburl =WebInfo.webDic[webState];
         if (canvasWebViewPrefab.WebView?.IsInitialized == true)
         {
             canvasWebViewPrefab.WebView.LoadUrl(weburl);
         }
     }
-
     public override void UpdateView(params object[] args)
     {
         base.UpdateView(args);
@@ -159,10 +175,6 @@ public class BoneWebView : UIBase
     public override void Update(float time)
     {
         base.Update(time);
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            canvasWebViewPrefab.WebView.LoadUrl("www.qq.com");
-        }
     }
 
     public override void OnApplicationFocus(bool hasFocus)

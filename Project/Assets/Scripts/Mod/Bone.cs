@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class Bone
 {
@@ -7,7 +8,7 @@ public class Bone
     private string _name;
     private string _content;
     private Note _note;
-
+    private EnumBone _boneenum;
     public int Id
     {
         get => _id;
@@ -38,10 +39,26 @@ public class Bone
         set => _note = value;
     }
 
+    public EnumBone Boneenum
+    {
+        get => _boneenum;
+        set => _boneenum = value;
+    }
+
     public void UpdateBoneInfo(BoneInfo boneInfo)
     {
         Id = boneInfo.BoneId;
         Boneype = boneInfo.Type;
+        Debug.Log("类型："+boneInfo.Type);
+        if (Boneype == "骨骼")
+        {
+            Boneenum = EnumBone.Bone;
+        }
+        else if (Boneype == "肌肉")
+        {
+            Boneenum = EnumBone.Muscle;
+        }
+       
         Name = boneInfo.Bonename;
         Content = boneInfo.Bonecontent;
         if (Note == null)

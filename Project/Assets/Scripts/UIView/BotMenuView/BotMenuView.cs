@@ -25,12 +25,20 @@ public class BotMenuView : UIBase
     //题库
     private void OnBankButtonClick()
     {
-        
     }    
     //我的
     private void OnMineButtonClick()
     {
-        
+        int uid = UserMod.Instance.Uid;
+        if (uid == 0)
+        {
+            UIManager.Instance.ShowView(ViewID.WebView,WebState.Login);
+        }
+        else
+        {
+            UIManager.Instance.ShowView(ViewID.WebView,WebState.UserInfo);
+        }
+        //UIManager.Instance.ShowView(ViewID.WebView,WebState.Login);
     }
     public override void OnShow(params object[] args)
     {

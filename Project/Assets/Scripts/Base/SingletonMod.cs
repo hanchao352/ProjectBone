@@ -111,6 +111,11 @@ public abstract class SingletonMod<T>  where T : class, IMod, new()
             Debug.Log(Instance.ToString()+" OnApplicationQuit");
         }
 
+        public virtual void AllModInitialize()
+        {
+            // Default implementation, can be overridden in derived classes
+            Debug.Log(Instance.ToString()+" AllModInitialize");
+        }
         public virtual void Dispose()
         {
             // Default implementation, can be overridden in derived classes

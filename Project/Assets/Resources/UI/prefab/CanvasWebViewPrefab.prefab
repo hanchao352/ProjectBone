@@ -154,7 +154,7 @@ MonoBehaviour:
   HoveringEnabled: 1
   InitialUrl: 
   KeyboardEnabled: 1
-  LogConsoleMessages: 0
+  LogConsoleMessages: 1
   PixelDensity: 1
   RemoteDebuggingEnabled: 0
   ScrollingEnabled: 1

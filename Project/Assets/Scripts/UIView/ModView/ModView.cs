@@ -92,8 +92,9 @@ public class ModView : UIBase
         switchRoot.SetActive(false);
         muscleRoot.SetActive(false);
         infoSvGo.SetActive(showInfoSv); 
-        boneText.text = "Bone";
-        bone_muscle_text.text = "Muscle";
+        boneText.text = "骨骼";
+        bone_muscle_text.text = "肌肉";
+        ShowInfo(false);
         // 点击复位按钮时 恢复到原始状态  相机模型需要复位
     }
 
@@ -101,6 +102,13 @@ public class ModView : UIBase
     {
         base.RegisterEvent();
         EventManager.Instance.RegisterEvent(EventDefine.BoneClickEvent,OnBoneClick);
+        EventManager.Instance.RegisterEvent(EventDefine.HideModel,HideModelCallback);
+    }
+
+    private void HideModelCallback(object[] args)
+    {
+        bool show = (int)args[0] == 1;
+        GameObjectManager.Instance.BodyVisible = show;
     }
 
     private void OnBoneClick(object[] args)
@@ -114,6 +122,7 @@ public class ModView : UIBase
     {
         base.UnRegisterEvent();
         EventManager.Instance.UnregisterEvent(EventDefine.BoneClickEvent,OnBoneClick);
+        EventManager.Instance.UnregisterEvent(EventDefine.HideModel,HideModelCallback);
     }
 
     private void OnBoneMuscleButtonClick()
@@ -121,16 +130,18 @@ public class ModView : UIBase
         isBoneRoot = !isBoneRoot;
         switchRoot.SetActive(false);
         muscleRoot.SetActive(!isBoneRoot);
-        boneText.text = isBoneRoot ? "Bone" : "Muscle";
-        bone_muscle_text.text = isBoneRoot ? "Muscle" : "Bone"; 
-        
+        boneText.text = isBoneRoot ? "骨骼" : "肌肉";
+        bone_muscle_text.text = isBoneRoot ? "肌肉" : "骨骼"; 
+        BoneShowType type = isBoneRoot ? BoneShowType.Bone : BoneShowType.Muscle;
         //todo 显示骨骼或者肌肉
+        GameObjectManager.Instance.ShowBoneByType(type);
     }
     
     private void OnAllShowButtonClick()
     {
         //todo 显示所有骨骼肌肉
         Init();
+        GameObjectManager.Instance.ShowBoneByType(BoneShowType.All);
     }
     
     private void OnSelectBone()
@@ -144,8 +155,8 @@ public class ModView : UIBase
     {
         showInfoSv = !showInfoSv;
         infoSvGo.SetActive(showInfoSv);
-        upGo.SetActive(showInfoSv);
-        downGo.SetActive(!showInfoSv);
+        upGo.SetActive(!showInfoSv);
+        downGo.SetActive(showInfoSv);
     }
     //隐藏按钮
     private void OnHideButtonClick()
@@ -165,7 +176,7 @@ public class ModView : UIBase
     //显示按钮
     private void OnShowButtonClick()
     {
-        
+        GameObjectManager.Instance.HideOtherBone();
     }
     //其他按钮
     private void OnOtherButtonClick()
@@ -176,7 +187,7 @@ public class ModView : UIBase
     private void OnSearchButtonClick()
     {
         // todo 打开搜索界面 
-        // UIManager.Instance.ShowView(ViewID.WebView);
+        // UIManager.Instance.ShowView(ViewID.WebView,WebState.Search);
     }
     
     private void OnBackButtonClick()
@@ -184,6 +195,7 @@ public class ModView : UIBase
         ShowInfo(false);
         UIManager.Instance.ShowView(ViewID.MainView);
         UIManager.Instance.HideView(ViewID.ModelView);
+        GameObjectManager.Instance.BodyVisible = false;
     }
 
     //底部详细信息
@@ -199,6 +211,9 @@ public class ModView : UIBase
     private void OnRefreshButtonClick()
     {
         //todo 恢复到原始状态
+        BoneMod.Instance.currentBoneId = -1;
+        GameObjectManager.Instance.HideBone();
+        Init();
     }
     
     private void OnSwitchButtonClick()

@@ -5,5 +5,6 @@
     void OnApplicationFocus(bool hasFocus);
     void OnApplicationPause(bool pauseStatus);
     void OnApplicationQuit();
+    void AllModInitialize();
     void Dispose();
 }

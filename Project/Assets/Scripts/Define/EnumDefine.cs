@@ -5,6 +5,8 @@ using System;public enum EnumGender
     Female = 1,
 }
 
+
+
 public enum EnumBone
 {
     //骨骼
@@ -36,8 +38,17 @@ public enum EnumPos
     //肩胛带
     Scapula = 8,
     
-    
-    
+}
+
+public enum BoneShowType
+{ 
+     //显示全部
+     All = 0,
+    //显示骨骼
+    Bone = 1,
+    //显示肌肉
+    Muscle = 2,
+   
 }
 
 

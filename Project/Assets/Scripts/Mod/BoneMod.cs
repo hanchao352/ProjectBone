@@ -32,6 +32,7 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
         }
     }
 
+    
     public override void RegisterMessageHandler()
     {
         RegisterWebRequestCallback<CSBoneRequest>(OnCSBoneRequest);
@@ -125,4 +126,6 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
          CSAllBoneRequest cSAllBoneRequest = new CSAllBoneRequest();
          cSAllBoneRequest.ToSend();
     }
+    
+    
 }

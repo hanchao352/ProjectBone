@@ -539,6 +539,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114964597144731212, guid: 7e2bbca1984073b47bc19c0a080e75de, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 687214263543339539, guid: 7e2bbca1984073b47bc19c0a080e75de, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 6957475218631914753, guid: 7e2bbca1984073b47bc19c0a080e75de, type: 3}
       propertyPath: m_SizeDelta.y
       value: 169.131

@@ -180,5 +180,54 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
               }
       }
 
+      public void ShowBoneByType(BoneShowType type)
+      {
+              if (type == BoneShowType.All)
+              {
+                      for (int i = 0; i < skeletonInfos.Count; i++)
+                      {
+                              SkeletonInfo skeletonInfo = skeletonInfos[i];
+                              skeletonInfo.boneGameObject.SetActive(true);
+                              
+                      }
+              }
+              else if (type == BoneShowType.Bone)
+              {
+                      for (int i = 0; i < skeletonInfos.Count; i++)
+                      {
+                              SkeletonInfo skeletonInfo = skeletonInfos[i];
+                              if (skeletonInfo.bone.Boneenum == EnumBone.Bone)
+                              {
+                                      skeletonInfo.boneGameObject.SetActive(true);
+                              }
+                              else
+                              {
+                                          skeletonInfo.boneGameObject.SetActive(false);
+                              }
+                             
+                              
+                      }
+              }
+              else if (type == BoneShowType.Muscle)
+              {
+                      for (int i = 0; i < skeletonInfos.Count; i++)
+                      {
+                              SkeletonInfo skeletonInfo = skeletonInfos[i];
+                              if (skeletonInfo.bone.Boneenum == EnumBone.Muscle)
+                              {
+                                      skeletonInfo.boneGameObject.SetActive(true);
+                              }
+                              else
+                              {
+                                      skeletonInfo.boneGameObject.SetActive(false);
+                              }
+                             
+                             
+                              
+                      }
+              }
+           
+      }
       
+
 }

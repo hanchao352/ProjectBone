@@ -125,6 +125,7 @@ public class InputManager:SingletonManager<InputManager>, IGeneric
            if (int.TryParse(boneName, out  boneId))
            {
                BoneMod.Instance.currentBoneId = boneId;
+               UserMod.Instance.Muscleid = boneId;
                EventManager.Instance.TriggerEvent(EventDefine.BoneClickEvent ,boneId);
            }
            else

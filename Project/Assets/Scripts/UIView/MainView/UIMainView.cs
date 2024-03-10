@@ -31,6 +31,7 @@ public class UIMainView : UIBase
     private void OnFemaleButtonClick()
     {
         Debug.Log($"功能暂未开放");
+        TipsMod.Instance.ShowTips("功能暂未开放");
     }
 
     private void OnMaleButtonClick()
@@ -43,19 +44,23 @@ public class UIMainView : UIBase
     private void OnArmButtonClick()
     {
         Debug.Log($"功能暂未开放");
+        TipsMod.Instance.ShowTips("功能暂未开放");
     }
 
     private void OnHeadButtonClick()
     {
         Debug.Log($"功能暂未开放");
+        TipsMod.Instance.ShowTips("功能暂未开放");
     }
     private void OnLegButtonClick()
     {
         Debug.Log($"功能暂未开放");
+        TipsMod.Instance.ShowTips("功能暂未开放");
     }
     private void OnBellyButtonClick()
     {
         Debug.Log($"功能暂未开放");
+        TipsMod.Instance.ShowTips("功能暂未开放");
     }
 
     public override void OnShow(params object[] args)

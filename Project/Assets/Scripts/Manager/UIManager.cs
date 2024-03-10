@@ -55,9 +55,51 @@ using UnityEngine;
             ModelCamera.depth = 2;
             ModelCamera.GetUniversalAdditionalCameraData().renderType = CameraRenderType.Overlay;
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(ModelCamera);
-            
+            AddEventListener();
         }
 
+        private void AddEventListener()
+        {
+            EventManager.Instance.RegisterEvent(EventDefine.GetUID,OnGetUidCallback);
+            EventManager.Instance.RegisterEvent(EventDefine.LogOut,OnLogOutCallback);
+            EventManager.Instance.RegisterEvent(EventDefine.CloseH5,OnCloseH5Callback);
+        }
+    
+        private void RemoveEventListener()
+        {
+            EventManager.Instance.UnregisterEvent(EventDefine.GetUID,OnGetUidCallback);
+            EventManager.Instance.UnregisterEvent(EventDefine.LogOut,OnLogOutCallback);
+            EventManager.Instance.UnregisterEvent(EventDefine.LogOut,OnCloseH5Callback);
+        }
+
+        private void OnCloseH5Callback(params object[] args)
+        {
+            Debug.Log("---------OnCloseH5Callback---------------:"+args[0]);
+        }
+        
+        private void OnGetUidCallback(params object[] args)
+        {
+            int uid =(int) ( args[0]);
+            SetUid(uid);
+            Debug.Log("---------OnGetUidCallback:"+uid);
+        }
+        private void OnLogOutCallback()
+        {
+            SetUid(0);
+            Debug.Log("---------OnLogOutCallback");
+        }
+
+        public int GetUid()
+        {
+            return UserMod.Instance.Uid;
+        }
+
+        public void SetUid(int uid)
+        {
+            UserMod.Instance.Uid = uid;
+        }
+
+        
         public UIBase GetView(int viewid)
         {
             if (_showViews.ContainsKey(viewid))
@@ -125,10 +167,7 @@ using UnityEngine;
 
       
 
-        public void ShowTips(string Tips)
-        {
-          
-        }
+
 
     
 
@@ -144,6 +183,7 @@ using UnityEngine;
         
         override public void Dispose()
         {
+            RemoveEventListener();
             for (int i = 0; i < _showViewsList.Count; i++)
             {
                 _showViewsList[i].Dispose();
