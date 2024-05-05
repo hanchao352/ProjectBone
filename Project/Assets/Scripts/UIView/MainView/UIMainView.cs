@@ -36,31 +36,71 @@ public class UIMainView : UIBase
 
     private void OnMaleButtonClick()
     {
+        if (BoneMod.Instance.boneLoaded == false)
+        {
+            TipsMod.Instance.ShowTips("数据加载中，请稍后再试");
+            return;
+        }
         UIManager.Instance.HideView(ViewID.MainView);
         UIManager.Instance.ShowView(ViewID.ModelView);
         GameObjectManager.Instance.BodyVisible = true;
+        GameObjectManager.Instance.SelectBoneType = (int)EnumPos.All;
+        //GameObjectManager.Instance.SelectBoneByPos( GameObjectManager.Instance.SelectBoneType);
+       
     }
     
     private void OnArmButtonClick()
     {
-        Debug.Log($"功能暂未开放");
-        TipsMod.Instance.ShowTips("功能暂未开放");
+        if (BoneMod.Instance.boneLoaded == false)
+        {
+            TipsMod.Instance.ShowTips("数据加载中，请稍后再试");
+            return;
+        }
+        UIManager.Instance.HideView(ViewID.MainView);
+        UIManager.Instance.ShowView(ViewID.ModelView);
+        GameObjectManager.Instance.BodyVisible = true;
+        GameObjectManager.Instance.SelectBoneType = (int)EnumPos.UpperLimbs;
+       // GameObjectManager.Instance.SelectBoneByPos((int)EnumPos.UpperLimbs);
     }
 
     private void OnHeadButtonClick()
     {
-        Debug.Log($"功能暂未开放");
-        TipsMod.Instance.ShowTips("功能暂未开放");
+        if (BoneMod.Instance.boneLoaded == false)
+        {
+            TipsMod.Instance.ShowTips("数据加载中，请稍后再试");
+            return;
+        }
+        UIManager.Instance.HideView(ViewID.MainView);
+        UIManager.Instance.ShowView(ViewID.ModelView);
+        GameObjectManager.Instance.BodyVisible = true;
+        GameObjectManager.Instance.SelectBoneType = (int)EnumPos.HeadAndNeck;
+       // GameObjectManager.Instance.SelectBoneByPos((int)EnumPos.HeadAndNeck);
     }
     private void OnLegButtonClick()
     {
-        Debug.Log($"功能暂未开放");
-        TipsMod.Instance.ShowTips("功能暂未开放");
+        if (BoneMod.Instance.boneLoaded == false)
+        {
+            TipsMod.Instance.ShowTips("数据加载中，请稍后再试");
+            return;
+        }
+        UIManager.Instance.HideView(ViewID.MainView);
+        UIManager.Instance.ShowView(ViewID.ModelView);
+        GameObjectManager.Instance.BodyVisible = true;
+        GameObjectManager.Instance.SelectBoneType = (int)EnumPos.LowerLimbs | (int)EnumPos.Pelvis;
+        //GameObjectManager.Instance.SelectBoneByPos((int)EnumPos.LowerLimbs | (int)EnumPos.Pelvis);
     }
     private void OnBellyButtonClick()
     {
-        Debug.Log($"功能暂未开放");
-        TipsMod.Instance.ShowTips("功能暂未开放");
+        if (BoneMod.Instance.boneLoaded == false)
+        {
+            TipsMod.Instance.ShowTips("数据加载中，请稍后再试");
+            return;
+        }
+        UIManager.Instance.HideView(ViewID.MainView);
+        UIManager.Instance.ShowView(ViewID.ModelView);
+        GameObjectManager.Instance.BodyVisible = true;
+        GameObjectManager.Instance.SelectBoneType = (int)EnumPos.ChestAndAbdomen;
+       // GameObjectManager.Instance.SelectBoneByPos((int)EnumPos.ChestAndAbdomen );
     }
 
     public override void OnShow(params object[] args)

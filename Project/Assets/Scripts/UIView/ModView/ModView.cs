@@ -33,7 +33,8 @@ public class ModView : UIBase
     private Button otherBtn;
     private bool showInfoSv;
     private bool isBoneRoot;
-    
+    private Button addBtn;
+    private Button subBtn;
     public override void Initialize()
     {
         base.Initialize();
@@ -50,6 +51,8 @@ public class ModView : UIBase
         bone_muscle_text = Root.transform.Find("left/Image/bone_btn/switch_root/bone_muscle_btn/bone_muscle_text").GetComponent<TextMeshProUGUI>();
         switchRoot = Root.transform.Find("left/Image/bone_btn/switch_root").gameObject;
         muscleRoot = Root.transform.Find("left/Image/bone_btn/muscle_root").gameObject;
+        addBtn = Root.transform.Find("left/Image/bone_btn/muscle_root/add_btn").GetComponent<Button>();
+        subBtn = Root.transform.Find("left/Image/bone_btn/muscle_root/sub_btn").GetComponent<Button>();
         
         searchbutton.onClick.AddListener(OnSearchButtonClick);
         backbutton.onClick.AddListener(OnBackButtonClick);
@@ -60,6 +63,8 @@ public class ModView : UIBase
         bone_btn.onClick.AddListener(OnBoneButtonClick);
         bone_muscle_btn.onClick.AddListener(OnBoneMuscleButtonClick);
         allshow_btn.onClick.AddListener(OnAllShowButtonClick);
+        addBtn.onClick.AddListener(OnAddButtonClick);
+        subBtn.onClick.AddListener(OnSubButtonClick);
         
         botGo = Root.transform.Find("bot").gameObject;
         infoSvGo = Root.transform.Find("bot/bg/infoSv").gameObject;
@@ -83,7 +88,86 @@ public class ModView : UIBase
         Init();
     }
 
-    
+    private void OnSubButtonClick()
+    {
+        int curid = BoneMod.Instance.CurrentBoneId;
+        if (curid <= 0) //当前没有选中任何骨骼id
+        {
+            if (GameObjectManager.Instance.ShowType==(int)BoneShowType.None)
+            {
+                TipsMod.Instance.ShowTips("已隐藏全部层级");
+            }
+            else
+            {
+                GameObjectManager.Instance.ShowType = UtilHelper.ClearHighestBit((int)GameObjectManager.Instance.ShowType);
+            }
+           
+        }
+        else
+        {
+            if (GameObjectManager.Instance.ShowType==(int)BoneShowType.None)
+            {
+                TipsMod.Instance.ShowTips("已隐藏全部层级");
+            }
+            else
+            {
+                GameObjectManager.Instance.ShowType = UtilHelper.ClearHighestBit((int)GameObjectManager.Instance.ShowType);
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
+
+    private void OnAddButtonClick()
+    {
+        int curid = BoneMod.Instance.CurrentBoneId;
+        if (curid <= 0) //当前没有选中任何骨骼id
+        {
+            if (GameObjectManager.Instance.ShowType > (int)BoneShowType.All)
+            {
+                GameObjectManager.Instance.ShowType = (int)BoneShowType.All;
+            }
+            else
+            {
+                if (UtilHelper.IsContains(GameObjectManager.Instance.ShowType,(int)BoneShowType.All)) 
+                {
+                    //GameObjectManager.Instance.ShowType = (int)BoneShowType.All;
+                    TipsMod.Instance.ShowTips("已显示全部层级");
+                }
+                else
+                {
+                    GameObjectManager.Instance.ShowType =  UtilHelper.AddOneBeforeHighestBit((int)GameObjectManager.Instance.ShowType);
+                }
+            }
+           
+        }
+        else
+        {
+            if (GameObjectManager.Instance.ShowType > (int)BoneShowType.All)
+            {
+                GameObjectManager.Instance.ShowType = (int)BoneShowType.All;
+            }
+            else
+            {
+                if (UtilHelper.IsContains(GameObjectManager.Instance.ShowType,(int)BoneShowType.All)) 
+                {
+                    //GameObjectManager.Instance.ShowType = (int)BoneShowType.All;
+                    TipsMod.Instance.ShowTips("已显示全部层级");
+                }
+                else
+                {
+                    GameObjectManager.Instance.ShowType =  UtilHelper.AddOneBeforeHighestBit((int)GameObjectManager.Instance.ShowType);
+                }
+            }
+        }
+    }
+
+
     // 界面初始化状态
     private void Init()
     {
@@ -134,14 +218,15 @@ public class ModView : UIBase
         bone_muscle_text.text = isBoneRoot ? "肌肉" : "骨骼"; 
         BoneShowType type = isBoneRoot ? BoneShowType.Bone : BoneShowType.Muscle;
         //todo 显示骨骼或者肌肉
-        GameObjectManager.Instance.ShowBoneByType(type);
+        GameObjectManager.Instance.ShowType = (int)type;
+        //GameObjectManager.Instance.ShowBoneByType(type);
     }
     
     private void OnAllShowButtonClick()
     {
         //todo 显示所有骨骼肌肉
         Init();
-        GameObjectManager.Instance.ShowBoneByType(BoneShowType.All);
+        GameObjectManager.Instance.ShowType = (int)BoneShowType.All;
     }
     
     private void OnSelectBone()
@@ -187,7 +272,8 @@ public class ModView : UIBase
     private void OnSearchButtonClick()
     {
         // todo 打开搜索界面 
-        // UIManager.Instance.ShowView(ViewID.WebView,WebState.Search);
+        UIManager.Instance.ShowView(ViewID.SearchView);
+        GameObjectManager.Instance.BodyVisible = false;
     }
     
     private void OnBackButtonClick()
@@ -211,7 +297,7 @@ public class ModView : UIBase
     private void OnRefreshButtonClick()
     {
         //todo 恢复到原始状态
-        BoneMod.Instance.currentBoneId = -1;
+        BoneMod.Instance.CurrentBoneId = -1;
         GameObjectManager.Instance.HideBone();
         Init();
     }
@@ -219,6 +305,7 @@ public class ModView : UIBase
     private void OnSwitchButtonClick()
     {
         //切换男女模型
+        TipsMod.Instance.ShowTips("功能暂未开放");
         Debug.Log("功能暂未开放");
     }
     
@@ -231,6 +318,7 @@ public class ModView : UIBase
     private void OnLastButtonClick()
     {
         // 复位？ 还是备份 暂时不太懂 不开放
+        GameObjectManager.Instance.SelectBoneByPos(GameObjectManager.Instance.SelectBoneType);
     }
     
     private void OnBoneButtonClick()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 using Vuplex.WebView;
 
@@ -114,6 +115,7 @@ public class Main : MonoBehaviour
        {
            BoneMod.Instance.Test();
        }
+      //UIManager.Instance.ShowView(ViewID.TestListView);
 #endif
         
 

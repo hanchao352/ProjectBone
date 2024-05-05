@@ -49,15 +49,16 @@ using UnityEngine;
             GameObject.DontDestroyOnLoad(eventSystem);
             //创建一个model相机
             ModelCamera = new GameObject("modelCamera").AddComponent<Camera>();
-            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(UICamera);
+           
             ModelCamera.cullingMask = 1 << LayerMask.NameToLayer("Body");
             ModelCamera.clearFlags = CameraClearFlags.Depth;
             ModelCamera.depth = 2;
             ModelCamera.GetUniversalAdditionalCameraData().renderType = CameraRenderType.Overlay;
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(ModelCamera);
+            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(UICamera);
             AddEventListener();
         }
-
+        
         private void AddEventListener()
         {
             EventManager.Instance.RegisterEvent(EventDefine.GetUID,OnGetUidCallback);
@@ -187,6 +188,7 @@ using UnityEngine;
             for (int i = 0; i < _showViewsList.Count; i++)
             {
                 _showViewsList[i].Dispose();
+              
             }
            
         }

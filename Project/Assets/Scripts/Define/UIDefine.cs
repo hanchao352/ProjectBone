@@ -23,6 +23,10 @@ public class ViewID
     public const int TestView = 5;
     //tips界面
     public const int TipsView = 6;
+    //测试list
+    public const int TestListView = 7;
+
+    public const int SearchView = 8;
 
 }
 
@@ -80,5 +84,8 @@ public static  class UIDefine
          _uiViews[ViewID.BotMenuView] = new ViewInfo(){ViewID = ViewID.BotMenuView,ResName = "bot_menu_window",ViewType = typeof(BotMenuView)};
          _uiViews[ViewID.TestView] = new ViewInfo(){ViewID = ViewID.TestView,ResName = "Test_window",ViewType = typeof(TestView)};
          _uiViews[ViewID.TipsView] = new ViewInfo(){ViewID = ViewID.TipsView,ResName = "tips_window",ViewType = typeof(TipsView)};
+         _uiViews[ViewID.TestListView] = new ViewInfo(){ViewID = ViewID.TestListView,ResName = "TestList",ViewType = typeof(TestListView)};
+         _uiViews[ViewID.SearchView] = new ViewInfo(){ViewID = ViewID.SearchView,ResName = "search_window",ViewType = typeof(SearchView)};
+         
     }
 }

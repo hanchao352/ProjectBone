@@ -147,4 +147,22 @@ public abstract class UIBase:IViewGeneric
         }
         return com;
     }
+    public virtual T MakeComponent<T>(RectTransform comroot) where T:ComponentBase
+    {
+        T com = comroot.MakeComponent<T>();
+        if (childComponents.Contains(com)==false)
+        {
+            childComponents.Add(com);
+        }
+        return com;
+    }
+    public virtual T MakeComponent<T>(Transform comroot) where T:ComponentBase
+    {
+        T com = comroot.MakeComponent<T>();
+        if (childComponents.Contains(com)==false)
+        {
+            childComponents.Add(com);
+        }
+        return com;
+    }
 }

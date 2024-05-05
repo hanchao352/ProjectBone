@@ -129,12 +129,22 @@ public class TipsView : UIBase
         for (int i = 0; i < _usingTextList.Count; i++)
         {
             _usingTextList[i].DOKill();
-            GameObject.Destroy(  _usingTextList[i].gameObject);
+            if (_usingTextList[i]!=null &&(_usingTextList[i]?.gameObject != null))
+            {
+                GameObject.Destroy(  _usingTextList[i].gameObject);
+            }
+          
         }
         for (int i = 0; i < _textList.Count; i++)
         {
-            GameObject.Destroy(  _textList[i].gameObject);
+            if (_textList[i]!=null &&(_textList[i]?.gameObject != null))
+            {
+                GameObject.Destroy(  _textList[i]?.gameObject);
+            }
+           
         }
-        
+        _usingTextList.Clear();
+        _textList.Clear();
+       
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
@@ -8,7 +9,10 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
         public bool rotateenable = false;
         public List<SkeletonInfo> skeletonInfos;
         private bool bodyVisible = false;
-
+        private Color NormalColor = new Color(0.7353569f, 0.7353569f, 0.7353569f, 1f);
+        private Color SelectColor = Color.cyan;
+        private int boneShowType =(int) BoneShowType.All;
+        private int selectBoneType = (int)EnumPos.All;
         public bool BodyVisible
         {
                 get
@@ -29,6 +33,26 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                         }
                 }
              
+        }
+
+        public int ShowType
+        {
+                get { return boneShowType; }
+                set
+                {
+                        boneShowType = value;
+                        ShowBoneByType(boneShowType);
+                }
+        }
+
+        public int SelectBoneType
+        {
+                get { return selectBoneType; }
+                set
+                {
+                        selectBoneType = value;
+                        SelectBoneByPos(selectBoneType);
+                }
         }
 
         public override void Initialize()
@@ -60,6 +84,7 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                                 skeletonInfo.boneId = id;
                                 skeletonInfo.bone = bone;
                                 skeletonInfo.boneGameObject = boneobj;
+                                skeletonInfo.meshRenderer = boneobj.GetComponent<MeshRenderer>();
                                 if (BoneMod.Instance.boneDic.ContainsKey(id))
                                 {
                                         BoneMod.Instance.boneDic[id] = bone;
@@ -79,6 +104,31 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                 }
                 obj.transform.position = new Vector3(0, 0, 0.5f);
                 Body = obj;
+                Body.transform.localScale = new Vector3(3, 3, 3);
+        }
+        
+        public void SelectBone(int boneid)
+        {
+                for (int i = 0; i < skeletonInfos.Count; i++)
+                {
+                        SkeletonInfo skeletonInfo = skeletonInfos[i];
+                        if (skeletonInfo.boneId == boneid)
+                        {
+                                skeletonInfo.meshRenderer.material.color = SelectColor;
+                        }
+                        else
+                        {
+                                skeletonInfo.meshRenderer.material.color = NormalColor;
+                        }
+                }
+        }
+        public void ResetBoneColor()
+        {
+                for (int i = 0; i < skeletonInfos.Count; i++)
+                {
+                        SkeletonInfo skeletonInfo = skeletonInfos[i];
+                        skeletonInfo.meshRenderer.material.color = NormalColor;
+                }
         }
         private void OnDrag(Vector2 lastpos, Vector2 curpos)
         {
@@ -145,7 +195,7 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
         {
                 if (boneid == -1)
                 {
-                        boneid = BoneMod.Instance.currentBoneId;
+                        boneid = BoneMod.Instance.CurrentBoneId;
                 }
                 for (int i = 0; i < skeletonInfos.Count; i++)
                 {
@@ -164,7 +214,7 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
       {
               if (boneid == -1)
               {
-                      boneid = BoneMod.Instance.currentBoneId;
+                      boneid = BoneMod.Instance.CurrentBoneId;
               }
               for (int i = 0; i < skeletonInfos.Count; i++)
               {
@@ -180,9 +230,16 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
               }
       }
 
-      public void ShowBoneByType(BoneShowType type)
+      public void ShowBoneByType(int type)
       {
-              if (type == BoneShowType.All)
+              for (int i = 0; i < skeletonInfos.Count; i++)
+              {
+                      SkeletonInfo skeletonInfo = skeletonInfos[i];
+                      skeletonInfo.boneGameObject.SetActive(false);
+                              
+              }
+             
+              if (UtilHelper.IsContains(type,(int)BoneShowType.All) )
               {
                       for (int i = 0; i < skeletonInfos.Count; i++)
                       {
@@ -191,43 +248,86 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                               
                       }
               }
-              else if (type == BoneShowType.Bone)
+              else
               {
-                      for (int i = 0; i < skeletonInfos.Count; i++)
+                      if (UtilHelper.IsContains(type,(int)BoneShowType.Bone) )
                       {
-                              SkeletonInfo skeletonInfo = skeletonInfos[i];
-                              if (skeletonInfo.bone.Boneenum == EnumBone.Bone)
+                              for (int i = 0; i < skeletonInfos.Count; i++)
                               {
-                                      skeletonInfo.boneGameObject.SetActive(true);
+                                      SkeletonInfo skeletonInfo = skeletonInfos[i];
+                                      if (skeletonInfo.bone.Boneenum == EnumBone.Bone)
+                                      {
+                                              skeletonInfo.boneGameObject.SetActive(true);
+                                      }
+                                    
+                                      
                               }
-                              else
+                      }
+                      if (UtilHelper.IsContains(type,(int)BoneShowType.Muscle))
+                      {
+                              for (int i = 0; i < skeletonInfos.Count; i++)
                               {
-                                          skeletonInfo.boneGameObject.SetActive(false);
+                                      SkeletonInfo skeletonInfo = skeletonInfos[i];
+                                      if (skeletonInfo.bone.Boneenum == EnumBone.Muscle)
+                                      {
+                                              skeletonInfo.boneGameObject.SetActive(true);
+                                      }
+                                    
+                                      
                               }
-                             
-                              
+                      }
+                      
+                      if (UtilHelper.IsContains(type,(int)BoneShowType.Fascia))
+                      {
+                              for (int i = 0; i < skeletonInfos.Count; i++)
+                              {
+                                      SkeletonInfo skeletonInfo = skeletonInfos[i];
+                                      if (skeletonInfo.bone.Boneenum == EnumBone.Fascia)
+                                      {
+                                              skeletonInfo.boneGameObject.SetActive(true);
+                                      }
+                                    
+                                      
+                              }
                       }
               }
-              else if (type == BoneShowType.Muscle)
-              {
-                      for (int i = 0; i < skeletonInfos.Count; i++)
-                      {
-                              SkeletonInfo skeletonInfo = skeletonInfos[i];
-                              if (skeletonInfo.bone.Boneenum == EnumBone.Muscle)
-                              {
-                                      skeletonInfo.boneGameObject.SetActive(true);
-                              }
-                              else
-                              {
-                                      skeletonInfo.boneGameObject.SetActive(false);
-                              }
-                             
-                             
-                              
-                      }
-              }
+             
            
       }
       
 
+      public void SelectBoneByPos(int pos)
+      {
+              for (int i = 0; i < skeletonInfos.Count; i++)
+              {
+                      SkeletonInfo skeletonInfo = skeletonInfos[i];
+                      if (skeletonInfo.bone.Id == 2243)
+                      {
+                              Debug.Log("骨骼所属位置:"+skeletonInfo.bone.Pos);
+                      }
+                      if (UtilHelper.IsContains(pos,skeletonInfo.bone.Pos)  )
+                      {
+                              skeletonInfo.boneGameObject.SetActive(true);
+                              Debug.Log("骨骼所属位置:"+skeletonInfo.bone.Pos);
+                      }
+                      else
+                      {
+                              skeletonInfo.boneGameObject.SetActive(false);
+                      }
+              }
+            
+      }
+      
+      public SkeletonInfo GetSkeletonInfo(int boneid)
+      {
+              for (int i = 0; i < skeletonInfos.Count; i++)
+              {
+                      SkeletonInfo skeletonInfo = skeletonInfos[i];
+                      if (skeletonInfo.boneId == boneid)
+                      {
+                              return skeletonInfo;
+                      }
+              }
+              return null;
+      }
 }

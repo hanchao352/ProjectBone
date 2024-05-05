@@ -1,10 +1,36 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Newtonsoft;
+using Newtonsoft.Json;
 
 public class UserMod : SingletonMod<UserMod>, IMod
 {
     private int _uid = 0;
     private int _muscleid = 0;
-
+    
+    public List<string> SearchHistory {get; set;}
+    
+    public void AddSearchHistory(string str)
+    {
+        if (SearchHistory.Contains(str))
+        {
+            SearchHistory.Remove(str);
+        }
+        SearchHistory.Insert(0,str);
+        if (SearchHistory.Count>10)
+        {
+            SearchHistory.RemoveAt(10);
+        }
+        var s = JsonConvert.SerializeObject(SearchHistory);
+       PlayerPrefs.SetString("999searchHistory",JsonConvert.SerializeObject(SearchHistory));
+    }
+    
+    public void ClearSearchHistory()
+    {
+        SearchHistory.Clear();
+        PlayerPrefs.SetString("999searchHistory","");
+    }
+    
     public int Uid
     {
         get
@@ -56,6 +82,16 @@ public class UserMod : SingletonMod<UserMod>, IMod
     {
         base.Initialize();
         Uid = PlayerPrefs.GetInt("uid",0);
+        
+        var str = PlayerPrefs.GetString("999searchHistory");
+        if (!string.IsNullOrEmpty(str))
+        {
+            SearchHistory = JsonConvert.DeserializeObject<List<string>>(str);
+        }
+        else
+        {
+            SearchHistory = new List<string>();
+        }
     }
 
     public override void AllModInitialize()

@@ -35,7 +35,11 @@
                     }
                 }
                 visible = value;
-                Root.SetActive(visible);
+                if (Root !=null)
+                {
+                    Root.SetActive(visible);
+                }
+               
             }
         }
 
@@ -45,7 +49,7 @@
         public virtual void Initialize()
         {
             childComponents = new List<ComponentBase>();
-            Visible = false;
+            Root.SetActive(visible);
         }
 
         public virtual void OnShow(params object[] args)

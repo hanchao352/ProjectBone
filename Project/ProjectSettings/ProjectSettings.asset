@@ -160,6 +160,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.DefaultCompany.Project
     Standalone: com.DefaultCompany.Project
+    iPhone: com.DefaultCompany.Project
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -787,7 +788,8 @@ PlayerSettings:
   webGLPowerPreference: 2
   scriptingDefineSymbols:
     Android: ODIN_VALIDATOR;ODIN_VALIDATOR_3_1;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;VUPLEX_STANDALONE
-    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ODIN_VALIDATOR;ODIN_VALIDATOR_3_1;VUPLEX_STANDALONE;WEBTest
+    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ODIN_VALIDATOR;ODIN_VALIDATOR_3_1;VUPLEX_STANDALONE
+    iPhone: ODIN_VALIDATOR;ODIN_VALIDATOR_3_1;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;VUPLEX_STANDALONE;WEBTest
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
@@ -891,4 +893,4 @@ PlayerSettings:
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
   virtualTexturingSupportEnabled: 0
-  insecureHttpOption: 1
+  insecureHttpOption: 2

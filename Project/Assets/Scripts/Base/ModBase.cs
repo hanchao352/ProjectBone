@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using UnityEngine.Experimental.GlobalIllumination;
 
-public abstract class ModBase 
+namespace GameUI
+{
+    public abstract class ModBase 
 {
     private readonly Dictionary<int, Func<IMessage, Task>> _callbacks = new Dictionary<int, Func<IMessage, Task>>();
     private  Dictionary<Type, Dictionary<int, Func<IMessage, Task>>> _messageIdToCallback;
@@ -93,3 +95,5 @@ public abstract class ModBase
     }
    
 }
+}
+

@@ -52,7 +52,7 @@ public class InputManager:SingletonManager<InputManager>, IGeneric
         if (gesture.State == GestureRecognizerState.Executing )
         {
         
-         float rotationSpeed = 0.1f; // 根据需要调整这个值
+         float rotationSpeed = 1f; // 根据需要调整这个值
          GameObjectManager.Instance.Body.transform.Rotate(Vector3.up, -panGesture.DeltaX * rotationSpeed, Space.World);
           GameObjectManager.Instance.Body.transform.Rotate(Vector3.right, panGesture.DeltaY * rotationSpeed, Space.World);
         }
@@ -73,11 +73,11 @@ public class InputManager:SingletonManager<InputManager>, IGeneric
         {
        
            
-            float deltaX = panGesture.DeltaX / 1000.0f;
-            float deltaY = panGesture.DeltaY / 1000.0f;
+            float deltaX = panGesture.DeltaX / 500.0f*-1 ;
+            float deltaY = panGesture.DeltaY / 500.0f;
             
             Vector3 pos = GameObjectManager.Instance.Body.transform.position;
-            pos.x += deltaX;
+            pos.x -= deltaX;
             pos.y += deltaY;
             GameObjectManager.Instance.Body.transform.position = pos;
         }
@@ -124,7 +124,8 @@ public class InputManager:SingletonManager<InputManager>, IGeneric
            // 使用 int.TryParse() 判断是不是能够转换成id
            if (int.TryParse(boneName, out  boneId))
            {
-               BoneMod.Instance.currentBoneId = boneId;
+               
+               BoneMod.Instance.CurrentBoneId = boneId;
                UserMod.Instance.Muscleid = boneId;
                EventManager.Instance.TriggerEvent(EventDefine.BoneClickEvent ,boneId);
            }

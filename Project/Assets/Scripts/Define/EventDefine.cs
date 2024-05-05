@@ -10,5 +10,6 @@
         // 通用事件
         public const int EditorSelectBone = 20001;
         public const int BoneClickEvent = 20002;
+        public const int OnSearchItemClick = 20003;
         
 }
