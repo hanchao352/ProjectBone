@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 9a21a64eddd870b49a7fd1d6bfa75722
+timeCreated: 1606650403
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Core/Scripts/Core/SubComponents/List/ListNavigationManager.cs
+  uploadId: 618765

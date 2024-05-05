@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 22cdfadf90754974eac79b3d005d6b44
+timeCreated: 1542052622
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Extra/PluginSupport/Playmaker/README.txt
+  uploadId: 618765

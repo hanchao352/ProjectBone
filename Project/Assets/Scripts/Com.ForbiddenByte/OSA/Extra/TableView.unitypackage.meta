@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0484411d8d08a8341bb24ab2265820c4
+timeCreated: 1563784159
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Extra/TableView.unitypackage
+  uploadId: 618765

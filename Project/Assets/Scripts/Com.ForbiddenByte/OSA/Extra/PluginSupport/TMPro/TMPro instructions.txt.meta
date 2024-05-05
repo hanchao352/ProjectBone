@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 028e2ef88a4b1a6409172e68ccc66730
+timeCreated: 1563652017
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Extra/PluginSupport/TMPro/TMPro
+    instructions.txt
+  uploadId: 618765

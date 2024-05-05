@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 30e8a83f5eaa51644a334eb590809625
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scripts/Common/CommandPanels/LabelWithToggles.cs
+  uploadId: 618765

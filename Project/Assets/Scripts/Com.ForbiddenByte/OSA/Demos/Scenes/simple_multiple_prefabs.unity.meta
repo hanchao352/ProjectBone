@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 367ff103acff98546b09ccccc47ddab0
+timeCreated: 1555406375
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/simple_multiple_prefabs.unity
+  uploadId: 618765

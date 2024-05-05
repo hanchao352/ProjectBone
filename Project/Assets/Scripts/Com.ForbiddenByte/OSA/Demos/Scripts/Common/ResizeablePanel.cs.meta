@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3723e1d2b9270704e8969e0cbbbd5df3
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scripts/Common/ResizeablePanel.cs
+  uploadId: 618765

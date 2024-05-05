@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 0a6a72d62fa4e9d438711a204b36c540
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Prefabs/DrawerCommandPanel/TemplateControls/ButtonWithInput.prefab
+  uploadId: 618765

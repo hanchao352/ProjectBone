@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: f4b7374d13bdab24bbbb88ff3e3909d1
+DefaultImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/chat.unity
+  uploadId: 618765

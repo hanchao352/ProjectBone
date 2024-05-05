@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f4d92ecea8427e043a3a768115fc5ce3
+timeCreated: 1595231715
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/different_prefab_per_orientation.unity
+  uploadId: 618765

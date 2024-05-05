@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 33416f14c71a2464394bc53c0f9bb476
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Prefabs/DrawerCommandPanel/TemplateControls/LabelWithToggles.prefab
+  uploadId: 618765

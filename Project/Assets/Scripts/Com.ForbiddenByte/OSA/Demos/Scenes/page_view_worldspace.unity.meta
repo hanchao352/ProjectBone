@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: b3dd830c30bab1b44b87e080b38944a3
+DefaultImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/page_view_worldspace.unity
+  uploadId: 618765

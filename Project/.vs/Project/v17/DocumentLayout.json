@@ -1,0 +1,134 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\ProjectBone\\Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|F:\\ProjectBone\\Project\\assets\\scripts\\base\\componentbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\componentbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|f:\\projectbone\\project\\assets\\scripts\\com.forbiddenbyte\\osa\\core\\scripts\\core\\baseitemviewsholder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\com.forbiddenbyte\\osa\\core\\scripts\\core\\baseitemviewsholder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|F:\\ProjectBone\\Project\\assets\\scripts\\uiview\\test\\itemcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uiview\\test\\itemcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|F:\\ProjectBone\\Project\\assets\\scripts\\com.forbiddenbyte\\osa\\core\\scripts\\core\\subcomponents\\computevisibilitymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\com.forbiddenbyte\\osa\\core\\scripts\\core\\subcomponents\\computevisibilitymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|F:\\ProjectBone\\Project\\assets\\scripts\\com.forbiddenbyte\\osa\\core\\scripts\\core\\osainternal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\com.forbiddenbyte\\osa\\core\\scripts\\core\\osainternal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|F:\\ProjectBone\\Project\\assets\\scripts\\ui\\commonlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\commonlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|F:\\ProjectBone\\Project\\assets\\scripts\\uitest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uitest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ComputeVisibilityManager.cs",
+              "DocumentMoniker": "F:\\ProjectBone\\Project\\Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\SubComponents\\ComputeVisibilityManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\SubComponents\\ComputeVisibilityManager.cs",
+              "ToolTip": "F:\\ProjectBone\\Project\\Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\SubComponents\\ComputeVisibilityManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\SubComponents\\ComputeVisibilityManager.cs",
+              "ViewState": "AQIAAL0AAAAAAAAAAAAewMoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-31T14:46:16.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ComponentBase.cs",
+              "DocumentMoniker": "F:\\ProjectBone\\Project\\Assets\\Scripts\\Base\\ComponentBase.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\ComponentBase.cs",
+              "ToolTip": "F:\\ProjectBone\\Project\\Assets\\Scripts\\Base\\ComponentBase.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\ComponentBase.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-31T14:43:10.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OSAInternal.cs",
+              "DocumentMoniker": "F:\\ProjectBone\\Project\\Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\OSAInternal.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\OSAInternal.cs",
+              "ToolTip": "F:\\ProjectBone\\Project\\Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\OSAInternal.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\OSAInternal.cs",
+              "ViewState": "AQIAAGQJAAAAAAAAAADwv3EJAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-31T14:36:30.867Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ItemComponent.cs",
+              "DocumentMoniker": "F:\\ProjectBone\\Project\\Assets\\Scripts\\UIView\\Test\\ItemComponent.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIView\\Test\\ItemComponent.cs",
+              "ToolTip": "F:\\ProjectBone\\Project\\Assets\\Scripts\\UIView\\Test\\ItemComponent.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIView\\Test\\ItemComponent.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAArwBoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-31T13:36:37.453Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UITest.cs",
+              "DocumentMoniker": "F:\\ProjectBone\\Project\\Assets\\Scripts\\UITest.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UITest.cs",
+              "ToolTip": "F:\\ProjectBone\\Project\\Assets\\Scripts\\UITest.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UITest.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAWwC4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-31T13:34:26.794Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CommonList.cs",
+              "DocumentMoniker": "F:\\ProjectBone\\Project\\Assets\\Scripts\\UI\\CommonList.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\CommonList.cs",
+              "ToolTip": "F:\\ProjectBone\\Project\\Assets\\Scripts\\UI\\CommonList.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UI\\CommonList.cs",
+              "ViewState": "AQIAAG0AAAAAAAAAAAAcwHsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-31T13:34:20.992Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BaseItemViewsHolder.cs",
+              "DocumentMoniker": "F:\\ProjectBone\\Project\\Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\BaseItemViewsHolder.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\BaseItemViewsHolder.cs",
+              "ToolTip": "F:\\ProjectBone\\Project\\Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\BaseItemViewsHolder.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Com.ForbiddenByte\\OSA\\Core\\Scripts\\Core\\BaseItemViewsHolder.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-31T13:23:31.596Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

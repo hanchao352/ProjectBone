@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 32485df9dd5c1f747b793e284087f63c
+DefaultImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/simple_pull_to_refresh.unity
+  uploadId: 618765

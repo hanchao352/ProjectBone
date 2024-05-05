@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aa616a950b22b8a4a9a97a57b0a2cc2f
+timeCreated: 1562917972
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/table_view.unity
+  uploadId: 618765

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: c297141bf709eec4c98aec87b2e12ea9
+timeCreated: 1617014539
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scripts/SimpleFilterable/SimpleFilterExample.cs
+  uploadId: 618765

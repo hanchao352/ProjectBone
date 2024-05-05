@@ -26,7 +26,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\Assembly-CSharp-firstpass\</OutputPath>
-    <DefineConstants>UNITY_2023_1_17;UNITY_2023_1;UNITY_2023;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_INITIALIZES_MEMORY_MANAGER_EXPLICITLY;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ODIN_VALIDATOR;ODIN_VALIDATOR_3_1;VUPLEX_STANDALONE;WEBTest;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_2023_1_17;UNITY_2023_1;UNITY_2023;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_RUNTIME_PERMISSIONS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_ANDROID;TEXTCORE_1_0_OR_NEWER;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;UNITY_CAN_SHOW_SPLASH_SCREEN;UNITY_HAS_GOOGLEVR;UNITY_HAS_TANGO;ENABLE_SPATIALTRACKING;ENABLE_ETC_COMPRESSION;PLATFORM_EXTENDS_VULKAN_DEVICE;PLATFORM_HAS_MULTIPLE_SWAPCHAINS;UNITY_ANDROID_SUPPORTS_SHADOWFILES;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;ODIN_VALIDATOR;ODIN_VALIDATOR_3_1;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;VUPLEX_STANDALONE;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169,0649</NoWarn>
@@ -45,29 +45,254 @@
     <Analyzer Include="F:\UnityEditor\2023.1.17f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\ConsoleBridgeMessage.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\UrlChangedEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptDynamicGrid.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Demos\Scripts\SimpleWebViewDemo.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\BaseWebViewPrefab.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptRaycast.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\TerminationType.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\PageLoadFailedException.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\MixedContentMode.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersCrossPlatformInputReflectionScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\AndroidCookieManager.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Demos\Scripts\PopupDemo.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\AndroidWebPlugin.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersCameraMove3DComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\PopupRequestedEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\WebViewOptions.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Scripts\StandaloneCookieManager.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\Internal\AndroidWebPluginRegistrant.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Windows\Scripts\WindowsWebPlugin.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithMutableAudio.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersZoomPanCameraComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\CanvasKeyboard.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\StringBridgeMessage.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\ViewportMaterialView.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\JsonArrayWrapper.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Windows\Scripts\WindowsWebView.cs" />
     <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\PutAttributesOnAnyType.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithHttpAuth.cs" />
     <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\Bar.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\SelfAndChildrenExample.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\AttributeProcessorPriorityExample.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\FileSelectionMessage.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\ExampleProjects\ExampleScripts\FingersExampleCoRoutineScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersPanOrbitComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\Internal\AndroidBoolCallback.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\KeyboardManager.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersOneTouchScaleAxisComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoAsteroidScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\WebViewLogger.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptSwipe.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersScrollViewComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Controls\FingersDPadScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\ScaleGestureRecognizer.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\ProgressChangeType.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptPlaceObjects.cs" />
     <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\BasicAttributeProcessorExample.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IPointerInputDetector.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\ExampleProjects\ExampleScripts\FingersExampleOptionsScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Mac\Scripts\MacWebPlugin.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersJoystickAnywhereComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\IWebPlugin.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\LongPressGestureRecognizer.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptPan.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\ScrolledEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\PointerOptions.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\Internal\AndroidStringAndBoolDelegateCallback.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Controls\FingersJoystickScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\MockWebPlugin.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithFileSelection.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptTapComponentAddByScript.cs" />
     <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\AttributeProcessorForListItemsExample.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\Foo.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Odin Validator\EnsureCorrectOdinVersion.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\TabGroupByDeclaringType.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\CustomizeDictionaryKeyValueExample.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\FocusedInputFieldChangedEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithNativeOnScreenKeyboard.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\EventArgs.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\iOS\Scripts\iOSWebPluginRegistrant.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWebView.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Other\FingersUtilityMethodsScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Demos\Scripts\HardwareKeyboardListener.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\GestureRecognizerComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\KeyboardUI.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\CachingGetter.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\WebPluginFactory.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptPlatformSpecificView.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\OneTouchRotateGestureRecognizer.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithNativeJavaScriptDialogs.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\Internal\AndroidByteArrayCallback.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\AndroidWebView.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersThirdPersonControllerScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\PanGestureRecognizerComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithFallbackVideo.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersRotateCameraComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\WebViewUnavailableException.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\PopupMode.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\Internal\AndroidStringAndObjectCallback.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Demos\Scripts\CameraRotator.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\Internal\AndroidFileSelectionCallback.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Windows\Scripts\WindowsWebPluginRegistrant.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptMultiFingerTap.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\AuthRequestedEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\BaseWebView.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\UrlChangedMessage.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\PageLoadFailedEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptComponent.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\GestureRecognizer.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\ICookieManager.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\ScaleGestureRecognizerComponentScript.cs" />
     <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\CustomAttributeProcessorLocatorExample.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithPdfCreation.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\iOS\Scripts\iOSWebView.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\DefaultPointerInputDetector.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\WebViewPrefab.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\LabelAttribute.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriltMultiPan.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptGestureSceneReload.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Mac\Scripts\Internal\MacWebPluginRegistrant.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\ExampleProjects\WordGame\FingersWordGameExampleScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\DownloadChangedEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\OneTouchScaleGestureRecognizer.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\MockWebView.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Modules\Unity.Mathematics\MathematicsDrawers.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\SwipeGestureRecognizerComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Cookie.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptTwoFingerPanScale.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\ClickedEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\iOS\Scripts\iOSWebPlugin.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\ProgressChangedEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\MockCookieManager.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithCursorType.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\CanvasPointerInputDetector.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Demos\Scripts\CanvasWorldSpaceDemo.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Mac\Scripts\Internal\CanvasWebViewPrefab.Mac.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\ExampleProjects\ExampleScripts\FingersExampleMainMenuScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\Internal\EditorAndroidWebViewEmulator.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\MouseButton.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\CanvasViewportMaterialView.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\ConsoleMessageLevel.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Mac\Scripts\MacWebView.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersMultiDragComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithPopups.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptDimmingView.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptMultiDrag.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\SelfAndChildrenExample.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\TapGestureRecognizer.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptZoomPanCamera.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\ScriptDialogEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\FocusedInputFieldType.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\AttributeProcessorPriorityExample.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptImage.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersImageGestureHelperComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithNative2DMode.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\ThreadDispatcher.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\DownloadMessage.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\RotateGestureRecognizer.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithTouch.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Keyboard.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Demos\Scripts\AdvancedWebViewDemo.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptLine3D.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersPlatformMoveJumpComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\PanGestureRecognizer.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\Internal\AndroidStringCallback.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithFallbackTextureData.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptImageAutomatic.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Controls\FingersImageAutomationScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\BaseKeyboard.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\VulkanDelayedTextureDestroyer.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithPixelDensity.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Scripts\ChromiumLogLevel.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\ImageGestureRecognizer.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Web.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithSettableUserAgent.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\WebPluginType.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\FingersScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\ForceDark.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptDragSwipe.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithKeyDownAndUp.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\CursorHelper.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptMoveFire.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithFind.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\Internal\AndroidTextureCreator.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithPointerDownAndUp.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\Foo.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptLine.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\ImageGestureRecognizerComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\iOS\Scripts\iOSCookieManager.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptVirtualTouches.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\TouchEventType.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\OneTouchScaleGestureRecognizerComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptTapAndDoubleTap.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\KeyModifier.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersFirstPersonControllerScript.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Validator\EnsureCorrectOdinVersion.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\TouchEvent.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\NativeKeyboardListener.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithDownloads.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\TabGroupByDeclaringType.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\RotateGestureRecognizerComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithChangingTexture.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\TerminatedEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\TapGestureRecognizerComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\FileSelectionEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Demos\Custom Attribute Processors\Scripts\CustomizeDictionaryKeyValueExample.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersRotateOrbitComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\SwipeGestureRecognizer.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithDeepLinking.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\StringWithIdBridgeMessage.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\ExampleProjects\ExampleScripts\FingersExampleSceneTransitionScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptDPad.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\LongPressGestureRecognizerComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScript3DOrbit.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Demos\Scripts\CanvasWebViewDemo.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Demos\Scripts\CanvasPopupDemo.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptOneFinger.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersPanRotateScaleComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\VXUtils.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\PointerEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\AndroidUtils.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\UrlActionType.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Android\Scripts\Internal\AndroidWarnings.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\DragMode.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Gestures\DeviceInfo.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptZoomableScrollView.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\XritPointerEventHelper.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersDragDropComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptJoystick.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\Internal\BridgeMessage.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\CanvasWebViewPrefab.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\ConsoleMessageEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\FingersPanARComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Prefab\Script\Components\OneTouchRotateGestureRecognizerComponentScript.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Scripts\StandaloneWebPlugin.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Core\Scripts\IWithMovablePointer.cs" />
+    <Compile Include="Assets\Plugins\Vuplex\WebView\Standalone\Scripts\StandaloneWebView.cs" />
+    <Compile Include="Assets\Plugins\Fingers\Demo\Scripts\DemoScriptLagTest.cs" />
+    <None Include="Assets\Plugins\Fingers\Demo\ExampleProjects\Resources\FingersExampleTransitionShader.shader" />
+    <None Include="Assets\Plugins\Fingers\Readme.txt" />
+    <None Include="Assets\Plugins\Vuplex\WebView\iOS\LICENSE_iOS.txt" />
     <None Include="Assets\Plugins\GoogleProto\Google.Protobuf.xml" />
     <None Include="Assets\Plugins\Demigiant\readme_DOTweenPro.txt" />
+    <None Include="Assets\Plugins\Sirenix\Odin Inspector\Modules\Unity.Mathematics\manifest.txt" />
     <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
     <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.xml" />
     <None Include="Assets\Plugins\Sirenix\Odin Validator\Readme.txt" />
+    <None Include="Assets\Plugins\Fingers\Prefab\Script\Other\XamarinAndroidTouchAdapter.txt" />
     <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.xml" />
     <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.xml" />
+    <None Include="Assets\Plugins\Vuplex\WebView\Android\LICENSE_Android.txt" />
+    <None Include="Assets\Plugins\Vuplex\WebView\iOS\Plugins\VXWebViewAppController.h" />
+    <None Include="Assets\Plugins\Vuplex\WebView\Android\Plugins\proguard-webview-android.txt" />
+    <None Include="Assets\Plugins\Fingers\Demo\ExampleProjects\ExampleProjectsReadme.txt" />
     <None Include="Assets\Plugins\Sirenix\Readme.txt" />
     <None Include="Assets\Plugins\Sirenix\Assemblies\link.xml" />
+    <None Include="Assets\Plugins\Vuplex\WebView\iOS\Plugins\VXWebViewAppController.mm" />
     <None Include="Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.xml" />
     <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.xml" />
+    <None Include="Assets\Plugins\Vuplex\WebView\Standalone\LICENSE_Standalone.txt" />
     <None Include="Assets\Plugins\Demigiant\DOTween\readme.txt" />
+    <None Include="Assets\Plugins\Vuplex\WebView\Core\Shaders\DefaultWebShader.shader" />
+    <None Include="Assets\Plugins\Vuplex\WebView\Core\Shaders\AndroidWebShader.shader" />
+    <None Include="Assets\Plugins\Fingers\ChangeLog.txt" />
     <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.xml" />
     <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinValidator.Editor.xml" />
     <Reference Include="UnityEngine">
@@ -96,12 +321,6 @@
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
       <HintPath>F:\UnityEditor\2023.1.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterInputModule">
-      <HintPath>F:\UnityEditor\2023.1.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterInputModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterRendererModule">
-      <HintPath>F:\UnityEditor\2023.1.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterRendererModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CommandStateObserverModule">
       <HintPath>F:\UnityEditor\2023.1.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.CommandStateObserverModule.dll</HintPath>
@@ -270,9 +489,6 @@
     </Reference>
     <Reference Include="UnityEngine.VideoModule">
       <HintPath>F:\UnityEditor\2023.1.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VirtualTexturingModule">
-      <HintPath>F:\UnityEditor\2023.1.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.VirtualTexturingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.WindModule">
       <HintPath>F:\UnityEditor\2023.1.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.WindModule.dll</HintPath>
@@ -897,10 +1113,6 @@
     <ProjectReference Include="DOTween.Modules.csproj">
       <Project>{225f359d-7cd7-d550-2d44-176362209d36}</Project>
       <Name>DOTween.Modules</Name>
-    </ProjectReference>
-    <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
-      <Project>{129816f7-99f5-9c70-d754-855cab7826a4}</Project>
-      <Name>Sirenix.OdinInspector.Modules.UnityMathematics</Name>
     </ProjectReference>
     <ProjectReference Include="DOTweenPro.Scripts.csproj">
       <Project>{27dc2a9e-6989-3483-ac17-43187c71ecce}</Project>

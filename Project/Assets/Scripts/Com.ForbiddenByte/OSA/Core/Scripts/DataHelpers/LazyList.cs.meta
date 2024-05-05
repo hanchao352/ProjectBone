@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ca386b979bca8e04bb032024010162e6
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Core/Scripts/DataHelpers/LazyList.cs
+  uploadId: 618765

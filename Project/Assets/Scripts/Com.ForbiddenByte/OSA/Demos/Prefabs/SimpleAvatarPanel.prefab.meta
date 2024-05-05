@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 27f4ea51e3b1bbb4f901366d96e8c696
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Prefabs/SimpleAvatarPanel.prefab
+  uploadId: 618765

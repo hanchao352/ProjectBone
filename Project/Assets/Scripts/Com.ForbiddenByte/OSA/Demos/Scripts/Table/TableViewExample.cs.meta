@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 0fc1ac197e8ffef4aaff67d7074f4b26
+timeCreated: 1562927162
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scripts/Table/TableViewExample.cs
+  uploadId: 618765

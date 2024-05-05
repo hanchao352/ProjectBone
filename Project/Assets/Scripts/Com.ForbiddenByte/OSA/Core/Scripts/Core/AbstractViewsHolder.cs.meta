@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bd48f5a30172f504c88bd48eb734ba81
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Core/Scripts/Core/AbstractViewsHolder.cs
+  uploadId: 618765

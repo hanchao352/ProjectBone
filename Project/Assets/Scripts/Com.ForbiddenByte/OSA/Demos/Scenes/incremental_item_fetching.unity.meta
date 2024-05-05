@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 6fb5633569549114b8118df2c0035aec
+DefaultImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/incremental_item_fetching.unity
+  uploadId: 618765

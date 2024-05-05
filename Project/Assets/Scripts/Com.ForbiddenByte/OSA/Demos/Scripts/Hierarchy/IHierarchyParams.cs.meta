@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 2a137c540d866534c90cfbeaeb4e0037
+timeCreated: 1551866462
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scripts/Hierarchy/IHierarchyParams.cs
+  uploadId: 618765

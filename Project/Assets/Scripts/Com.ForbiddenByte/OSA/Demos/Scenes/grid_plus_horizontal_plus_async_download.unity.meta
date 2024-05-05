@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 27ebc6f67413d8e4ab79cfae660b0849
+DefaultImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/grid_plus_horizontal_plus_async_download.unity
+  uploadId: 618765

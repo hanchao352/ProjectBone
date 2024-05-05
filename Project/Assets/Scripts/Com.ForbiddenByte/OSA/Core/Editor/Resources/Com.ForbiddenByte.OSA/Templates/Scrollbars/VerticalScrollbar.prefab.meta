@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: ee2574d0ef4f55544acf5a78b1718fe8
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Core/Editor/Resources/Com.ForbiddenByte.OSA/Templates/Scrollbars/VerticalScrollbar.prefab
+  uploadId: 618765

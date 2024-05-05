@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 220b78217ab2fdb44a3d1bdc64629be5
+timeCreated: 1552910884
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/expand_item_to_variable_size.unity
+  uploadId: 618765

@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 352b45e88c6913e458e2d409a245f90b
+DefaultImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/multiple_prefabs.unity
+  uploadId: 618765

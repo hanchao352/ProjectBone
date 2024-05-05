@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 5d981f0071e408146a9b5fbcca6de36d
+DefaultImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/looping_spinner.unity
+  uploadId: 618765

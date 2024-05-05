@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d9801443f34985549b12ec9d3cbab59e
+timeCreated: 1580308561
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Core/Scripts/Core/Data/Animations/UserAnimationsCancellingEvents.cs
+  uploadId: 618765

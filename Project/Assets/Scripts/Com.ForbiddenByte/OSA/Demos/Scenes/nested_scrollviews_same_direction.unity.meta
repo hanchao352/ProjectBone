@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 92b9321b8f9a3b24f97cd74ffd3e855d
+timeCreated: 1562846530
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scenes/nested_scrollviews_same_direction.unity
+  uploadId: 618765

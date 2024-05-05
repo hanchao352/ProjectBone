@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d5ddbbb1d1256564590b0b4b91ccddea
+timeCreated: 1555408267
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scripts/SimpleMultiplePrefabs/Models/AdModel.cs
+  uploadId: 618765

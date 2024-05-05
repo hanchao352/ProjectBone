@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 9eada3da5896fec449dccc97d4828880
+timeCreated: 1532098972
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Core/Scripts/DataHelpers/SimpleDataHelper.cs
+  uploadId: 618765

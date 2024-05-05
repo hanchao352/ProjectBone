@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 8828defd21be1874d891650e0f09499d
+timeCreated: 1529947432
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scripts/NestedScrollViews/NestedScrollViewsExample.cs
+  uploadId: 618765

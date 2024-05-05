@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b4d6b163701435d46833461fd21fed29
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 68436
+  packageName: Optimized ScrollView Adapter
+  packageVersion: 7.0.0
+  assetPath: Assets/Plugins/Com.ForbiddenByte/OSA/Demos/Scripts/MultiplePrefabs/ViewHolders/BaseVH.cs
+  uploadId: 618765
