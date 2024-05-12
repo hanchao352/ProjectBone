@@ -30,6 +30,11 @@ public abstract class UIBase:IViewGeneric
         {
             parent = UIManager.Instance.WebWindowRoot;
         }
+        else if (ViewInfo.ViewID == ViewID.TipsView)
+        {
+            parent = UIManager.Instance.TipsRoot;
+        }
+        
         Root.transform.SetParent(parent,false); 
         rectTransform = Root.GetComponent<RectTransform>();
         Root.transform.localPosition = Vector3.zero;

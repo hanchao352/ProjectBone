@@ -24,7 +24,7 @@ using UnityEngine;
         public Transform WindowRoot { get; set; }
         public Transform BotWindowRoot { get; set; }
         public Transform WebWindowRoot { get; set; }
-
+        public Transform TipsRoot { get; set; }
         public Camera ModelCamera { get; set; }
         
         public override void Initialize()
@@ -35,6 +35,7 @@ using UnityEngine;
             WindowRoot = UIRoot.Find("canvas/window");
             BotWindowRoot = UIRoot.Find("canvas/bot_window");
             WebWindowRoot = UIRoot.Find("canvas/web_window");
+            TipsRoot = UIRoot.Find("canvas/Tips_window");
             UICamera = new GameObject("UICamera").AddComponent<Camera>();
             UICamera.cullingMask = 1 << LayerMask.NameToLayer("UI");
             UICamera.clearFlags = CameraClearFlags.Depth;
