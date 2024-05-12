@@ -13,6 +13,13 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
         private Color SelectColor = Color.cyan;
         private int boneShowType =(int) BoneShowType.All;
         private int selectBoneType = (int)EnumPos.All;
+        //初始坐标位置
+        private Vector3 initpos = new Vector3(0, 0, 0);
+        //初始大小
+        private Vector3 initscale = new Vector3(1, 1, 1);
+        //初始角度
+        private Vector3 initangle = new Vector3(0, 0, 0);
+        
         public bool BodyVisible
         {
                 get
@@ -105,6 +112,9 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                 obj.transform.position = new Vector3(0, 0, 0.5f);
                 Body = obj;
                 Body.transform.localScale = new Vector3(3, 3, 3);
+                initpos = Body.transform.position;
+                initscale = Body.transform.localScale;
+                initangle = Body.transform.eulerAngles;
         }
         
         public void SelectBone(int boneid)
@@ -329,5 +339,45 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                       }
               }
               return null;
+      }
+
+      public void ReSetPos()
+      {
+              if (Body != null)
+              {
+                      Body.transform.position = initpos;
+              }
+              {
+                      
+              }
+      }
+      
+      public void ReSetScale()
+      {
+              if (Body != null)
+              {
+                      Body.transform.localScale = initscale;
+              }
+              {
+                      
+              }
+      }
+      
+      public void ResetAngle()
+      {
+              if (Body != null)
+              {
+                      Body.transform.eulerAngles = initangle;
+              }
+              {
+                      
+              }
+      }
+      
+      public void ReSet()
+      {
+              ReSetPos();
+              ReSetScale();
+              ResetAngle();
       }
 }

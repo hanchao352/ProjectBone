@@ -300,6 +300,7 @@ public class ModView : UIBase
         BoneMod.Instance.CurrentBoneId = -1;
         GameObjectManager.Instance.HideBone();
         Init();
+        GameObjectManager.Instance.ReSet();
     }
     
     private void OnSwitchButtonClick()
