@@ -12,22 +12,33 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
     public Dictionary<int, Bone> boneDic;
     public bool boneLoaded = false;
     private int currentBoneId = 0;
+    public List<int> selectedBoneIds;
 
     public int CurrentBoneId
     {
         get
         {
-            return  currentBoneId;
+            if (selectedBoneIds.Count > 0)
+            {
+                return selectedBoneIds[selectedBoneIds.Count - 1];
+            }
+            return  0;
         }
 
         set
         {
-            currentBoneId = value;
-            if (GameObjectManager.Instance.Body != null)
+            if (value == 0)
             {
-               GameObjectManager.Instance.SelectBone(currentBoneId);
+                selectedBoneIds.Clear();
             }
-           
+            else
+            {
+                selectedBoneIds.Add(value);
+                if (GameObjectManager.Instance.Body != null)
+                {
+                    GameObjectManager.Instance.SelectBone(selectedBoneIds[selectedBoneIds.Count - 1]);
+                }
+            }
         }
         
     }
@@ -39,6 +50,7 @@ public class BoneMod : SingletonMod<BoneMod>,IMod
         interactableLayer = 1<<UnityLayer.Layer_Body;
       //  InputManager.Instance.OnTap += OnTap;
         boneDic = new Dictionary<int, Bone>();
+        selectedBoneIds = new List<int>();
         CurrentBoneId = 0;
       
     }

@@ -35,7 +35,7 @@ public class SearchItemComponent : ComponentBase
            float distance = 0.5f;
            // 计算目标前方的位置
            Vector3 targetFrontPosition = target.transform.position + body.transform.forward * distance;
-
+           GameObjectManager.Instance.Body.transform.localScale= Vector3.one*3;
             // 设置相机的位置
            mainCamera.transform.position = targetFrontPosition;
 

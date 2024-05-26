@@ -8,6 +8,8 @@ public class InputManager:SingletonManager<InputManager>, IGeneric
     private ScaleGestureRecognizer scaleGesture;
     private OneTouchRotateGestureRecognizer rotateGesture;
     public LayerMask targetLayer;
+    public Vector3 scalemin = new Vector3(0.5f, 0.5f, 0.5f);
+    public Vector3 scalemax = new Vector3(10f, 10f, 10f);
     public override void Initialize()
     {
         base.Initialize();
@@ -33,7 +35,13 @@ public class InputManager:SingletonManager<InputManager>, IGeneric
         if (gesture.State == GestureRecognizerState.Executing)
         {
            
-            GameObjectManager.Instance.Body.transform.localScale *= scaleGesture.ScaleMultiplier;
+            Vector3 scale = GameObjectManager.Instance.Body.transform.localScale;
+            scale *= scaleGesture.ScaleMultiplier;
+            scale.x = Mathf.Clamp(scale.x, scalemin.x, scalemax.x);
+            scale.y = Mathf.Clamp(scale.y, scalemin.y, scalemax.y);
+            scale.z = Mathf.Clamp(scale.z, scalemin.z, scalemax.z);
+            GameObjectManager.Instance.Body.transform.localScale = scale;
+            //GameObjectManager.Instance.Body.transform.localScale *= scaleGesture.ScaleMultiplier;
          
         }
     }

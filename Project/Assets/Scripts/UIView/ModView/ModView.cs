@@ -176,7 +176,7 @@ public class ModView : UIBase
         switchRoot.SetActive(false);
         muscleRoot.SetActive(false);
         infoSvGo.SetActive(showInfoSv); 
-        boneText.text = "骨骼";
+        boneText.text = "全部";
         bone_muscle_text.text = "肌肉";
         ShowInfo(false);
         // 点击复位按钮时 恢复到原始状态  相机模型需要复位
@@ -279,6 +279,7 @@ public class ModView : UIBase
     private void OnBackButtonClick()
     {
         ShowInfo(false);
+        OnAllShowButtonClick();
         UIManager.Instance.ShowView(ViewID.MainView);
         UIManager.Instance.HideView(ViewID.ModelView);
         GameObjectManager.Instance.BodyVisible = false;
@@ -297,7 +298,7 @@ public class ModView : UIBase
     private void OnRefreshButtonClick()
     {
         //todo 恢复到原始状态
-        BoneMod.Instance.CurrentBoneId = -1;
+        BoneMod.Instance.CurrentBoneId = 0;
         GameObjectManager.Instance.HideBone();
         Init();
         GameObjectManager.Instance.ReSet();

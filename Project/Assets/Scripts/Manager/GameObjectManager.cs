@@ -33,6 +33,14 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                         if (Body!= null)
                         { 
                                 bodyVisible = value;
+                                // if (value == true)
+                                // {
+                                //         ChangeBodyLayer(UnityLayer.Layer_Body);        
+                                // }
+                                // else
+                                // {
+                                //         ChangeBodyLayer(UnityLayer.Layer_Default);
+                                // }
                                 Body.SetActive(value);
                         }
                         {
@@ -75,6 +83,19 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                 LoadBody();
                 BodyVisible = false;
         }
+        
+        void ChangeBodyLayer(int layer)
+        {
+                if (Body != null)
+                {
+                        
+                        for (int i = 0; i < Body.transform.childCount; i++)
+                        {
+                                Body.transform.GetChild(i).gameObject.layer = layer;
+                        }
+                }
+        }
+        
         void LoadBody()
         {
                 GameObject obj = ResManager.Instance.LoadRes<GameObject>("Model/jirou_nan");
@@ -201,42 +222,29 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                 base.OnApplicationPause(pauseStatus);
         }
         
-        public void HideBone(int boneid = -1 )
+        public void HideBone()
         {
-                if (boneid == -1)
-                {
-                        boneid = BoneMod.Instance.CurrentBoneId;
-                }
+                var selectedBoneIds = BoneMod.Instance.selectedBoneIds;
                 for (int i = 0; i < skeletonInfos.Count; i++)
                 {
                         SkeletonInfo skeletonInfo = skeletonInfos[i];
-                        if (skeletonInfo.boneId == boneid)
+                        skeletonInfo.boneGameObject.SetActive(true);
+                        for (int j = 0; j < selectedBoneIds.Count; j++)
                         {
-                                skeletonInfo.boneGameObject.SetActive(false);
-                        }
-                        else
-                        {
-                                skeletonInfo.boneGameObject.SetActive(true);
+                                if (skeletonInfo.boneId == selectedBoneIds[j])
+                                {
+                                        skeletonInfo.boneGameObject.SetActive(false);
+                                }
                         }
                 }
         }       
-      public void HideOtherBone(int boneid = -1)
+      public void HideOtherBone()
       {
-              if (boneid == -1)
-              {
-                      boneid = BoneMod.Instance.CurrentBoneId;
-              }
+              var boneId = BoneMod.Instance.CurrentBoneId;
               for (int i = 0; i < skeletonInfos.Count; i++)
               {
                       SkeletonInfo skeletonInfo = skeletonInfos[i];
-                      if (skeletonInfo.boneId != boneid)
-                      {
-                              skeletonInfo.boneGameObject.SetActive(false);
-                      }
-                      else
-                      {
-                              skeletonInfo.boneGameObject.SetActive(true);
-                      }
+                        skeletonInfo.boneGameObject.SetActive((skeletonInfo.boneId == boneId));
               }
       }
 
