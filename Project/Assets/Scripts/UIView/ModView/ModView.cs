@@ -35,6 +35,15 @@ public class ModView : UIBase
     private bool isBoneRoot;
     private Button addBtn;
     private Button subBtn;
+    private Button add_light_btn;
+    private Button sub_light_btn;
+    private TextMeshProUGUI light_text;
+
+    private float m_lightValue;
+
+    private Light mLight;
+    
+    
     public override void Initialize()
     {
         base.Initialize();
@@ -53,6 +62,9 @@ public class ModView : UIBase
         muscleRoot = Root.transform.Find("left/Image/bone_btn/muscle_root").gameObject;
         addBtn = Root.transform.Find("left/Image/bone_btn/muscle_root/add_btn").GetComponent<Button>();
         subBtn = Root.transform.Find("left/Image/bone_btn/muscle_root/sub_btn").GetComponent<Button>();
+        add_light_btn = Root.transform.Find("left/Image/add_btn").GetComponent<Button>();
+        sub_light_btn = Root.transform.Find("left/Image/sub_btn").GetComponent<Button>();
+        light_text =  Root.transform.Find("left/Image/light_text").GetComponent<TextMeshProUGUI>();
         
         searchbutton.onClick.AddListener(OnSearchButtonClick);
         backbutton.onClick.AddListener(OnBackButtonClick);
@@ -65,6 +77,8 @@ public class ModView : UIBase
         allshow_btn.onClick.AddListener(OnAllShowButtonClick);
         addBtn.onClick.AddListener(OnAddButtonClick);
         subBtn.onClick.AddListener(OnSubButtonClick);
+        add_light_btn.onClick.AddListener(OnAddLightButtonClick);
+        sub_light_btn.onClick.AddListener(OnSubLightButtonClick);
         
         botGo = Root.transform.Find("bot").gameObject;
         infoSvGo = Root.transform.Find("bot/bg/infoSv").gameObject;
@@ -115,13 +129,22 @@ public class ModView : UIBase
             }
         }
         
-        
-        
-        
-        
-        
-        
     }
+
+    private void OnAddLightButtonClick()
+    {
+        m_lightValue+=0.02f;
+        mLight.intensity = m_lightValue;
+        light_text.text = m_lightValue.ToString("F");
+    }
+    
+    private void OnSubLightButtonClick()
+    {
+        m_lightValue-=0.02f;
+        mLight.intensity = m_lightValue;
+        light_text.text = m_lightValue.ToString("F");
+    }
+    
 
     private void OnAddButtonClick()
     {
@@ -352,6 +375,9 @@ public class ModView : UIBase
     public override void OnShow(params object[] args)
     {
         base.OnShow(args);
+        mLight = GameObject.Find("Directional Light").transform.GetComponent<Light>();
+        m_lightValue = mLight.intensity;
+        light_text.text = m_lightValue.ToString("F");
     }
 
     public override void UpdateView(params object[] args)
