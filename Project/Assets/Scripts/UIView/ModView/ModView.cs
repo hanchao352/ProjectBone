@@ -37,7 +37,7 @@ public class ModView : UIBase
     private Button subBtn;
     private Button add_light_btn;
     private Button sub_light_btn;
-    private TextMeshProUGUI light_text;
+    private TMP_InputField light_text;
 
     private float m_lightValue;
 
@@ -64,8 +64,8 @@ public class ModView : UIBase
         subBtn = Root.transform.Find("left/Image/bone_btn/muscle_root/sub_btn").GetComponent<Button>();
         add_light_btn = Root.transform.Find("left/Image/add_btn").GetComponent<Button>();
         sub_light_btn = Root.transform.Find("left/Image/sub_btn").GetComponent<Button>();
-        light_text =  Root.transform.Find("left/Image/light_text").GetComponent<TextMeshProUGUI>();
-        
+        light_text =  Root.transform.Find("left/Image/light_text").GetComponent<TMP_InputField>();
+        light_text.onValueChanged.AddListener(OnInputValueChanged);
         searchbutton.onClick.AddListener(OnSearchButtonClick);
         backbutton.onClick.AddListener(OnBackButtonClick);
         refreshbutton.onClick.AddListener(OnRefreshButtonClick);
@@ -100,6 +100,16 @@ public class ModView : UIBase
         showBtn.onClick.AddListener(OnShowButtonClick);
         otherBtn.onClick.AddListener(OnOtherButtonClick);
         Init();
+    }
+
+    private void OnInputValueChanged(string arg0)
+    {
+        if (float.TryParse(arg0, out float value))
+        {
+            mLight.intensity = value;
+            m_lightValue = value;
+        }
+       
     }
 
     private void OnSubButtonClick()
