@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: de095fb7d8661e04291a6c97a8bc91a4
+guid: 910125b4f65559440aba828b4edaf069
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -16,8 +16,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -105,5 +103,5 @@ ModelImporter:
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
-  assetBundleName: jirou_nan
+  assetBundleName: 
   assetBundleVariant: 

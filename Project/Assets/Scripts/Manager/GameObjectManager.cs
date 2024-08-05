@@ -132,7 +132,7 @@ public class GameObjectManager:SingletonManager<GameObjectManager>, IGeneric
                 }
                 obj.transform.position = new Vector3(0, 0, 0.5f);
                 Body = obj;
-                Body.transform.localScale = new Vector3(3, 3, 3);
+                Body.transform.localScale = new Vector3(1, 1, 1);
                 initpos = Body.transform.position;
                 initscale = Body.transform.localScale;
                 initangle = Body.transform.eulerAngles;
