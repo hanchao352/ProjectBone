@@ -6,7 +6,7 @@ using System.Net;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
-using Vuplex.WebView;
+
 
 
 public class Main : MonoBehaviour
@@ -19,8 +19,6 @@ public class Main : MonoBehaviour
         DontDestroyOnLoad(this);
         SetScreen();
         // StandaloneWebView.SetCommandLineArguments("--disable-web-security");
-        Web.ClearAllData();
-        WebRequestManager.Instance.Initialize();
         var managerTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => typeof(IGeneric).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 

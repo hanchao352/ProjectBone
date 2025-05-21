@@ -80,7 +80,6 @@ public static  class UIDefine
        
          _uiViews[ViewID.MainView] = new ViewInfo(){ViewID = ViewID.MainView,ResName = "main_window",ViewType = typeof(UIMainView)};
          _uiViews[ViewID.ModelView] = new ViewInfo(){ViewID = ViewID.MainView,ResName = "show_window",ViewType = typeof(ModView)};
-         _uiViews[ViewID.WebView] = new ViewInfo(){ViewID = ViewID.WebView,ResName = "CanvasWebViewPrefab",ViewType = typeof(BoneWebView)};
          _uiViews[ViewID.BotMenuView] = new ViewInfo(){ViewID = ViewID.BotMenuView,ResName = "bot_menu_window",ViewType = typeof(BotMenuView)};
          _uiViews[ViewID.TestView] = new ViewInfo(){ViewID = ViewID.TestView,ResName = "Test_window",ViewType = typeof(TestView)};
          _uiViews[ViewID.TipsView] = new ViewInfo(){ViewID = ViewID.TipsView,ResName = "tips_window",ViewType = typeof(TipsView)};
