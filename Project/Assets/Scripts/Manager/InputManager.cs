@@ -13,8 +13,8 @@ public class InputManager : SingletonManager<InputManager>, IGeneric
     public LayerMask targetLayer;
 
     // 缩放限制
-    public float scaleMin = 0.5f;
-    public float scaleMax = 10f;
+    public float scaleMin = 0.1f;
+    public float scaleMax = float.MaxValue;
 
     // 灵敏度
     public float rotationSpeed = 0.3f;
@@ -93,7 +93,7 @@ public class InputManager : SingletonManager<InputManager>, IGeneric
     private void CreateScaleGesture()
     {
         scaleGesture = new ScaleGestureRecognizer();
-        scaleGesture.ZoomSpeed = 3.0f;
+        scaleGesture.ZoomSpeed = 1.5f;
         scaleGesture.StateUpdated += OnScaleGesture;
         FingersScript.Instance.AddGesture(scaleGesture);
     }
@@ -118,7 +118,13 @@ public class InputManager : SingletonManager<InputManager>, IGeneric
         if (body == null) return;
 
         // 如果当前有多指触摸，单指手势不处理旋转（让双指平移/缩放优先）
-        if (Input.touchCount >= 2) return;
+        if (Input.touchCount >= 2)
+        {
+            // 多指时重置状态，避免抬指后残留速度导致旋转
+            lastDelta = Vector2.zero;
+            rotationVelocity = Vector2.zero;
+            return;
+        }
 
         if (gesture.State == GestureRecognizerState.Began)
         {
@@ -130,6 +136,14 @@ public class InputManager : SingletonManager<InputManager>, IGeneric
         }
         else if (gesture.State == GestureRecognizerState.Executing)
         {
+            // 双重保险：Executing 期间如果多指也跳过
+            if (Input.touchCount >= 2)
+            {
+                lastDelta = Vector2.zero;
+                rotationVelocity = Vector2.zero;
+                return;
+            }
+
             float deltaX = oneFingerPanGesture.DeltaX;
             float deltaY = oneFingerPanGesture.DeltaY;
 
