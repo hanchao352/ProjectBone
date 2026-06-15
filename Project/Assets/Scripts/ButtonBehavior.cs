@@ -51,7 +51,7 @@ public static class AppToUnityCode
     public const int HideModel = 2;                  // 隐藏模型
     public const int ReceiveBoneConfig = 3;          // 接收骨骼配置
     public const int ExportBoneConfig = 4;           // 导出骨骼配置（请求导出）
-    public const int ShowByType = 5;                 // 根据类型显示
+    public const int ShowByType = 5;                 // 按类型(EnumBone:骨骼/肌肉/筋膜)筛选，与当前部位筛选叠加(只影响当前显示的部位)
     public const int ShowByPosition = 6;             // 根据位置显示
     public const int HideBone = 10;                  // 隐藏选中的骨骼
     public const int ShowBone = 11;                  // 显示选中的骨骼
@@ -335,9 +335,11 @@ public class ButtonBehavior : MonoBehaviour
     }
 
     /// <summary>
-    /// 根据骨骼类型显示模型
+    /// 按骨骼类型(EnumBone)筛选显示。
+    /// 注意：内部会与当前部位筛选(EnumPos)叠加取交集，即只对"当前显示的部位"做类型筛选。
+    /// 例如已选中头颈(ShowByPosition)，再调用此接口只影响头颈范围内的骨骼/肌肉/筋膜，不会翻出其他部位。
     /// </summary>
-    /// <param name="type">骨骼类型 (EnumBone: Bone=1, Muscle=2, Fascia=4)</param>
+    /// <param name="type">骨骼类型位组合 (EnumBone: Bone=1, Muscle=2, Fascia=4, All=7)</param>
     public void ShowModelByType(int type)
     {
         Debug.Log($"---- 根据类型显示模型 ---- type: {type}");
