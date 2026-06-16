@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Manager\EventManager.cs" />
     <Compile Include="Assets\Scripts\Base\ICommonList.cs" />
     <Compile Include="Assets\Scripts\Manager\UITipsManager.cs" />
+    <Compile Include="Assets\Scripts\Debug\HierarchyDumper.cs" />
     <Compile Include="Assets\Scripts\Manager\TimeManager.cs" />
     <Compile Include="Assets\Scripts\UIView\MainView\UIMainView.cs" />
     <Compile Include="Assets\Scripts\Base\IMod.cs" />
@@ -92,7 +93,6 @@
     <Compile Include="Assets\Scripts\Mod\UserMod.cs" />
     <Compile Include="Assets\Scripts\Base\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Debug\FileLogger.cs" />
-    <Compile Include="Assets\Scripts\Debug\HierarchyDumper.cs" />
     <Compile Include="Assets\Scripts\Define\UIDefine.cs" />
     <Compile Include="Assets\Scripts\Base\IGeneric.cs" />
     <Compile Include="Assets\Scripts\Manager\ResManager.cs" />
