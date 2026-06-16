@@ -29,13 +29,18 @@ public class BodyModelService
     {
         Debug.Log("[BodyModel] 开始加载模型...");
         GameObject obj = LoadModelPrefab();
-        if (obj == null)
+        if (!obj)
         {
             Debug.LogError("[BodyModel] 模型预制体加载失败! Resources.Load(\"Model/jirou_nan\") 返回 null");
             return;
         }
 
-        Debug.Log($"[BodyModel] 模型加载成功, childCount: {obj.transform.childCount}");
+        // 诊断：直接子节点 vs 全部后代 vs 各类渲染器，用于定位真机层级差异（编辑器有子节点、真机 childCount=0）
+        int directChild = obj.transform.childCount;
+        int allTransforms = obj.GetComponentsInChildren<Transform>(true).Length;
+        int meshRenderers = obj.GetComponentsInChildren<MeshRenderer>(true).Length;
+        int skinnedMesh = obj.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length;
+        Debug.Log($"[BodyModel] 实例诊断: name={obj.name}, 直接子节点={directChild}, 全部后代Transform={allTransforms}, MeshRenderer={meshRenderers}, SkinnedMeshRenderer={skinnedMesh}");
 
         obj.transform.position = new Vector3(0, 0, 0);
 
@@ -59,6 +64,15 @@ public class BodyModelService
     /// </summary>
     public GameObject LoadModelPrefab()
     {
+        // 诊断：Resources.Load 返回共享引用（不实例化、无额外开销），先记录源资源层级再走 ResManager 实例化
+        GameObject source = Resources.Load<GameObject>("Model/jirou_nan");
+        if (!source)
+        {
+            Debug.LogError("[BodyModel] 源资源加载失败: Resources.Load(\"Model/jirou_nan\") 返回 null");
+            return null;
+        }
+        Debug.Log($"[BodyModel] 源资源诊断: name={source.name}, 直接子节点={source.transform.childCount}, 全部后代Transform={source.GetComponentsInChildren<Transform>(true).Length}");
+
         return ResManager.Instance.LoadRes<GameObject>("Model/jirou_nan");
     }
 
@@ -83,14 +97,29 @@ public class BodyModelService
     /// </summary>
     public void RegisterBones(GameObject root)
     {
+        int childCount = root.transform.childCount;
+
         // 第一遍：统计有效骨骼数量（名称可解析为 int 的子对象）
         int validCount = 0;
-        for (int i = 0; i < root.transform.childCount; i++)
+        for (int i = 0; i < childCount; i++)
         {
             if (int.TryParse(root.transform.GetChild(i).gameObject.name, out _))
             {
                 validCount++;
             }
+        }
+
+        // 诊断：打印实际子节点名字样本，定位真机上的名称/层级问题
+        if (childCount > 0)
+        {
+            string n0 = root.transform.GetChild(0).gameObject.name;
+            string n1 = childCount > 1 ? root.transform.GetChild(1).gameObject.name : "-";
+            string n2 = childCount > 2 ? root.transform.GetChild(2).gameObject.name : "-";
+            Debug.Log($"[BodyModel] RegisterBones: 直接子节点={childCount}, 可解析为ID={validCount}, 子节点样本=[{n0}, {n1}, {n2}]");
+        }
+        else
+        {
+            Debug.LogWarning("[BodyModel] RegisterBones: 直接子节点为 0! 模型层级异常，请检查 prefab 打包结果。");
         }
 
         _registry.Initialize(validCount);

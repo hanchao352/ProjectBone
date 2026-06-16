@@ -23,11 +23,14 @@ public class ResManager:SingletonManager<ResManager>,IGeneric
 
         public T LoadRes<T>(string resname) where T : UnityEngine.Object
         {
-               
+                T go = Resources.Load<T>(resname);
+                if (!go)
+                {
+                        Debug.LogError($"[ResManager] Resources.Load 失败: {resname} (type={typeof(T).Name}) 返回 null");
+                        return null;
+                }
 
-              T  go = Resources.Load<T>(resname);
-             T obj =   GameObject.Instantiate<T>(go);
-                
+                T obj = GameObject.Instantiate<T>(go);
                 return obj;
         }
 }
