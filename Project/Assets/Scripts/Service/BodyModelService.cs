@@ -42,6 +42,9 @@ public class BodyModelService
         int skinnedMesh = obj.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length;
         Debug.Log($"[BodyModel] 实例诊断: name={obj.name}, 直接子节点={directChild}, 全部后代Transform={allTransforms}, MeshRenderer={meshRenderers}, SkinnedMeshRenderer={skinnedMesh}");
 
+        // 诊断：打印模型加载后的原始层级树（真机无 Hierarchy 窗口，借此在日志中查看层级）
+        HierarchyDumper.Dump(obj);
+
         obj.transform.position = new Vector3(0, 0, 0);
 
         InitializeBoneColliders(obj);

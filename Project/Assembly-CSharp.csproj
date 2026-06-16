@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\Mod\UserMod.cs" />
     <Compile Include="Assets\Scripts\Base\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Debug\FileLogger.cs" />
+    <Compile Include="Assets\Scripts\Debug\HierarchyDumper.cs" />
     <Compile Include="Assets\Scripts\Define\UIDefine.cs" />
     <Compile Include="Assets\Scripts\Base\IGeneric.cs" />
     <Compile Include="Assets\Scripts\Manager\ResManager.cs" />
