@@ -15,6 +15,9 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
     private int _boneShowType = (int)BoneShowType.All;
     private int _selectBoneType = (int)EnumPos.All;
 
+    // 模型加载前若已收到骨骼数据，先缓存，待模型加载完成后再应用并显示（解决嵌入模式下数据/加载时序竞争）
+    private List<BoneData> _pendingBoneData;
+
     public GameObject Body => _bodyModelService.Body;
 
     public bool BodyVisible
@@ -30,7 +33,15 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
             }
             _bodyVisible = value;
             _bodyModelService.SetBodyVisible(value);
-            Debug.Log($"[GameObjectManager] BodyVisible = {value}, Body active: {_bodyModelService.Body.activeSelf}");
+            // 诊断：隐藏时打印调用栈，定位"谁把模型根节点隐藏了"
+            if (!value)
+            {
+                Debug.Log($"[GameObjectManager] BodyVisible = false, Body active: {_bodyModelService.Body.activeSelf}\n[隐藏调用栈]\n{StackTraceUtility.ExtractStackTrace()}");
+            }
+            else
+            {
+                Debug.Log($"[GameObjectManager] BodyVisible = true, Body active: {_bodyModelService.Body.activeSelf}");
+            }
         }
     }
 
@@ -72,7 +83,17 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
         base.AllManagerInitialize();
         _bodyModelService.LoadBody();
         _configService.InitializeBuffer(_registry.Count);
-        BodyVisible = false;
+
+        // 模型加载完成：若加载前已收到数据则立即应用并显示，否则先隐藏等待数据
+        if (_pendingBoneData != null)
+        {
+            ApplyBoneConfig(_pendingBoneData);
+            _pendingBoneData = null;
+        }
+        else
+        {
+            BodyVisible = false;
+        }
     }
 
     public void SelectBone(int boneid)
@@ -194,9 +215,19 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
 
     public void ApplyBoneConfig(List<BoneData> boneDataList)
     {
+        // 模型尚未加载完成时，先缓存数据，待 AllManagerInitialize 中模型就绪后再应用，避免显示请求丢失
+        if (!_bodyModelService.Body)
+        {
+            _pendingBoneData = boneDataList;
+            Debug.LogWarning("[GameObjectManager] 模型未就绪，已缓存骨骼数据，待加载完成后应用并显示");
+            return;
+        }
+
         _configService.ApplyBoneConfigFromList(boneDataList);
         ShowBoneByType(_boneShowType);
         SelectBoneByPos(_selectBoneType);
+        // 数据应用后激活模型根节点（显示统一收敛到此处，不依赖外部调用方）
+        BodyVisible = true;
     }
 
     public void LoadBoneConfigFromJson(string jsonString)
@@ -204,6 +235,8 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
         _configService.LoadBoneConfigFromJson(jsonString);
         ShowBoneByType(_boneShowType);
         SelectBoneByPos(_selectBoneType);
+        // 数据应用后激活模型根节点
+        BodyVisible = true;
     }
 
     public string ExportBoneConfigToJson()

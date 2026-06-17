@@ -308,9 +308,8 @@ public class ButtonBehavior : MonoBehaviour
                 Debug.Log($"[BoneConfig] 解析成功, 骨骼数量: {boneDataList.Count}");
                 GameObjectManager.Instance.ApplyBoneConfig(boneDataList);
                 BoneMod.Instance.boneLoaded = true;
-                // 接收到骨骼配置后显示模型
-                GameObjectManager.Instance.BodyVisible = true;
-                Debug.Log($"[BoneConfig] 配置应用完成, 模型已显示, Body={GameObjectManager.Instance.Body != null}");
+                // 模型显示由 ApplyBoneConfig 统一负责（数据应用后激活根节点，并处理模型未就绪的时序缓存）
+                Debug.Log($"[BoneConfig] 配置应用完成, Body={GameObjectManager.Instance.Body != null}");
             }
             else
             {
