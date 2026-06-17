@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Data\SkeletonRegistry.cs" />
+    <Compile Include="Assets\Scripts\Debug\RuntimeInspectorToggle.cs" />
     <Compile Include="Assets\Scripts\Base\SingletonMod.cs" />
     <Compile Include="Assets\Scripts\Util\MsgHelper.cs" />
     <Compile Include="Assets\Scripts\Manager\EventManager.cs" />
@@ -1222,6 +1223,10 @@
     <ProjectReference Include="DOTween.Modules.csproj">
       <Project>{9D355F22-D77C-50D5-2D44-176362209D36}</Project>
       <Name>DOTween.Modules</Name>
+    </ProjectReference>
+    <ProjectReference Include="RuntimeInspector.Runtime.csproj">
+      <Project>{2EE30337-6E07-D363-7BE3-0E43CF18B976}</Project>
+      <Name>RuntimeInspector.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="HighlightPlus.Demo.csproj">
       <Project>{1B71E9B0-765A-3A6A-4182-E43C19B13915}</Project>

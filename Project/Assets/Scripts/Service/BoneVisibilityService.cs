@@ -51,6 +51,7 @@ public class BoneVisibilityService
         bool showAllType = (type & (int)BoneShowType.All) == (int)BoneShowType.All;
         bool showAllPos = (pos & (int)EnumPos.All) == (int)EnumPos.All;
 
+        int visibleCount = 0;
         for (int i = 0; i < count; i++)
         {
             ref var info = ref items[i];
@@ -62,8 +63,16 @@ public class BoneVisibilityService
             bool posVisible = showAllPos || ((info.bone.Pos & pos) != 0);
 
             // 两个条件都满足才显示
-            info.boneGameObject.SetActive(typeVisible && posVisible);
+            bool visible = typeVisible && posVisible;
+            info.boneGameObject.SetActive(visible);
+            if (visible)
+            {
+                visibleCount++;
+            }
         }
+
+        // 诊断：打印筛选条件与实际可见数量，定位"显示全部却不显示"的问题
+        Debug.Log($"[Visibility] type={type}(全类型={showAllType}), pos={pos}(全部位={showAllPos}), 总数={count}, 可见={visibleCount}, 隐藏={count - visibleCount}");
     }
 
     /// <summary>
