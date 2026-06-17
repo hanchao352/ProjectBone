@@ -60,6 +60,59 @@ public class BodyModelService
         _initAngle = _body.transform.eulerAngles;
         
         Debug.Log($"[BodyModel] 模型初始化完成, 注册骨骼数: {_registry.Count}, Body active: {_body.activeSelf}");
+
+        // 诊断：打印模型坐标/缩放/包围盒及相机对比，定位"加载成功却看不见"的问题
+        LogModelTransform(_body);
+    }
+
+    /// <summary>
+    /// 诊断输出：模型的坐标、缩放、世界包围盒，以及 ModelCamera 信息与可见性判断。
+    /// 用于定位模型已加载但不在相机视野内（位置偏离 / 缩放过大过小 / 被 Layer 剔除）的问题。
+    /// </summary>
+    private void LogModelTransform(GameObject body)
+    {
+        if (!body)
+        {
+            Debug.LogWarning("[BodyModel] LogModelTransform: body 为 null");
+            return;
+        }
+
+        Transform t = body.transform;
+        Debug.Log($"[BodyModel] 变换: 世界坐标={t.position}, 本地坐标={t.localPosition}, localScale={t.localScale}, lossyScale={t.lossyScale}, 旋转={t.eulerAngles}, Layer={body.layer}");
+
+        // 合并所有 Renderer 的世界包围盒，得到模型实际占用空间与中心
+        Renderer[] renderers = body.GetComponentsInChildren<Renderer>(true);
+        if (renderers.Length == 0)
+        {
+            Debug.LogWarning("[BodyModel] 变换: 未找到任何 Renderer，无法计算包围盒");
+        }
+        else
+        {
+            Bounds bounds = renderers[0].bounds;
+            for (int i = 1; i < renderers.Length; i++)
+            {
+                bounds.Encapsulate(renderers[i].bounds);
+            }
+            // 渲染剔除看的是 Renderer 所在节点的 Layer（子节点），不是根节点
+            int rendererLayer = renderers[0].gameObject.layer;
+            bool firstRendererEnabled = renderers[0].enabled;
+            Debug.Log($"[BodyModel] 包围盒(世界): 中心={bounds.center}, 尺寸={bounds.size}, min={bounds.min}, max={bounds.max}, 子节点Layer={rendererLayer}, 首个Renderer.enabled={firstRendererEnabled}");
+
+            Camera cam = UIManager.Instance.ModelCamera;
+            if (!cam)
+            {
+                Debug.LogWarning("[BodyModel] ModelCamera 为 null，无法做相机可见性对比");
+            }
+            else
+            {
+                Vector3 toCenter = bounds.center - cam.transform.position;
+                float dist = toCenter.magnitude;
+                float dot = Vector3.Dot(toCenter.normalized, cam.transform.forward);
+                bool inCullingMask = (cam.cullingMask & (1 << rendererLayer)) != 0;
+                Debug.Log($"[BodyModel] ModelCamera: 坐标={cam.transform.position}, 朝向={cam.transform.forward}, near={cam.nearClipPlane}, far={cam.farClipPlane}, fov={cam.fieldOfView}, 正交={cam.orthographic}, cullingMask={cam.cullingMask}");
+                Debug.Log($"[BodyModel] 可见性判断: 模型中心距相机={dist:F3}, 前方点积={dot:F3}(>0在相机前方), 子节点Layer在相机CullingMask内={inCullingMask}");
+            }
+        }
     }
 
     /// <summary>
