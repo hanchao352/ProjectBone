@@ -48,7 +48,9 @@ public class BodyModelService
         obj.transform.position = new Vector3(0, 0, 0);
 
         // 先设置 Layer，确保所有节点（包括未激活的）都有正确的 Layer
+        Debug.Log($"[BodyModel] 开始设置Layer={UnityLayer.Layer_Body}, 当前根节点Layer={obj.layer}");
         SetBodyLayer(obj, UnityLayer.Layer_Body);
+        Debug.Log($"[BodyModel] 设置Layer完成, 根节点Layer={obj.layer}, 第一个子节点Layer={(obj.transform.childCount > 0 ? obj.transform.GetChild(0).gameObject.layer.ToString() : "无子节点")}");
 
         InitializeBoneColliders(obj);
         RegisterBones(obj);
@@ -225,7 +227,14 @@ public class BodyModelService
     /// </summary>
     private void SetLayerRecursively(Transform trans, int layer)
     {
+        int oldLayer = trans.gameObject.layer;
         trans.gameObject.layer = layer;
+
+        // 诊断：验证 Layer 是否真的被设置
+        if (trans.gameObject.layer != layer)
+        {
+            Debug.LogWarning($"[BodyModel] Layer设置失败! 节点={trans.name}, 期望Layer={layer}, 实际Layer={trans.gameObject.layer}, 原Layer={oldLayer}");
+        }
 
         // 使用 GetChild 遍历，确保包括未激活的子节点
         for (int i = 0; i < trans.childCount; i++)
