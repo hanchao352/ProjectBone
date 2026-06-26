@@ -47,9 +47,11 @@ public class BodyModelService
 
         obj.transform.position = new Vector3(0, 0, 0);
 
+        // 先设置 Layer，确保所有节点（包括未激活的）都有正确的 Layer
+        SetBodyLayer(obj, UnityLayer.Layer_Body);
+
         InitializeBoneColliders(obj);
         RegisterBones(obj);
-        SetBodyLayer(obj, UnityLayer.Layer_Body);
 
         obj.transform.position = new Vector3(0, 0, 0.5f);
         _body = obj;
@@ -219,14 +221,17 @@ public class BodyModelService
     }
 
     /// <summary>
-    /// 递归设置 Transform 及其所有子节点的 Layer
+    /// 递归设置 Transform 及其所有子节点的 Layer（包括未激活的节点）
     /// </summary>
     private void SetLayerRecursively(Transform trans, int layer)
     {
         trans.gameObject.layer = layer;
+
+        // 使用 GetChild 遍历，确保包括未激活的子节点
         for (int i = 0; i < trans.childCount; i++)
         {
-            SetLayerRecursively(trans.GetChild(i), layer);
+            Transform child = trans.GetChild(i);
+            SetLayerRecursively(child, layer);
         }
     }
 
