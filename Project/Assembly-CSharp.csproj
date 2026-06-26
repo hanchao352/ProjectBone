@@ -111,6 +111,7 @@
     <Compile Include="Assets\Scripts\Util\UtilHelper.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\Manager\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Debug\LogToFile.cs" />
     <Compile Include="Assets\Samples\Universal RP\15.0.7\URP Package Samples\SharedAssets\Scripts\AutoLoadPipelineAsset.cs" />
     <Compile Include="Assets\Samples\Universal RP\15.0.7\URP Package Samples\SharedAssets\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Scripts\Base\IViewGeneric.cs" />
