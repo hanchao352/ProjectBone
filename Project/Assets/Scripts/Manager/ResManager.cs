@@ -30,7 +30,7 @@ public class ResManager:SingletonManager<ResManager>,IGeneric
                         return null;
                 }
 
-                T obj = GameObject.Instantiate<T>(go);
+                T obj = UnityEngine.Object.Instantiate<T>(go);
                 return obj;
         }
 }
