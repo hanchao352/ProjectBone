@@ -283,8 +283,8 @@ public class BodyModelService
 
     /// <summary>
     /// 设置 Body 的可见性。
-    /// visible=true 时设置 Layer 为 Layer_Body 并激活；
-    /// visible=false 时设置 Layer 为 Layer_Default 并停用。
+    /// visible=true 时激活并确保 Layer 为 Layer_Body；
+    /// visible=false 时停用但保持 Layer 不变（避免影响后续显示）。
     /// </summary>
     public void SetBodyVisible(bool visible)
     {
@@ -292,13 +292,14 @@ public class BodyModelService
 
         if (visible)
         {
+            // 显示时确保 Layer 正确
             SetBodyLayer(_body, UnityLayer.Layer_Body);
+            _body.SetActive(true);
         }
         else
         {
-            SetBodyLayer(_body, UnityLayer.Layer_Default);
+            // 隐藏时只停用，不修改 Layer（保持为 Body Layer）
+            _body.SetActive(false);
         }
-
-        _body.SetActive(visible);
     }
 }
