@@ -120,16 +120,16 @@ public class BodyModelService
     /// </summary>
     public GameObject LoadModelPrefab()
     {
-        // 诊断：Resources.Load 返回共享引用（不实例化、无额外开销），先记录源资源层级再走 ResManager 实例化
-        GameObject source = Resources.Load<GameObject>("Model/jirou_nan");
+        // 直接加载 FBX 文件而不是预制体，避免预制体引用问题
+        GameObject source = Resources.Load<GameObject>("Model/jirou_01");
         if (!source)
         {
-            Debug.LogError("[BodyModel] 源资源加载失败: Resources.Load(\"Model/jirou_nan\") 返回 null");
+            Debug.LogError("[BodyModel] 源资源加载失败: Resources.Load(\"Model/jirou_01\") 返回 null");
             return null;
         }
         Debug.Log($"[BodyModel] 源资源诊断: name={source.name}, 直接子节点={source.transform.childCount}, 全部后代Transform={source.GetComponentsInChildren<Transform>(true).Length}");
 
-        return ResManager.Instance.LoadRes<GameObject>("Model/jirou_nan");
+        return ResManager.Instance.LoadRes<GameObject>("Model/jirou_01");
     }
 
     /// <summary>
@@ -207,13 +207,26 @@ public class BodyModelService
     }
 
     /// <summary>
-    /// 设置所有子对象的 Layer
+    /// 设置根对象和所有子对象的 Layer（递归设置所有后代）
     /// </summary>
     public void SetBodyLayer(GameObject root, int layer)
     {
-        for (int i = 0; i < root.transform.childCount; i++)
+        // 设置根节点
+        root.layer = layer;
+
+        // 递归设置所有子节点
+        SetLayerRecursively(root.transform, layer);
+    }
+
+    /// <summary>
+    /// 递归设置 Transform 及其所有子节点的 Layer
+    /// </summary>
+    private void SetLayerRecursively(Transform trans, int layer)
+    {
+        trans.gameObject.layer = layer;
+        for (int i = 0; i < trans.childCount; i++)
         {
-            root.transform.GetChild(i).gameObject.layer = layer;
+            SetLayerRecursively(trans.GetChild(i), layer);
         }
     }
 
