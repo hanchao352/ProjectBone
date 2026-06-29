@@ -6,6 +6,16 @@ using UnityEngine;
 /// </summary>
 public class BodyModelService
 {
+    /// <summary>
+    /// 人体模型资源路径（Resources 下，不含扩展名）。
+    /// 必须使用扁平静态网格预制体 jirou_nan：根节点 jirou_nan 下直接挂载约 1423 个
+    /// 以骨骼ID命名的子节点，每个子节点为静态 MeshFilter+MeshRenderer+MeshCollider。
+    /// 不能使用原始绑定模型 jirou_01.FBX：它是 Generic 骨骼绑定(蒙皮)模型，实例化后是
+    /// 蒙皮骨架(SkinnedMeshRenderer)，没有以ID命名的扁平静态网格子节点，会导致
+    /// RegisterBones 注册不到任何骨骼，表现为"只有根节点、没有子节点"。
+    /// </summary>
+    private const string ModelResourcePath = "Model/jirou_nan";
+
     private readonly SkeletonRegistry _registry;
     private GameObject _body;
     private Vector3 _initPos;
@@ -31,11 +41,13 @@ public class BodyModelService
         GameObject obj = LoadModelPrefab();
         if (!obj)
         {
-            Debug.LogError("[BodyModel] 模型预制体加载失败! Resources.Load(\"Model/jirou_nan\") 返回 null");
+            Debug.LogError($"[BodyModel] 模型预制体加载失败! Resources.Load(\"{ModelResourcePath}\") 返回 null");
             return;
         }
 
-        // 诊断：直接子节点 vs 全部后代 vs 各类渲染器，用于定位真机层级差异（编辑器有子节点、真机 childCount=0）
+        // 诊断：直接子节点 vs 全部后代 vs 各类渲染器。
+        // 预期(jirou_nan 预制体)：直接子节点≈1423、MeshRenderer≈1423、SkinnedMeshRenderer=0。
+        // 若 直接子节点=0 或 SkinnedMeshRenderer>0，说明加载到的不是扁平静态预制体(可能误用了绑定FBX)。
         int directChild = obj.transform.childCount;
         int allTransforms = obj.GetComponentsInChildren<Transform>(true).Length;
         int meshRenderers = obj.GetComponentsInChildren<MeshRenderer>(true).Length;
@@ -120,20 +132,21 @@ public class BodyModelService
     }
 
     /// <summary>
-    /// 从 Resources 加载模型预制体并实例化
+    /// 从 Resources 加载人体模型预制体并实例化。
+    /// 加载扁平静态网格预制体 jirou_nan(根节点下挂载以骨骼ID命名的静态网格子节点)，
+    /// 而非原始绑定模型 jirou_01.FBX(蒙皮骨架)，否则实例化结果只有根节点、没有骨骼子节点。
     /// </summary>
     public GameObject LoadModelPrefab()
     {
-        // 直接加载 FBX 文件而不是预制体，避免预制体引用问题
-        GameObject source = Resources.Load<GameObject>("Model/jirou_01");
+        GameObject source = Resources.Load<GameObject>(ModelResourcePath);
         if (!source)
         {
-            Debug.LogError("[BodyModel] 源资源加载失败: Resources.Load(\"Model/jirou_01\") 返回 null");
+            Debug.LogError($"[BodyModel] 源资源加载失败: Resources.Load(\"{ModelResourcePath}\") 返回 null");
             return null;
         }
         Debug.Log($"[BodyModel] 源资源诊断: name={source.name}, 直接子节点={source.transform.childCount}, 全部后代Transform={source.GetComponentsInChildren<Transform>(true).Length}");
 
-        return ResManager.Instance.LoadRes<GameObject>("Model/jirou_01");
+        return ResManager.Instance.LoadRes<GameObject>(ModelResourcePath);
     }
 
     /// <summary>
