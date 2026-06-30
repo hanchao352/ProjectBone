@@ -65,7 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\SelectTools\SelectGameObjectInGameView.cs" />
+    <Compile Include="Assets\Editor\DarkTool\BuildTools\AndroidCleanExporter.cs" />
     <Compile Include="Assets\Editor\BundleTool\BundleTools.cs" />
+    <Compile Include="Assets\Editor\DarkTool\Build\AndroidCleanExporter.cs" />
     <Compile Include="Assets\Editor\BoneTools\BoneDataTestWindow.cs" />
     <Compile Include="Assets\Editor\BoneTools\BoneEditorWindow.cs" />
   </ItemGroup>
