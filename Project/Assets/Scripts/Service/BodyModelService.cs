@@ -54,6 +54,9 @@ public class BodyModelService
         int skinnedMesh = obj.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length;
         Debug.Log($"[BodyModel] 实例诊断: name={obj.name}, 直接子节点={directChild}, 全部后代Transform={allTransforms}, MeshRenderer={meshRenderers}, SkinnedMeshRenderer={skinnedMesh}");
 
+        // 诊断：检查 MeshFilter 的网格是否丢失（定位"打包后层级在、但 MeshFilter.mesh 丢失"的问题）
+        LogMeshIntegrity(obj);
+
         // 诊断：打印模型加载后的原始层级树（真机无 Hierarchy 窗口，借此在日志中查看层级）
         HierarchyDumper.Dump(obj);
 
@@ -79,6 +82,46 @@ public class BodyModelService
 
         // 诊断：打印模型坐标/缩放/包围盒及相机对比，定位"加载成功却看不见"的问题
         LogModelTransform(_body);
+    }
+
+    /// <summary>
+    /// 诊断输出：统计子节点 MeshFilter 的网格丢失情况(sharedMesh 为 null)。
+    /// 用于定位"打包后层级在、但 MeshFilter.mesh 丢失"的问题：网格数据并不在预制体里，
+    /// 而是来自被跨资源引用的 FBX 子资源(jirou_01.FBX)。若该 FBX 的网格未被打进包，
+    /// 则组件仍在、但 sharedMesh 为 null，表现为节点都在却看不到模型。
+    /// </summary>
+    private void LogMeshIntegrity(GameObject root)
+    {
+        MeshFilter[] filters = root.GetComponentsInChildren<MeshFilter>(true);
+        int total = filters.Length;
+        int missing = 0;
+        string sample = "";
+        int sampleCount = 0;
+
+        for (int i = 0; i < total; i++)
+        {
+            if (filters[i].sharedMesh)
+            {
+                continue;
+            }
+
+            missing++;
+            if (sampleCount < 5)
+            {
+                sample = sampleCount == 0 ? filters[i].gameObject.name : sample + ", " + filters[i].gameObject.name;
+                sampleCount++;
+            }
+        }
+
+        if (missing > 0)
+        {
+            Debug.LogError($"[BodyModel] 网格丢失诊断: MeshFilter共{total}个, sharedMesh为null的有{missing}个! 丢失样本=[{sample}]。" +
+                           "网格数据来自被引用的FBX子资源(jirou_01.FBX)，请确认其网格已正确打进包(LFS真实文件已拉取/未被裁剪/跨资源引用未失效)。");
+        }
+        else
+        {
+            Debug.Log($"[BodyModel] 网格完整性诊断: MeshFilter共{total}个, 全部 sharedMesh 有效。");
+        }
     }
 
     /// <summary>
