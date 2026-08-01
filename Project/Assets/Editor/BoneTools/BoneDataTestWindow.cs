@@ -22,15 +22,15 @@ public class BoneDataTestWindow : EditorWindow
 
     // ButtonBehavior 消息代码（与 AppToUnityCode 保持一致）
     private const int CodeReceiveBoneConfig = 3;   // 接收骨骼配置
-    private const int CodeShowByType = 5;          // 按类型筛选（EnumBone）
+    private const int CodeShowByType = 5;          // 按类型筛选（BoneShowType）
     private const int CodeShowByPosition = 6;      // 按部位筛选
 
-    // 可筛选的类型（EnumBone：骨骼/肌肉/筋膜）
-    private static readonly (string label, EnumBone value)[] TypeOptions =
+    // 可筛选的类型（BoneShowType：骨骼/肌肉/筋膜）
+    private static readonly (string label, BoneShowType value)[] TypeOptions =
     {
-        ("骨骼", EnumBone.Bone),
-        ("肌肉", EnumBone.Muscle),
-        ("筋膜", EnumBone.Fascia),
+        ("骨骼", BoneShowType.Bone),
+        ("肌肉", BoneShowType.Muscle),
+        ("筋膜", BoneShowType.Fascia),
     };
 
     // 当前各类型的勾选状态
@@ -239,13 +239,13 @@ public class BoneDataTestWindow : EditorWindow
     }
 
     /// <summary>
-    /// 绘制类型筛选区域：骨骼 / 肌肉 / 筋膜（EnumBone）。
+    /// 绘制类型筛选区域：骨骼 / 肌肉 / 筋膜（BoneShowType）。
     /// 筛选通过 ButtonBehavior.ReceiveMessage(code=5) 下发，内部会与当前部位筛选叠加(交集)，
     /// 即只对"当前显示的部位"做类型筛选，与真机流程一致。
     /// </summary>
     private void DrawBoneTypeFilter(bool isPlaying)
     {
-        EditorGUILayout.LabelField("按类型筛选 (EnumBone)", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("按类型筛选 (BoneShowType)", EditorStyles.boldLabel);
         EditorGUILayout.HelpBox(
             "勾选骨骼/肌肉/筋膜后点击「应用类型筛选」，通过真机消息入口(code=5)下发组合位标志。\n" +
             "该筛选只作用于当前显示的部位：例如先选「头颈」再筛类型，只影响头颈范围。",
@@ -279,7 +279,7 @@ public class BoneDataTestWindow : EditorWindow
             EditorGUILayout.Space();
 
             int flags = GetSelectedTypeFlags();
-            EditorGUILayout.LabelField("当前组合值", flags == 0 ? "无 (0)" : $"{(EnumBone)flags} ({flags})");
+            EditorGUILayout.LabelField("当前组合值", flags == 0 ? "无 (0)" : $"{(BoneShowType)flags} ({flags})");
 
             if (GUILayout.Button("应用类型筛选 (走真机流程)", GUILayout.Height(32)))
             {
@@ -288,7 +288,7 @@ public class BoneDataTestWindow : EditorWindow
 
             if (GUILayout.Button("显示全部类型 (All)", GUILayout.Height(24)))
             {
-                ApplyBoneTypeFilter((int)EnumBone.All);
+                ApplyBoneTypeFilter((int)BoneShowType.All);
             }
         }
     }
@@ -326,7 +326,7 @@ public class BoneDataTestWindow : EditorWindow
 
         _lastMessage = jsonString;
         buttonBehavior.ReceiveMessage(jsonString);
-        Debug.Log($"[BoneDataTest] 已应用类型筛选：{(EnumBone)typeFlags} ({typeFlags})");
+        Debug.Log($"[BoneDataTest] 已应用类型筛选：{(BoneShowType)typeFlags} ({typeFlags})");
         Repaint();
     }
 

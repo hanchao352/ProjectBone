@@ -23,9 +23,10 @@ public class BoneEditorWindow : EditorWindow
 
         public string TypeName => typeId switch
         {
+            0 => "其它",
             1 => "骨骼",
             2 => "肌肉",
-            4 => "筋膜",
+            3 => "筋膜",
             _ => "未知"
         };
 
@@ -209,7 +210,7 @@ public class BoneEditorWindow : EditorWindow
             if (BoneMod.Instance.boneDic.ContainsKey(entry.id))
             {
                 Bone bone = BoneMod.Instance.boneDic[entry.id];
-                bone.Boneenum = (EnumBone)entry.typeId;
+                bone.Boneenum = BoneTypeMapper.FromTypeId(entry.typeId);
                 bone.Pos = entry.PositionFlags;
                 bone.Direction = entry.direction;
             }

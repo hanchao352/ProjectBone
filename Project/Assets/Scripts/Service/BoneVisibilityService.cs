@@ -32,9 +32,7 @@ public class BoneVisibilityService
             }
             else
             {
-                // 位运算：将 EnumBone 映射到 BoneShowType 的对应位
-                int boneBit = (int)info.bone.Boneenum;
-                bool visible = (type & boneBit) != 0;
+                bool visible = BoneTypeMapper.MatchesShowType(info.bone.Boneenum, type);
                 info.boneGameObject.SetActive(visible);
             }
         }
@@ -57,7 +55,7 @@ public class BoneVisibilityService
             ref var info = ref items[i];
 
             // 类型过滤
-            bool typeVisible = showAllType || ((type & (int)info.bone.Boneenum) != 0);
+            bool typeVisible = showAllType || BoneTypeMapper.MatchesShowType(info.bone.Boneenum, type);
 
             // 部位过滤
             bool posVisible = showAllPos || ((info.bone.Pos & pos) != 0);

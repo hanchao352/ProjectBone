@@ -313,6 +313,7 @@ public class InputManager : SingletonManager<InputManager>, IGeneric
                     Bone bone = BoneMod.Instance.boneDic[boneId];
                     string typeCn = ((EnumBone)bone.Boneenum) switch
                     {
+                        EnumBone.Other => "其它",
                         EnumBone.Bone => "骨骼",
                         EnumBone.Muscle => "肌肉",
                         EnumBone.Fascia => "筋膜",
