@@ -43,6 +43,18 @@ public class BoneClickInfo
 }
 
 /// <summary>
+/// 模型加载进度信息。progress 为 0-100 的整数百分比，status 取值为
+/// loading、completed 或 failed；加载失败时 error 包含错误原因。
+/// </summary>
+public class ModelLoadProgressInfo
+{
+    public int progress;
+    public string stage;
+    public string status;
+    public string error;
+}
+
+/// <summary>
 /// App调用Unity功能的消息代码（App -> Unity）
 /// </summary>
 public static class AppToUnityCode
@@ -76,6 +88,7 @@ public static class UnityToAppCode
     public const int BoneSelected = 1;               // 骨骼被选中（用户点击时自动发送）
     public const int ExportBoneConfigResult = 2;     // 导出骨骼配置结果（响应App请求）
     public const int BoneDeselected = 3;             // 骨骼取消选中（用户再次点击时自动发送）
+    public const int ModelLoadProgress = 4;           // 模型加载进度（Unity启动加载时主动发送）
 }
 
 public class ButtonBehavior : MonoBehaviour
@@ -379,6 +392,22 @@ public class ButtonBehavior : MonoBehaviour
         BoneClickInfo clickInfo = new BoneClickInfo { id = boneId };
         string boneInfoJson = JsonConvert.SerializeObject(clickInfo);
         SendWrappedMessage(UnityToAppCode.BoneDeselected, boneInfoJson);
+    }
+
+    /// <summary>
+    /// 通知移动端当前模型加载进度。
+    /// </summary>
+    public void NotifyModelLoadProgress(ModelLoadProgressInfo progressInfo)
+    {
+        if (progressInfo == null)
+        {
+            Debug.LogWarning("[ModelLoadProgress] 忽略空的进度信息");
+            return;
+        }
+
+        progressInfo.progress = Mathf.Clamp(progressInfo.progress, 0, 100);
+        string progressJson = JsonConvert.SerializeObject(progressInfo);
+        SendWrappedMessage(UnityToAppCode.ModelLoadProgress, progressJson);
     }
 
     /// <summary>

@@ -10,6 +10,8 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
     private BoneSelectionService _selectionService;
     private BoneMaterialService _materialService;
     private BoneConfigService _configService;
+    private ButtonBehavior _buttonBehavior;
+    private bool _missingButtonBehaviorLogged;
 
     private bool _bodyVisible;
     private int _boneShowType = (int)BoneShowType.All;
@@ -80,9 +82,18 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
 
     public override void AllManagerInitialize()
     {
+        System.Diagnostics.Stopwatch stageTimer = System.Diagnostics.Stopwatch.StartNew();
+        StartupTimingLogger.Mark("game_object_manager_all_initialize_enter");
         base.AllManagerInitialize();
-        _bodyModelService.LoadBody();
+        _bodyModelService.LoadBody(NotifyModelLoadProgress);
+        StartupTimingLogger.MarkDuration(
+            "body_model_load_returned", stageTimer,
+            $"body_ready={_bodyModelService.Body != null}|bones={_registry.Count}");
+
+        stageTimer.Restart();
         _configService.InitializeBuffer(_registry.Count);
+        StartupTimingLogger.MarkDuration(
+            "bone_config_buffer_initialized", stageTimer, $"bones={_registry.Count}");
 
         // 模型加载完成：若加载前已收到数据则立即应用并显示，否则先隐藏等待数据
         if (_pendingBoneData != null)
@@ -93,6 +104,38 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
         else
         {
             BodyVisible = false;
+        }
+
+        StartupTimingLogger.Mark(
+            "game_object_manager_all_initialize_exit",
+            $"body_ready={_bodyModelService.Body != null}|bones={_registry.Count}");
+    }
+
+    private void NotifyModelLoadProgress(ModelLoadProgressInfo progressInfo)
+    {
+        if (!_buttonBehavior)
+        {
+            _buttonBehavior = Object.FindAnyObjectByType<ButtonBehavior>();
+        }
+
+        if (!_buttonBehavior)
+        {
+            if (!_missingButtonBehaviorLogged)
+            {
+                Debug.LogWarning("[GameObjectManager] 未找到 ButtonBehavior，无法向 App 上报模型加载进度");
+                _missingButtonBehaviorLogged = true;
+            }
+            return;
+        }
+
+        try
+        {
+            _buttonBehavior.NotifyModelLoadProgress(progressInfo);
+        }
+        catch (System.Exception exception)
+        {
+            // 原生通信异常不能打断模型初始化。
+            Debug.LogError($"[GameObjectManager] 向 App 上报模型加载进度失败: {exception.Message}");
         }
     }
 

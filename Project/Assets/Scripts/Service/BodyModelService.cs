@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Stopwatch = System.Diagnostics.Stopwatch;
 
 /// <summary>
 /// 模型加载与生命周期服务。负责人体模型预制体加载、MeshCollider 初始化、
@@ -21,6 +23,10 @@ public class BodyModelService
     private Vector3 _initPos;
     private Vector3 _initScale;
     private Vector3 _initAngle;
+    private Action<ModelLoadProgressInfo> _progressCallback;
+    private int _lastReportedProgress = -1;
+    private string _lastReportedStage;
+    private string _lastReportedStatus;
 
     /// <summary>
     /// 当前加载的人体模型 GameObject
@@ -35,53 +41,137 @@ public class BodyModelService
     /// <summary>
     /// 完整的模型加载流程：加载预制体 → 初始化碰撞体 → 注册骨骼 → 设置Layer → 记录初始变换
     /// </summary>
-    public void LoadBody()
+    public void LoadBody(Action<ModelLoadProgressInfo> progressCallback = null)
     {
-        Debug.Log("[BodyModel] 开始加载模型...");
-        GameObject obj = LoadModelPrefab();
-        if (!obj)
+        Stopwatch totalTimer = Stopwatch.StartNew();
+        Stopwatch stageTimer = Stopwatch.StartNew();
+        StartupTimingLogger.Mark("body_load_enter");
+
+        _progressCallback = progressCallback;
+        _lastReportedProgress = -1;
+        _lastReportedStage = null;
+        _lastReportedStatus = null;
+
+        try
         {
-            Debug.LogError($"[BodyModel] 模型预制体加载失败! Resources.Load(\"{ModelResourcePath}\") 返回 null");
+            ReportProgress(0, "starting", "loading");
+            Debug.Log("[BodyModel] 开始加载模型...");
+            ReportProgress(5, "loading_model", "loading");
+            GameObject obj = LoadModelPrefab();
+            if (!obj)
+            {
+                const string error = "模型预制体资源加载失败";
+                Debug.LogError($"[BodyModel] 模型预制体加载失败! Resources.Load(\"{ModelResourcePath}\") 返回 null");
+                ReportProgress(_lastReportedProgress, "loading_model", "failed", error);
+                return;
+            }
+
+            StartupTimingLogger.MarkDuration(
+                "body_prefab_ready", stageTimer, $"children={obj.transform.childCount}");
+
+            stageTimer.Restart();
+            ReportProgress(35, "validating_model", "loading");
+
+            // 诊断：直接子节点 vs 全部后代 vs 各类渲染器。
+            // 预期(jirou_nan 预制体)：直接子节点≈1423、MeshRenderer≈1423、SkinnedMeshRenderer=0。
+            // 若 直接子节点=0 或 SkinnedMeshRenderer>0，说明加载到的不是扁平静态预制体(可能误用了绑定FBX)。
+            int directChild = obj.transform.childCount;
+            int allTransforms = obj.GetComponentsInChildren<Transform>(true).Length;
+            int meshRenderers = obj.GetComponentsInChildren<MeshRenderer>(true).Length;
+            int skinnedMesh = obj.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length;
+            StartupTimingLogger.MarkDuration(
+                "body_hierarchy_diagnostics_complete", stageTimer,
+                $"children={directChild}|transforms={allTransforms}|mesh_renderers={meshRenderers}|skinned_meshes={skinnedMesh}");
+            Debug.Log($"[BodyModel] 实例诊断: name={obj.name}, 直接子节点={directChild}, 全部后代Transform={allTransforms}, MeshRenderer={meshRenderers}, SkinnedMeshRenderer={skinnedMesh}");
+
+            // 诊断：检查 MeshFilter 的网格是否丢失（定位"打包后层级在、但 MeshFilter.mesh 丢失"的问题）
+            stageTimer.Restart();
+            LogMeshIntegrity(obj);
+            StartupTimingLogger.MarkDuration("body_mesh_integrity_check_complete", stageTimer);
+
+            // 诊断：打印模型加载后的原始层级树（真机无 Hierarchy 窗口，借此在日志中查看层级）
+            stageTimer.Restart();
+            HierarchyDumper.Dump(obj);
+            StartupTimingLogger.MarkDuration("body_hierarchy_dump_complete", stageTimer);
+
+            obj.transform.position = new Vector3(0, 0, 0);
+
+            ReportProgress(45, "setting_layer", "loading");
+            // 先设置 Layer，确保所有节点（包括未激活的）都有正确的 Layer
+            Debug.Log($"[BodyModel] 开始设置Layer={UnityLayer.Layer_Body}, 当前根节点Layer={obj.layer}");
+            stageTimer.Restart();
+            SetBodyLayer(obj, UnityLayer.Layer_Body);
+            StartupTimingLogger.MarkDuration("body_layer_setup_complete", stageTimer);
+            Debug.Log($"[BodyModel] 设置Layer完成, 根节点Layer={obj.layer}, 第一个子节点Layer={(obj.transform.childCount > 0 ? obj.transform.GetChild(0).gameObject.layer.ToString() : "无子节点")}");
+
+            ReportProgress(55, "initializing_colliders", "loading");
+            stageTimer.Restart();
+            InitializeBoneColliders(obj, progress =>
+                ReportProgress(55 + Mathf.RoundToInt(progress * 20f), "initializing_colliders", "loading"));
+            StartupTimingLogger.MarkDuration(
+                "body_collider_scan_complete", stageTimer, $"children={obj.transform.childCount}");
+
+            ReportProgress(75, "registering_bones", "loading");
+            stageTimer.Restart();
+            RegisterBones(obj, progress =>
+                ReportProgress(75 + Mathf.RoundToInt(progress * 20f), "registering_bones", "loading"));
+            StartupTimingLogger.MarkDuration(
+                "body_bone_registration_complete", stageTimer, $"bones={_registry.Count}");
+
+            ReportProgress(95, "finalizing", "loading");
+            obj.transform.position = new Vector3(0, 0, 0.5f);
+            _body = obj;
+            _body.transform.localScale = new Vector3(10, 10, 10);
+
+            _initPos = _body.transform.position;
+            _initScale = _body.transform.localScale;
+            _initAngle = _body.transform.eulerAngles;
+
+            Debug.Log($"[BodyModel] 模型初始化完成, 注册骨骼数: {_registry.Count}, Body active: {_body.activeSelf}");
+
+            // 诊断：打印模型坐标/缩放/包围盒及相机对比，定位"加载成功却看不见"的问题
+            stageTimer.Restart();
+            LogModelTransform(_body);
+            StartupTimingLogger.MarkDuration("body_transform_diagnostics_complete", stageTimer);
+            ReportProgress(100, "completed", "completed");
+            StartupTimingLogger.MarkDuration(
+                "body_load_complete", totalTimer,
+                $"children={_body.transform.childCount}|bones={_registry.Count}");
+        }
+        catch (Exception exception)
+        {
+            StartupTimingLogger.MarkDuration(
+                "body_load_failed", totalTimer,
+                $"exception={exception.GetType().Name}|message={exception.Message}");
+            ReportProgress(Mathf.Max(_lastReportedProgress, 0), "failed", "failed", exception.Message);
+            throw;
+        }
+        finally
+        {
+            _progressCallback = null;
+        }
+    }
+
+    private void ReportProgress(int progress, string stage, string status, string error = null)
+    {
+        progress = Mathf.Clamp(progress, 0, 100);
+        if (progress == _lastReportedProgress &&
+            stage == _lastReportedStage &&
+            status == _lastReportedStatus)
+        {
             return;
         }
 
-        // 诊断：直接子节点 vs 全部后代 vs 各类渲染器。
-        // 预期(jirou_nan 预制体)：直接子节点≈1423、MeshRenderer≈1423、SkinnedMeshRenderer=0。
-        // 若 直接子节点=0 或 SkinnedMeshRenderer>0，说明加载到的不是扁平静态预制体(可能误用了绑定FBX)。
-        int directChild = obj.transform.childCount;
-        int allTransforms = obj.GetComponentsInChildren<Transform>(true).Length;
-        int meshRenderers = obj.GetComponentsInChildren<MeshRenderer>(true).Length;
-        int skinnedMesh = obj.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length;
-        Debug.Log($"[BodyModel] 实例诊断: name={obj.name}, 直接子节点={directChild}, 全部后代Transform={allTransforms}, MeshRenderer={meshRenderers}, SkinnedMeshRenderer={skinnedMesh}");
-
-        // 诊断：检查 MeshFilter 的网格是否丢失（定位"打包后层级在、但 MeshFilter.mesh 丢失"的问题）
-        LogMeshIntegrity(obj);
-
-        // 诊断：打印模型加载后的原始层级树（真机无 Hierarchy 窗口，借此在日志中查看层级）
-        HierarchyDumper.Dump(obj);
-
-        obj.transform.position = new Vector3(0, 0, 0);
-
-        // 先设置 Layer，确保所有节点（包括未激活的）都有正确的 Layer
-        Debug.Log($"[BodyModel] 开始设置Layer={UnityLayer.Layer_Body}, 当前根节点Layer={obj.layer}");
-        SetBodyLayer(obj, UnityLayer.Layer_Body);
-        Debug.Log($"[BodyModel] 设置Layer完成, 根节点Layer={obj.layer}, 第一个子节点Layer={(obj.transform.childCount > 0 ? obj.transform.GetChild(0).gameObject.layer.ToString() : "无子节点")}");
-
-        InitializeBoneColliders(obj);
-        RegisterBones(obj);
-
-        obj.transform.position = new Vector3(0, 0, 0.5f);
-        _body = obj;
-        _body.transform.localScale = new Vector3(10, 10, 10);
-
-        _initPos = _body.transform.position;
-        _initScale = _body.transform.localScale;
-        _initAngle = _body.transform.eulerAngles;
-        
-        Debug.Log($"[BodyModel] 模型初始化完成, 注册骨骼数: {_registry.Count}, Body active: {_body.activeSelf}");
-
-        // 诊断：打印模型坐标/缩放/包围盒及相机对比，定位"加载成功却看不见"的问题
-        LogModelTransform(_body);
+        _lastReportedProgress = progress;
+        _lastReportedStage = stage;
+        _lastReportedStatus = status;
+        _progressCallback?.Invoke(new ModelLoadProgressInfo
+        {
+            progress = progress,
+            stage = stage,
+            status = status,
+            error = error
+        });
     }
 
     /// <summary>
@@ -181,7 +271,11 @@ public class BodyModelService
     /// </summary>
     public GameObject LoadModelPrefab()
     {
+        Stopwatch stageTimer = Stopwatch.StartNew();
         GameObject source = Resources.Load<GameObject>(ModelResourcePath);
+        StartupTimingLogger.MarkDuration(
+            "body_source_resources_load_complete", stageTimer,
+            $"resource={ModelResourcePath}|success={source != null}");
         if (!source)
         {
             Debug.LogError($"[BodyModel] 源资源加载失败: Resources.Load(\"{ModelResourcePath}\") 返回 null");
@@ -189,21 +283,35 @@ public class BodyModelService
         }
         Debug.Log($"[BodyModel] 源资源诊断: name={source.name}, 直接子节点={source.transform.childCount}, 全部后代Transform={source.GetComponentsInChildren<Transform>(true).Length}");
 
-        return ResManager.Instance.LoadRes<GameObject>(ModelResourcePath);
+        stageTimer.Restart();
+        GameObject instance = ResManager.Instance.LoadRes<GameObject>(ModelResourcePath);
+        StartupTimingLogger.MarkDuration(
+            "body_res_manager_load_returned", stageTimer,
+            $"resource={ModelResourcePath}|success={instance != null}");
+        return instance;
     }
 
     /// <summary>
     /// 为每个子对象添加 MeshCollider（如果不存在）
     /// </summary>
-    public void InitializeBoneColliders(GameObject root)
+    public void InitializeBoneColliders(GameObject root, Action<float> progressCallback = null)
     {
-        for (int i = 0; i < root.transform.childCount; i++)
+        int childCount = root.transform.childCount;
+        if (childCount == 0)
+        {
+            progressCallback?.Invoke(1f);
+            return;
+        }
+
+        for (int i = 0; i < childCount; i++)
         {
             GameObject child = root.transform.GetChild(i).gameObject;
             if (child.GetComponent<MeshCollider>() == null)
             {
                 child.AddComponent<MeshCollider>();
             }
+
+            progressCallback?.Invoke((i + 1f) / childCount);
         }
     }
 
@@ -211,9 +319,17 @@ public class BodyModelService
     /// 解析子对象名称，创建 SkeletonInfo 并注册到 SkeletonRegistry 和 BoneMod.Instance.boneDic。
     /// 先统计有效骨骼数量，再初始化 SkeletonRegistry 容量，最后逐个注册。
     /// </summary>
-    public void RegisterBones(GameObject root)
+    public void RegisterBones(GameObject root, Action<float> progressCallback = null)
     {
         int childCount = root.transform.childCount;
+
+        if (childCount == 0)
+        {
+            _registry.Initialize(0);
+            Debug.LogWarning("[BodyModel] RegisterBones: 直接子节点为 0! 模型层级异常，请检查 prefab 打包结果。");
+            progressCallback?.Invoke(1f);
+            return;
+        }
 
         // 第一遍：统计有效骨骼数量（名称可解析为 int 的子对象）
         int validCount = 0;
@@ -223,6 +339,8 @@ public class BodyModelService
             {
                 validCount++;
             }
+
+            progressCallback?.Invoke((i + 1f) / childCount * 0.5f);
         }
 
         // 诊断：打印实际子节点名字样本，定位真机上的名称/层级问题
@@ -233,11 +351,6 @@ public class BodyModelService
             string n2 = childCount > 2 ? root.transform.GetChild(2).gameObject.name : "-";
             Debug.Log($"[BodyModel] RegisterBones: 直接子节点={childCount}, 可解析为ID={validCount}, 子节点样本=[{n0}, {n1}, {n2}]");
         }
-        else
-        {
-            Debug.LogWarning("[BodyModel] RegisterBones: 直接子节点为 0! 模型层级异常，请检查 prefab 打包结果。");
-        }
-
         _registry.Initialize(validCount);
 
         // 第二遍：注册骨骼
@@ -263,6 +376,8 @@ public class BodyModelService
                     BoneMod.Instance.boneDic.Add(id, bone);
                 }
             }
+
+            progressCallback?.Invoke(0.5f + (i + 1f) / childCount * 0.5f);
         }
     }
 

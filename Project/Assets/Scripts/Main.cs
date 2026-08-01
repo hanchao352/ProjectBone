@@ -1,8 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using UnityEngine;
+using Stopwatch = System.Diagnostics.Stopwatch;
 
 
 public class Main : MonoBehaviour
@@ -12,6 +14,7 @@ public class Main : MonoBehaviour
 
     public void Awake()
     {
+        StartupTimingLogger.Mark("main_awake_enter");
         DontDestroyOnLoad(this);
         SetScreen();
         
@@ -20,7 +23,10 @@ public class Main : MonoBehaviour
         {
             gameObject.AddComponent<FileLogger>();
         }
+        Debug.Log($"[StartupTiming] 启动性能日志: {StartupTimingLogger.LogFilePath}");
+
         // StandaloneWebView.SetCommandLineArguments("--disable-web-security");
+        Stopwatch stageTimer = Stopwatch.StartNew();
         var managerTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => typeof(IGeneric).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 
@@ -41,14 +47,19 @@ public class Main : MonoBehaviour
             }
         }
         managers = managersList.ToArray();
+        StartupTimingLogger.MarkDuration(
+            "manager_discovery_complete", stageTimer, $"count={managers.Length}");
 
         // 调用每个 manager 的 Initialize 方法
         foreach (var manager in managers)
         {
+            stageTimer.Restart();
             manager.Initialize();
+            StartupTimingLogger.MarkDuration(
+                "manager_initialize_complete", stageTimer, $"type={manager.GetType().FullName}");
         }
 
-       
+        stageTimer.Restart();
         var modTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => typeof(IMod).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 
@@ -70,19 +81,32 @@ public class Main : MonoBehaviour
         }
       
         mods = modList.ToArray();
+        StartupTimingLogger.MarkDuration(
+            "mod_discovery_complete", stageTimer, $"count={mods.Length}");
+
         //调用每个 manager 的 Initialize 方法
         foreach (var mod in modList)
         {
+            stageTimer.Restart();
             mod.Initialize();
+            StartupTimingLogger.MarkDuration(
+                "mod_initialize_complete", stageTimer, $"type={mod.GetType().FullName}");
         }
         foreach (var manager in managers)
         {
+            stageTimer.Restart();
             manager.AllManagerInitialize();
+            StartupTimingLogger.MarkDuration(
+                "manager_all_initialize_complete", stageTimer, $"type={manager.GetType().FullName}");
         }
         foreach (var mod in mods)
         {
+            stageTimer.Restart();
             mod.AllModInitialize();
+            StartupTimingLogger.MarkDuration(
+                "mod_all_initialize_complete", stageTimer, $"type={mod.GetType().FullName}");
         }
+        StartupTimingLogger.Mark("main_awake_exit");
     }
 
     //设置为竖屏.不自动旋转
@@ -105,11 +129,20 @@ public class Main : MonoBehaviour
     // 仅在首次调用 Update 方法之前调用 Start
     public void Start()
     {
+        StartupTimingLogger.Mark("main_start_enter");
+        StartCoroutine(LogFirstFrameEnd());
         GameObjectManager.Instance.SelectBoneType = (int)EnumPos.All;
 #if UNITY_EDITOR
         // 编辑器下加载本地 bonedata.txt 模拟服务器数据，用于测试
         LoadLocalBoneData();
 #endif
+        StartupTimingLogger.Mark("main_start_exit");
+    }
+
+    private IEnumerator LogFirstFrameEnd()
+    {
+        yield return new WaitForEndOfFrame();
+        StartupTimingLogger.Mark("first_frame_end");
     }
 
 #if UNITY_EDITOR
