@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using Newtonsoft.Json;
+using Stopwatch = System.Diagnostics.Stopwatch;
 
 public class NativeAPI
 {
@@ -311,7 +312,10 @@ public class ButtonBehavior : MonoBehaviour
     /// </summary>
     private void ReceiveBoneConfigInternal(string msg)
     {
-        Debug.Log($"[BoneConfig] 开始处理骨骼配置数据, 数据长度: {(msg != null ? msg.Length : 0)}");
+        DateTime receiveStartTime = DateTime.Now;
+        Stopwatch receiveTimer = Stopwatch.StartNew();
+        Debug.Log($"[BoneConfig] 开始处理骨骼配置数据, 开始时间={receiveStartTime:HH:mm:ss.fff}, 数据长度: {(msg != null ? msg.Length : 0)}");
+        TipsMod.Instance.ShowTips($"开始接收数据，时间 {receiveStartTime:HH:mm:ss.fff}");
         try
         {
             // 第二层反序列化：从 msg 中解析具体的骨骼数据
@@ -320,9 +324,12 @@ public class ButtonBehavior : MonoBehaviour
             {
                 Debug.Log($"[BoneConfig] 解析成功, 骨骼数量: {boneDataList.Count}");
                 GameObjectManager.Instance.ApplyBoneConfig(boneDataList);
-                BoneMod.Instance.boneLoaded = true;
                 // 模型显示由 ApplyBoneConfig 统一负责（数据应用后激活根节点，并处理模型未就绪的时序缓存）
-                Debug.Log($"[BoneConfig] 配置应用完成, Body={GameObjectManager.Instance.Body != null}");
+                receiveTimer.Stop();
+                DateTime receiveCompletedTime = DateTime.Now;
+                long elapsedMilliseconds = receiveTimer.ElapsedMilliseconds;
+                Debug.Log($"[BoneConfig] 配置应用完成, 完成时间={receiveCompletedTime:HH:mm:ss.fff}, Body={GameObjectManager.Instance.Body != null}, 耗时={elapsedMilliseconds}ms");
+                TipsMod.Instance.ShowTips($"数据接收完毕，时间 {receiveCompletedTime:HH:mm:ss.fff}，耗时 {elapsedMilliseconds} ms");
             }
             else
             {

@@ -95,7 +95,7 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
         StartupTimingLogger.MarkDuration(
             "bone_config_buffer_initialized", stageTimer, $"bones={_registry.Count}");
 
-        // 模型加载完成：若加载前已收到数据则立即应用并显示，否则先隐藏等待数据
+        // 模型加载完成后立即显示；配置未到时仍允许查看和操作模型变换，仅拦截骨骼点击。
         if (_pendingBoneData != null)
         {
             ApplyBoneConfig(_pendingBoneData);
@@ -103,7 +103,7 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
         }
         else
         {
-            BodyVisible = false;
+            BodyVisible = true;
         }
 
         StartupTimingLogger.Mark(
@@ -271,6 +271,7 @@ public class GameObjectManager : SingletonManager<GameObjectManager>, IGeneric
         SelectBoneByPos(_selectBoneType);
         // 数据应用后激活模型根节点（显示统一收敛到此处，不依赖外部调用方）
         BodyVisible = true;
+        BoneMod.Instance.boneLoaded = true;
     }
 
     public void LoadBoneConfigFromJson(string jsonString)

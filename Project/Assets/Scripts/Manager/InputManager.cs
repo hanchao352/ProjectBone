@@ -300,6 +300,13 @@ public class InputManager : SingletonManager<InputManager>, IGeneric
             MeshRenderer mr = hitObj.GetComponent<MeshRenderer>();
             if (mr == null || !mr.enabled) return;
 
+            if (!BoneMod.Instance.boneLoaded)
+            {
+                TipsMod.Instance.ShowTips("数据加载中，请稍后再试");
+                Debug.Log("[Input] 骨骼配置尚未加载，已忽略模型点击");
+                return;
+            }
+
             int boneId;
             if (int.TryParse(hitObj.name, out boneId))
             {
