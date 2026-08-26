@@ -30,7 +30,7 @@ public class ButtonBehaviorCustomData // 定义可序列化数据结构 - 通讯
 public struct BoneData
 {
     public int id;              // 骨骼ID
-    public int type;            // 模型数据类型 (EnumBone: Other=0, Bone=2, Muscle=4, Fascia=8)
+    public int type;            // 模型数据类型 (EnumBone: Other=0, Bone=1, Muscle=2, Fascia=4)
     public int position;        // 骨骼位置 (EnumPos: 上肢、肩背、下肢等)
     public int direction;       // 骨骼方向 (EnumDirection: None=0, Left=1, Right=2, Other=4)
 }
@@ -358,7 +358,7 @@ public class ButtonBehavior : MonoBehaviour
     /// 注意：内部会与当前部位筛选(EnumPos)叠加取交集，即只对"当前显示的部位"做类型筛选。
     /// 例如已选中头颈(ShowByPosition)，再调用此接口只影响头颈范围内的骨骼/肌肉/筋膜，不会翻出其他部位。
     /// </summary>
-    /// <param name="type">显示类型位组合 (BoneShowType: Bone=1, Muscle=2, Fascia=4, All=7)</param>
+    /// <param name="type">显示类型位组合 (BoneShowType: Bone=1, Muscle=2, Fascia=4, All=7，与 EnumBone 数值一致)</param>
     public void ShowModelByType(int type)
     {
         Debug.Log($"---- 根据类型显示模型 ---- type: {type}");

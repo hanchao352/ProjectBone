@@ -13,11 +13,11 @@ public enum EnumBone
     // 其它（modeldate.type_id 为空或 0，bonedata.type 为 0）
     Other = 0,
     //骨骼
-    Bone = 1<<1,
+    Bone = 1<<0,
     //肌肉
-    Muscle = 1<<2,
+    Muscle = 1<<1,
     //筋膜
-    Fascia = 1<<3,
+    Fascia = 1<<2,
     //所有
     All = Bone|Muscle|Fascia,
 }
@@ -69,7 +69,9 @@ public enum BoneShowType
 
 /// <summary>
 /// 模型数据类型与界面筛选位之间的映射。
-/// EnumBone 使用 bonedata.type 的值；BoneShowType 使用 App code=5 的筛选协议值。
+/// EnumBone 使用 bonedata.type 的值（Other=0, Bone=1, Muscle=2, Fascia=4）；
+/// BoneShowType 使用 App code=5 的筛选协议值，两者位定义现已完全一致。
+/// 保留此映射层的原因是 Other=0 需要特殊处理：位与运算无法表达"仅在显示全部类型时可见"。
 /// </summary>
 public static class BoneTypeMapper
 {

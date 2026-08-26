@@ -55,7 +55,6 @@ public class BodyModelService
         try
         {
             ReportProgress(0, "starting", "loading");
-            Debug.Log("[BodyModel] 开始加载模型...");
             ReportProgress(5, "loading_model", "loading");
             GameObject obj = LoadModelPrefab();
             if (!obj)
@@ -72,37 +71,22 @@ public class BodyModelService
             stageTimer.Restart();
             ReportProgress(35, "validating_model", "loading");
 
-            // 诊断：直接子节点 vs 全部后代 vs 各类渲染器。
-            // 预期(jirou_nan 预制体)：直接子节点≈1423、MeshRenderer≈1423、SkinnedMeshRenderer=0。
-            // 若 直接子节点=0 或 SkinnedMeshRenderer>0，说明加载到的不是扁平静态预制体(可能误用了绑定FBX)。
-            int directChild = obj.transform.childCount;
-            int allTransforms = obj.GetComponentsInChildren<Transform>(true).Length;
-            int meshRenderers = obj.GetComponentsInChildren<MeshRenderer>(true).Length;
-            int skinnedMesh = obj.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length;
             StartupTimingLogger.MarkDuration(
                 "body_hierarchy_diagnostics_complete", stageTimer,
-                $"children={directChild}|transforms={allTransforms}|mesh_renderers={meshRenderers}|skinned_meshes={skinnedMesh}");
-            Debug.Log($"[BodyModel] 实例诊断: name={obj.name}, 直接子节点={directChild}, 全部后代Transform={allTransforms}, MeshRenderer={meshRenderers}, SkinnedMeshRenderer={skinnedMesh}");
+                $"children={obj.transform.childCount}");
 
-            // 诊断：检查 MeshFilter 的网格是否丢失（定位"打包后层级在、但 MeshFilter.mesh 丢失"的问题）
+            // 检查 MeshFilter 的网格是否丢失（定位"打包后层级在、但 MeshFilter.mesh 丢失"的问题）
             stageTimer.Restart();
-            LogMeshIntegrity(obj);
+            CheckMeshIntegrity(obj);
             StartupTimingLogger.MarkDuration("body_mesh_integrity_check_complete", stageTimer);
-
-            // 诊断：打印模型加载后的原始层级树（真机无 Hierarchy 窗口，借此在日志中查看层级）
-            stageTimer.Restart();
-            HierarchyDumper.Dump(obj);
-            StartupTimingLogger.MarkDuration("body_hierarchy_dump_complete", stageTimer);
 
             obj.transform.position = new Vector3(0, 0, 0);
 
             ReportProgress(45, "setting_layer", "loading");
             // 先设置 Layer，确保所有节点（包括未激活的）都有正确的 Layer
-            Debug.Log($"[BodyModel] 开始设置Layer={UnityLayer.Layer_Body}, 当前根节点Layer={obj.layer}");
             stageTimer.Restart();
             SetBodyLayer(obj, UnityLayer.Layer_Body);
             StartupTimingLogger.MarkDuration("body_layer_setup_complete", stageTimer);
-            Debug.Log($"[BodyModel] 设置Layer完成, 根节点Layer={obj.layer}, 第一个子节点Layer={(obj.transform.childCount > 0 ? obj.transform.GetChild(0).gameObject.layer.ToString() : "无子节点")}");
 
             ReportProgress(55, "initializing_colliders", "loading");
             stageTimer.Restart();
@@ -127,12 +111,6 @@ public class BodyModelService
             _initScale = _body.transform.localScale;
             _initAngle = _body.transform.eulerAngles;
 
-            Debug.Log($"[BodyModel] 模型初始化完成, 注册骨骼数: {_registry.Count}, Body active: {_body.activeSelf}");
-
-            // 诊断：打印模型坐标/缩放/包围盒及相机对比，定位"加载成功却看不见"的问题
-            stageTimer.Restart();
-            LogModelTransform(_body);
-            StartupTimingLogger.MarkDuration("body_transform_diagnostics_complete", stageTimer);
             ReportProgress(100, "completed", "completed");
             StartupTimingLogger.MarkDuration(
                 "body_load_complete", totalTimer,
@@ -175,12 +153,12 @@ public class BodyModelService
     }
 
     /// <summary>
-    /// 诊断输出：统计子节点 MeshFilter 的网格丢失情况(sharedMesh 为 null)。
+    /// 校验子节点 MeshFilter 的网格是否丢失(sharedMesh 为 null)，丢失时报错。
     /// 用于定位"打包后层级在、但 MeshFilter.mesh 丢失"的问题：网格数据并不在预制体里，
     /// 而是来自被跨资源引用的 FBX 子资源(jirou_01.FBX)。若该 FBX 的网格未被打进包，
     /// 则组件仍在、但 sharedMesh 为 null，表现为节点都在却看不到模型。
     /// </summary>
-    private void LogMeshIntegrity(GameObject root)
+    private void CheckMeshIntegrity(GameObject root)
     {
         MeshFilter[] filters = root.GetComponentsInChildren<MeshFilter>(true);
         int total = filters.Length;
@@ -208,60 +186,6 @@ public class BodyModelService
             Debug.LogError($"[BodyModel] 网格丢失诊断: MeshFilter共{total}个, sharedMesh为null的有{missing}个! 丢失样本=[{sample}]。" +
                            "网格数据来自被引用的FBX子资源(jirou_01.FBX)，请确认其网格已正确打进包(LFS真实文件已拉取/未被裁剪/跨资源引用未失效)。");
         }
-        else
-        {
-            Debug.Log($"[BodyModel] 网格完整性诊断: MeshFilter共{total}个, 全部 sharedMesh 有效。");
-        }
-    }
-
-    /// <summary>
-    /// 诊断输出：模型的坐标、缩放、世界包围盒，以及 ModelCamera 信息与可见性判断。
-    /// 用于定位模型已加载但不在相机视野内（位置偏离 / 缩放过大过小 / 被 Layer 剔除）的问题。
-    /// </summary>
-    private void LogModelTransform(GameObject body)
-    {
-        if (!body)
-        {
-            Debug.LogWarning("[BodyModel] LogModelTransform: body 为 null");
-            return;
-        }
-
-        Transform t = body.transform;
-        Debug.Log($"[BodyModel] 变换: 世界坐标={t.position}, 本地坐标={t.localPosition}, localScale={t.localScale}, lossyScale={t.lossyScale}, 旋转={t.eulerAngles}, Layer={body.layer}");
-
-        // 合并所有 Renderer 的世界包围盒，得到模型实际占用空间与中心
-        Renderer[] renderers = body.GetComponentsInChildren<Renderer>(true);
-        if (renderers.Length == 0)
-        {
-            Debug.LogWarning("[BodyModel] 变换: 未找到任何 Renderer，无法计算包围盒");
-        }
-        else
-        {
-            Bounds bounds = renderers[0].bounds;
-            for (int i = 1; i < renderers.Length; i++)
-            {
-                bounds.Encapsulate(renderers[i].bounds);
-            }
-            // 渲染剔除看的是 Renderer 所在节点的 Layer（子节点），不是根节点
-            int rendererLayer = renderers[0].gameObject.layer;
-            bool firstRendererEnabled = renderers[0].enabled;
-            Debug.Log($"[BodyModel] 包围盒(世界): 中心={bounds.center}, 尺寸={bounds.size}, min={bounds.min}, max={bounds.max}, 子节点Layer={rendererLayer}, 首个Renderer.enabled={firstRendererEnabled}");
-
-            Camera cam = UIManager.Instance.ModelCamera;
-            if (!cam)
-            {
-                Debug.LogWarning("[BodyModel] ModelCamera 为 null，无法做相机可见性对比");
-            }
-            else
-            {
-                Vector3 toCenter = bounds.center - cam.transform.position;
-                float dist = toCenter.magnitude;
-                float dot = Vector3.Dot(toCenter.normalized, cam.transform.forward);
-                bool inCullingMask = (cam.cullingMask & (1 << rendererLayer)) != 0;
-                Debug.Log($"[BodyModel] ModelCamera: 坐标={cam.transform.position}, 朝向={cam.transform.forward}, near={cam.nearClipPlane}, far={cam.farClipPlane}, fov={cam.fieldOfView}, 正交={cam.orthographic}, cullingMask={cam.cullingMask}");
-                Debug.Log($"[BodyModel] 可见性判断: 模型中心距相机={dist:F3}, 前方点积={dot:F3}(>0在相机前方), 子节点Layer在相机CullingMask内={inCullingMask}");
-            }
-        }
     }
 
     /// <summary>
@@ -281,7 +205,6 @@ public class BodyModelService
             Debug.LogError($"[BodyModel] 源资源加载失败: Resources.Load(\"{ModelResourcePath}\") 返回 null");
             return null;
         }
-        Debug.Log($"[BodyModel] 源资源诊断: name={source.name}, 直接子节点={source.transform.childCount}, 全部后代Transform={source.GetComponentsInChildren<Transform>(true).Length}");
 
         stageTimer.Restart();
         GameObject instance = ResManager.Instance.LoadRes<GameObject>(ModelResourcePath);
@@ -343,14 +266,6 @@ public class BodyModelService
             progressCallback?.Invoke((i + 1f) / childCount * 0.5f);
         }
 
-        // 诊断：打印实际子节点名字样本，定位真机上的名称/层级问题
-        if (childCount > 0)
-        {
-            string n0 = root.transform.GetChild(0).gameObject.name;
-            string n1 = childCount > 1 ? root.transform.GetChild(1).gameObject.name : "-";
-            string n2 = childCount > 2 ? root.transform.GetChild(2).gameObject.name : "-";
-            Debug.Log($"[BodyModel] RegisterBones: 直接子节点={childCount}, 可解析为ID={validCount}, 子节点样本=[{n0}, {n1}, {n2}]");
-        }
         _registry.Initialize(validCount);
 
         // 第二遍：注册骨骼

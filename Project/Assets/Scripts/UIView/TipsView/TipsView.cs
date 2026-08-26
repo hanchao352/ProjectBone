@@ -24,7 +24,6 @@ public class TipsView : UIBase
         prefabText.gameObject.SetActive(false);
         startPos = prefabText.localPosition;
         endPos = new Vector3(startPos.x, startPos.y+300, startPos.z);
-        Debug.Log("StarPos:"+prefabText.localPosition);
     }
 
     public override void OnShow(params object[] args)
@@ -57,24 +56,12 @@ public class TipsView : UIBase
          text.gameObject.SetActive(true);
          text.text = tips;
          TweenerCore<Vector3, Vector3, VectorOptions> tween = text.transform.DOLocalMove(endPos, flytime).SetEase(Ease.Linear);
-         tween.OnStart(() =>
-         {
-             Debug.Log("tween.OnStart");
-         });
-         
-         tween.OnUpdate(() =>
-         {
-             Debug.Log("tween.OnUpdate");
-             Debug.Log(text.rectTransform.localPosition.y);
-         });
-         
             tween.OnComplete(() =>
             {
                 text.gameObject.SetActive(false);
                 _usingTextList.Remove(text);
                 _textList.Add(text);
                 text.transform.localPosition = startPos;
-                Debug.Log("tween.OnComplete");
             });
        
      }
